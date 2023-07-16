@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 
 class EndPointApi {
@@ -18,7 +16,7 @@ class EndPointApi {
     try {
       final resp = await dio.get(path);
       return resp.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw ('Error en el Get $e');
     }
   }
@@ -29,7 +27,7 @@ class EndPointApi {
     try {
       final resp = await dio.post(path, data: data);
       return resp.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw ('Error en el Post $e');
     }
   }
@@ -40,7 +38,7 @@ class EndPointApi {
     try {
       final resp = await dio.put(path, data: data);
       return resp.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw ('Error en el put $e');
     }
   }
@@ -49,18 +47,8 @@ class EndPointApi {
     try {
       final resp = await dio.delete(path);
       return resp.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw ('Error en el Delete $e');
-    }
-  }
-
-  static Future uploadFile(String path, Uint8List bytes) async {
-    final formData = FormData.fromMap({'file': MultipartFile.fromBytes(bytes)});
-    try {
-      final resp = await dio.put(path, data: formData);
-      return resp.data;
-    } on DioError catch (e) {
-      throw ('Error en el put $e');
     }
   }
 }

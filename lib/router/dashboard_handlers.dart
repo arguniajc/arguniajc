@@ -10,6 +10,7 @@ import 'package:control_actividades/ui/views/user_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 import '../ui/views/activities_view.dart';
+import '../ui/views/inf_arg.dart';
 
 class DashboardHandlers {
   static Handler dashboard = Handler(handlerFunc: (context, params) {
@@ -83,6 +84,18 @@ class DashboardHandlers {
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return ActivitiesView();
+    } else {
+      return LoginView();
+    }
+  });
+
+  static Handler infArgRoute = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.infArgRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return InfArgView();
     } else {
       return LoginView();
     }

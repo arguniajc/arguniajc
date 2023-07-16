@@ -1,8 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:control_actividades/Models/http/auth_response.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloudinary/cloudinary.dart';
 import '../api/endpointApi.dart';
 
 class UserFormProvider extends ChangeNotifier {
@@ -35,7 +34,8 @@ class UserFormProvider extends ChangeNotifier {
         password: password ?? user!.password,
         idTipoUsuario: idTipoUsuario ?? user!.idTipoUsuario,
         response: response ?? user!.response,
-        token: token ?? user!.token);
+        token: token ?? user!.token,
+        img: img ?? user!.img);
     notifyListeners();
   }
 
@@ -57,7 +57,7 @@ class UserFormProvider extends ChangeNotifier {
       "id_tipo_usuario": 1,
       "response": user!.response,
       "token": user!.token,
-      "img": ""
+      "img": user!.img
     };
 
     try {
@@ -69,14 +69,45 @@ class UserFormProvider extends ChangeNotifier {
     }
   }
 
-  Future<Usuario> uploadImage(String path, Uint8List bytes) async {
+  Future<Usuario> uploadImage(
+      String path, PlatformFile file, Usuario userImg) async {
+    final cloudinary = Cloudinary.signedConfig(
+      apiKey: '853725776848698',
+      apiSecret: '9GMXpRluzCHU3Zhlgw5RgEZV85M',
+      cloudName: 'dhhu0nqcm',
+    );
+
+    final response = await cloudinary.upload(
+        file: file.path,
+        fileBytes: file.bytes,
+        resourceType: CloudinaryResourceType.image,
+        fileName: 'imgUser${userImg.idusuario}',
+        progressCallback: (count, total) {});
+
+    if (response.isSuccessful) {
+      userImg.img = response.secureUrl;
+    }
+
+    final data = {
+      "documento": userImg.documento,
+      "nombre": userImg.nombre,
+      "apellido": userImg.apellido,
+      "email": userImg.email,
+      "password": userImg.password,
+      "id_tipo_usuario": 1,
+      "response": userImg.response,
+      "token": userImg.token,
+      "img": userImg.img
+    };
+
     try {
-      final resp = await EndPointApi.uploadFile(path, bytes);
-      user = Usuario.fromMap(resp);
+      EndPointApi.httpPut('/user/${userImg.idusuario}', data);
+      user = userImg;
       notifyListeners();
+
       return user!;
     } catch (e) {
-      throw 'Error en user from provider';
+      throw 'Error en la peticion Put';
     }
   }
 }

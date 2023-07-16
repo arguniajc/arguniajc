@@ -244,6 +244,9 @@ class AvatarContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final userFormProvider = Provider.of<UserFormProvider>(context);
     final user = userFormProvider.user!;
+    final image = (user.img!.isEmpty)
+        ? const Image(image: AssetImage('no-image.jpg'))
+        : FadeInImage.assetNetwork(placeholder: 'loader.gif', image: user.img!);
     return WhiteCard(
         width: 250,
         child: Container(
@@ -260,9 +263,8 @@ class AvatarContainer extends StatelessWidget {
                   child: Stack(
                     children: [
                       ClipOval(
-                          child: Image(
-                        image: AssetImage('no-image.jpg'),
-                      )),
+                        child: image,
+                      ),
                       Positioned(
                           bottom: 5,
                           right: 5,
@@ -291,8 +293,17 @@ class AvatarContainer extends StatelessWidget {
 
                                 if (result != null) {
                                   PlatformFile file = result.files.first;
-                                  userFormProvider.uploadImage(
-                                      'user/upload', file.bytes!);
+                                  NotificationsService.showBusyIndicator(
+                                      context);
+
+                                  final userImg = await userFormProvider
+                                      .uploadImage('user/upload', file, user);
+
+                                  Provider.of<UsersProvider>(context,
+                                          listen: false)
+                                      .refreshUser(userImg);
+
+                                  Navigator.of(context).pop();
                                 } else {
                                   // User canceled the picker
                                 }

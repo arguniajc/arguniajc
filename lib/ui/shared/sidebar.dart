@@ -27,8 +27,8 @@ class Sidebar extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         children: [
           Logo(),
-          SizedBox(height: 50),
-          TextSeparator(text: 'main'),
+          const SizedBox(height: 50),
+          TextSeparator(text: 'Main'),
           MenuItem(
             text: 'Dashboard',
             icon: Icons.compass_calibration_outlined,
@@ -36,14 +36,18 @@ class Sidebar extends StatelessWidget {
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
           ),
+          TextSeparator(text: 'ARG'),
           MenuItem(
-              text: 'Orders',
-              icon: Icons.shopping_cart_outlined,
-              onPressed: () {}),
+              text: 'Inf. ARG',
+              icon: Icons.summarize,
+              onPressed: () => navigateTo(Flurorouter.infArgRoute),
+              isActive:
+                  sideMenuProvider.currentPage == Flurorouter.infArgRoute),
+          MenuItem(text: 'Activities', icon: Icons.menu_book, onPressed: () {}),
+          MenuItem(text: 'Media', icon: Icons.language, onPressed: () {}),
           MenuItem(
-              text: 'Analytic',
-              icon: Icons.show_chart_outlined,
-              onPressed: () {}),
+              text: 'Timeline', icon: Icons.receipt_long, onPressed: () {}),
+          TextSeparator(text: 'Account'),
           MenuItem(
             text: 'User',
             icon: Icons.people_alt_outlined,
@@ -51,21 +55,13 @@ class Sidebar extends StatelessWidget {
             isActive: sideMenuProvider.currentPage == Flurorouter.userRoute,
           ),
           MenuItem(
-              text: 'Products',
-              icon: Icons.dashboard_outlined,
-              onPressed: () {}),
-          MenuItem(
-              text: 'Discount',
-              icon: Icons.attach_money_outlined,
-              onPressed: () {}),
-          MenuItem(
             text: 'Activities',
             icon: Icons.note_alt,
             onPressed: () => navigateTo(Flurorouter.activitiesRoute),
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.activitiesRoute,
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           TextSeparator(text: 'UI Elements'),
           MenuItem(
             text: 'Icons',
@@ -87,7 +83,7 @@ class Sidebar extends StatelessWidget {
             onPressed: () => navigateTo(Flurorouter.blankRoute),
             isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           TextSeparator(text: 'Exit'),
           MenuItem(
               text: 'Logout',
