@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../providers/users_provider.dart';
 
 class UserView extends StatelessWidget {
+  const UserView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final usersProvider = Provider.of<UsersProvider>(context);

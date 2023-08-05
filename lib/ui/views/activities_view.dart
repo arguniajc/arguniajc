@@ -7,6 +7,8 @@ import '../../datatables/activities_datasource.dart';
 import '../../providers/ativities_provider.dart';
 
 class ActivitiesView extends StatefulWidget {
+  const ActivitiesView({super.key});
+
   @override
   ActivitiesViewState createState() => ActivitiesViewState();
 }

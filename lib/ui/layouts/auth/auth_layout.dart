@@ -15,7 +15,7 @@ class AuthLayout extends StatelessWidget {
         body: Scrollbar(
       // isAlwaysShown: true,
       child: ListView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         children: [
           (size.width > 1000)
               ? _DesktopBody(child: child)
@@ -44,7 +44,7 @@ class _MobileBody extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           CustomTitle(),
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 650,
             child: child,

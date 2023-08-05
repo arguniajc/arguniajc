@@ -47,7 +47,7 @@ class _UserModalState extends State<UserModal> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context, listen: false);
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       height: 2000,
       width: 300,
       decoration: builBoxDecoration(),
@@ -60,7 +60,7 @@ class _UserModalState extends State<UserModal> {
                   style: CustomLabels.h1.copyWith(color: Colors.white)),
               IconButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.close,
                     color: Colors.white,
                   ))

@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -101,7 +103,8 @@ class LoginView extends StatelessWidget {
   void onFormSubmit(
       LoginFormProvider loginFormProvider, AuthProvider authProvider) {
     final isValid = loginFormProvider.validateForm();
-    if (isValid)
+    if (isValid) {
       authProvider.login(loginFormProvider.email, loginFormProvider.password);
+    }
   }
 }

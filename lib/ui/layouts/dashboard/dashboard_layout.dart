@@ -38,7 +38,7 @@ class DashboardLayoutState extends State<DashboardLayout>
                   child: Column(
                     children: [
                       // Navbar
-                      Navbar(),
+                      const Navbar(),
 
                       // View
                       Expanded(

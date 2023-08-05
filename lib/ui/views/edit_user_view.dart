@@ -55,7 +55,7 @@ class _EditUserViewState extends State<EditUserView> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         children: [
           Text('Usuario', style: CustomLabels.h1),
           const SizedBox(height: 10),
@@ -73,6 +73,9 @@ class _EditUserViewState extends State<EditUserView> {
 }
 
 class UserViewBody extends StatelessWidget {
+  // ignore: prefer_const_constructors_in_immutables
+  UserViewBody({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

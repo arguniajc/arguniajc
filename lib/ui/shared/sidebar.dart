@@ -28,7 +28,7 @@ class Sidebar extends StatelessWidget {
         children: [
           Logo(),
           const SizedBox(height: 50),
-          TextSeparator(text: 'Main'),
+          const TextSeparator(text: 'Main'),
           MenuItem(
             text: 'Dashboard',
             icon: Icons.compass_calibration_outlined,
@@ -36,18 +36,28 @@ class Sidebar extends StatelessWidget {
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
           ),
-          TextSeparator(text: 'ARG'),
+          const SizedBox(height: 10),
+          const TextSeparator(text: 'ARG'),
           MenuItem(
               text: 'Inf. ARG',
               icon: Icons.summarize,
               onPressed: () => navigateTo(Flurorouter.infArgRoute),
               isActive:
                   sideMenuProvider.currentPage == Flurorouter.infArgRoute),
-          MenuItem(text: 'Activities', icon: Icons.menu_book, onPressed: () {}),
+          MenuItem(
+              text: 'Activities',
+              icon: Icons.menu_book,
+              onPressed: () => navigateTo(Flurorouter.activitiesArgRoute),
+              isActive: sideMenuProvider.currentPage ==
+                  Flurorouter.activitiesArgRoute),
           MenuItem(text: 'Media', icon: Icons.language, onPressed: () {}),
           MenuItem(
-              text: 'Timeline', icon: Icons.receipt_long, onPressed: () {}),
-          TextSeparator(text: 'Account'),
+              text: 'Timeline',
+              icon: Icons.timeline_sharp,
+              onPressed: () => navigateTo(Flurorouter.timeLineRoute),
+              isActive:
+                  sideMenuProvider.currentPage == Flurorouter.timeLineRoute),
+          const TextSeparator(text: 'Account'),
           MenuItem(
             text: 'User',
             icon: Icons.people_alt_outlined,
@@ -62,7 +72,7 @@ class Sidebar extends StatelessWidget {
                 sideMenuProvider.currentPage == Flurorouter.activitiesRoute,
           ),
           const SizedBox(height: 30),
-          TextSeparator(text: 'UI Elements'),
+          const TextSeparator(text: 'UI Elements'),
           MenuItem(
             text: 'Icons',
             icon: Icons.list_alt_outlined,
@@ -84,7 +94,7 @@ class Sidebar extends StatelessWidget {
             isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
           ),
           const SizedBox(height: 50),
-          TextSeparator(text: 'Exit'),
+          const TextSeparator(text: 'Exit'),
           MenuItem(
               text: 'Logout',
               icon: Icons.exit_to_app_outlined,
