@@ -121,7 +121,7 @@ class DashboardHandlers {
         .setCurrentPageUrl(Flurorouter.timeLineRoute);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
-      return const TimeLineView();
+      return TimeLineView();
     } else {
       return const LoginView();
     }
