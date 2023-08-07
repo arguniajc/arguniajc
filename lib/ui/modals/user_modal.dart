@@ -77,7 +77,7 @@ class _UserModalState extends State<UserModal> {
                 hint: 'Nombre de usuario',
                 label: 'Nombre de Usuario',
                 icon: Icons.co_present),
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 10,
@@ -89,7 +89,7 @@ class _UserModalState extends State<UserModal> {
                 hint: 'Nombre de usuario',
                 label: 'Apellido de Usuario',
                 icon: Icons.co_present),
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 10,
@@ -99,7 +99,7 @@ class _UserModalState extends State<UserModal> {
             onChanged: ((value) => documento = int.parse(value)),
             decoration: CustomInputs.loginInputDecoration(
                 hint: 'Documento', label: 'Documneto', icon: Icons.co_present),
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 10,
@@ -109,7 +109,7 @@ class _UserModalState extends State<UserModal> {
             onChanged: ((value) => email = value),
             decoration: CustomInputs.loginInputDecoration(
                 hint: 'Email', label: 'Email', icon: Icons.co_present),
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 10,
@@ -119,10 +119,10 @@ class _UserModalState extends State<UserModal> {
             onChanged: ((value) => password = value),
             decoration: CustomInputs.loginInputDecoration(
                 hint: 'Password', label: 'Password', icon: Icons.co_present),
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           Container(
-            margin: EdgeInsets.only(top: 30),
+            margin: const EdgeInsets.only(top: 30),
             alignment: Alignment.center,
             child: CustomOutlinedButton(
               onPressed: () async {
