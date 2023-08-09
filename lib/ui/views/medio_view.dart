@@ -51,13 +51,13 @@ class medioView extends StatelessWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: FooterWiget(
-                            label: "Descripcion",
+                            label: "Tipo de medio",
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese la Descripcion',
-                                  label: 'Descripcion',
-                                  icon: Icons.description),
+                                  hint: 'Ingrese el tipo de medio',
+                                  label: 'Tipo de medio',
+                                  icon: Icons.layers),
                             )),
                       ),
                     ],
@@ -67,25 +67,13 @@ class medioView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: FooterWiget(
-                            label: "Medios utilizados",
+                            label: "Medios de notificación",
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese los medios utilizados',
-                                  label: 'Medios utilizados',
-                                  icon: Icons.addchart),
-                            )),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FooterWiget(
-                            label: "Fecha de realizacion",
-                            child: TextFormField(
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese la fecha de realizacion',
-                                  label: 'Fecha de realizacion',
-                                  icon: Icons.event),
+                                  hint: 'Ingrese el medio de de notificación',
+                                  label: 'Medio de de notificación',
+                                  icon: Icons.notifications_active),
                             )),
                       ),
                     ],

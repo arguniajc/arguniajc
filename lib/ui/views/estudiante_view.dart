@@ -17,7 +17,7 @@ class EstudiantesView extends StatelessWidget {
               children: const [
                 ListTile(
                   leading: Icon(
-                    Icons.apps,
+                    Icons.school,
                     size: 50,
                   ),
                   title: Text('Estudiantes',
@@ -39,57 +39,30 @@ class EstudiantesView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: FooterWiget(
-                            label: "Nombre de medio",
+                            label: "Universidad",
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el nombre del medio',
-                                  label: 'Nombre del medio',
-                                  icon: Icons.wysiwyg),
+                                  hint: 'Ingrese el nombre de la Universidad',
+                                  label: 'Nombre de la Universidad',
+                                  icon: Icons.business),
                             )),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: FooterWiget(
-                            label: "Descripcion",
+                            label: "Grupo",
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese la Descripcion',
-                                  label: 'Descripcion',
-                                  icon: Icons.description),
+                                  hint: 'Ingrese el código del grupo',
+                                  label: 'Código Grupo',
+                                  icon: Icons.groups),
                             )),
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: FooterWiget(
-                            label: "Medios utilizados",
-                            child: TextFormField(
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese los medios utilizados',
-                                  label: 'Medios utilizados',
-                                  icon: Icons.addchart),
-                            )),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FooterWiget(
-                            label: "Fecha de realizacion",
-                            child: TextFormField(
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese la fecha de realizacion',
-                                  label: 'Fecha de realizacion',
-                                  icon: Icons.event),
-                            )),
-                      ),
-                    ],
-                  ),
                 ])),
           ))
         ],
