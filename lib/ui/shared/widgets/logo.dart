@@ -10,10 +10,10 @@ class Logo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.bubble_chart_outlined, color: Color(0xff7A6BF5)),
+          const Icon(Icons.gamepad, color: Color(0xff7A6BF5)),
           const SizedBox(width: 10),
           Text(
-            'Admin',
+            'Admin ARG',
             style: GoogleFonts.montserratAlternates(
                 fontSize: 20, fontWeight: FontWeight.w200, color: Colors.white),
           )

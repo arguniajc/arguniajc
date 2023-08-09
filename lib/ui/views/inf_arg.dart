@@ -19,7 +19,7 @@ class InfArgView extends StatelessWidget {
               children: const [
                 ListTile(
                   leading: Icon(
-                    Icons.calculate,
+                    Icons.book,
                     size: 50,
                   ),
                   title: Text('ARG',

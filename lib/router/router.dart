@@ -22,6 +22,9 @@ class Flurorouter {
   static String activitiesArgRoute = '/dashboard/activitiesArgRoute';
   static String infArgRoute = '/dashboard/infarg';
   static String timeLineRoute = '/dashboard/timeline';
+  static String medioRoute = '/dashboard/medio';
+  static String estudiantesRoute = '/dashboard/estudiantes';
+  static String notasRoute = '/dashboard/notas';
 
   static void configureRoutes() {
     // Auth Routes
@@ -58,6 +61,15 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn);
     router.define(timeLineRoute,
         handler: DashboardHandlers.timeline,
+        transitionType: TransitionType.fadeIn);
+    router.define(medioRoute,
+        handler: DashboardHandlers.medio,
+        transitionType: TransitionType.fadeIn);
+    router.define(estudiantesRoute,
+        handler: DashboardHandlers.estudiantes,
+        transitionType: TransitionType.fadeIn);
+    router.define(notasRoute,
+        handler: DashboardHandlers.notas,
         transitionType: TransitionType.fadeIn);
 
     // 404

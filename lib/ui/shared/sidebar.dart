@@ -40,7 +40,7 @@ class Sidebar extends StatelessWidget {
           const TextSeparator(text: 'ARG'),
           MenuItem(
               text: 'Inf. ARG',
-              icon: Icons.summarize,
+              icon: Icons.book,
               onPressed: () => navigateTo(Flurorouter.infArgRoute),
               isActive:
                   sideMenuProvider.currentPage == Flurorouter.infArgRoute),
@@ -50,7 +50,11 @@ class Sidebar extends StatelessWidget {
               onPressed: () => navigateTo(Flurorouter.activitiesArgRoute),
               isActive: sideMenuProvider.currentPage ==
                   Flurorouter.activitiesArgRoute),
-          MenuItem(text: 'Media', icon: Icons.language, onPressed: () {}),
+          MenuItem(
+              text: 'Medio',
+              icon: Icons.apps,
+              onPressed: () => navigateTo(Flurorouter.medioRoute),
+              isActive: sideMenuProvider.currentPage == Flurorouter.medioRoute),
           MenuItem(
               text: 'Timeline',
               icon: Icons.timeline_sharp,
@@ -70,6 +74,20 @@ class Sidebar extends StatelessWidget {
             onPressed: () => navigateTo(Flurorouter.activitiesRoute),
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.activitiesRoute,
+          ),
+          const TextSeparator(text: 'Notas'),
+          MenuItem(
+            text: 'Estudiantes',
+            icon: Icons.school,
+            onPressed: () => navigateTo(Flurorouter.estudiantesRoute),
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.estudiantesRoute,
+          ),
+          MenuItem(
+            text: 'Notas',
+            icon: Icons.note_alt,
+            onPressed: () => navigateTo(Flurorouter.notasRoute),
+            isActive: sideMenuProvider.currentPage == Flurorouter.notasRoute,
           ),
           const SizedBox(height: 30),
           const TextSeparator(text: 'UI Elements'),

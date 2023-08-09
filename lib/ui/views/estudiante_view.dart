@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../inputs/custom_inputs.dart';
 
-class activitiesArgView extends StatelessWidget {
+class EstudiantesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -17,10 +17,10 @@ class activitiesArgView extends StatelessWidget {
               children: const [
                 ListTile(
                   leading: Icon(
-                    Icons.menu_book,
+                    Icons.apps,
                     size: 50,
                   ),
-                  title: Text('Actividades',
+                  title: Text('Estudiantes',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                 ),
@@ -39,12 +39,12 @@ class activitiesArgView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: FooterWiget(
-                            label: "Nombre de actividad",
+                            label: "Nombre de medio",
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el nombre de la actividad',
-                                  label: 'Nombre de actividad',
+                                  hint: 'Ingrese el nombre del medio',
+                                  label: 'Nombre del medio',
                                   icon: Icons.wysiwyg),
                             )),
                       ),
