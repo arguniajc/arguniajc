@@ -62,22 +62,6 @@ class CreateArgViewState extends State<InfArgView> {
   Widget build(BuildContext context) {
     final form = Provider.of<InfArgProvider>(context, listen: false);
     return SingleChildScrollView(
-<<<<<<< HEAD
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Card(
-              child: Container(
-            margin: const EdgeInsets.all(2),
-            padding: const EdgeInsets.all(2),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                ListTile(
-                  leading: Icon(
-                    Icons.book,
-                    size: 50,
-=======
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
@@ -90,14 +74,10 @@ class CreateArgViewState extends State<InfArgView> {
                 children: const [
                   ListTile(
                     leading: Icon(
-                      Icons.calculate,
+                      Icons.book,
                       size: 50,
                     ),
-                    title: Text('ARG',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold)),
->>>>>>> 3791c39a9eb13837faeef4b1bab5dcf9f21caabd
-                  ),
+                  )
                 ],
               ),
             )),
