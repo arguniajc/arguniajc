@@ -69,9 +69,9 @@ class CreateArgViewState extends State<InfArgView> {
                 child: Container(
               margin: const EdgeInsets.all(2),
               padding: const EdgeInsets.all(2),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   ListTile(
                     leading: Icon(
                       Icons.book,
@@ -402,8 +402,8 @@ class CreateArgViewState extends State<InfArgView> {
                                         Colors.indigo),
                                     shadowColor: MaterialStateProperty.all(
                                         Colors.transparent)),
-                                child: Row(
-                                  children: const [
+                                child: const Row(
+                                  children: [
                                     Icon(
                                       Icons.save_outlined,
                                       size: 20,

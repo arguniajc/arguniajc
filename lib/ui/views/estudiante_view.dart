@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../inputs/custom_inputs.dart';
 
 class EstudiantesView extends StatelessWidget {
+  const EstudiantesView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -12,9 +13,9 @@ class EstudiantesView extends StatelessWidget {
               child: Container(
             margin: const EdgeInsets.all(2),
             padding: const EdgeInsets.all(2),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 ListTile(
                   leading: Icon(
                     Icons.school,

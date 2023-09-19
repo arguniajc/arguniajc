@@ -39,11 +39,11 @@ class Sidebar extends StatelessWidget {
           const SizedBox(height: 10),
           const TextSeparator(text: 'ARG'),
           MenuItem(
-              text: 'Inf. ARG',
+              text: 'ARG',
               icon: Icons.book,
-              onPressed: () => navigateTo(Flurorouter.infArgRoute),
+              onPressed: () => navigateTo(Flurorouter.argRoute),
               isActive:
-                  sideMenuProvider.currentPage == Flurorouter.infArgRoute),
+                  sideMenuProvider.currentPage == Flurorouter.argRoute),
           MenuItem(
               text: 'Activities',
               icon: Icons.menu_book,
@@ -67,6 +67,12 @@ class Sidebar extends StatelessWidget {
             icon: Icons.people_alt_outlined,
             onPressed: () => navigateTo(Flurorouter.userRoute),
             isActive: sideMenuProvider.currentPage == Flurorouter.userRoute,
+          ),
+          MenuItem(
+            text: 'Type user',
+            icon: Icons.supervised_user_circle,
+            onPressed: () => navigateTo(Flurorouter.typeuserRoute),
+            isActive: sideMenuProvider.currentPage == Flurorouter.typeuserRoute,
           ),
           MenuItem(
             text: 'Activities',
@@ -124,7 +130,7 @@ class Sidebar extends StatelessWidget {
     );
   }
 
-  BoxDecoration buildBoxDecoration() => BoxDecoration(
+  BoxDecoration buildBoxDecoration() => const BoxDecoration(
       gradient: LinearGradient(colors: [
         Color(0xff092044),
         Color(0xff092042),

@@ -56,7 +56,7 @@ class ActivitiesViewState extends State<ActivitiesView> {
                     showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         context: context,
-                        builder: (_) => UserModal());
+                        builder: (_) => const UserModal());
                   },
                   text: 'Crear',
                   icon: Icons.add_outlined)

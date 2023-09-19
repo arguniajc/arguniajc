@@ -56,7 +56,7 @@ class ArgFormProvider extends ChangeNotifier {
     return formKey.currentState!.validate();
   }
 
-  Future updateUser() async {
+  Future updateArg() async {
     if (!validForm()) {
       return false;
     }
@@ -82,7 +82,7 @@ class ArgFormProvider extends ChangeNotifier {
     };
 
     try {
-      final usuario = EndPointApi.httpPut('/user/${arg!.idarg}', data);
+      final args = EndPointApi.httpPut('/arg/${arg!.idarg}', data);
 
       return true;
     } catch (e) {

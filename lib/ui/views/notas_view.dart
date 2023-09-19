@@ -12,9 +12,9 @@ class NotasView extends StatelessWidget {
               child: Container(
             margin: const EdgeInsets.all(2),
             padding: const EdgeInsets.all(2),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 ListTile(
                   leading: Icon(
                     Icons.note_alt,

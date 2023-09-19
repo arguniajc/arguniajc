@@ -16,7 +16,7 @@ class UsersProvider extends ChangeNotifier {
   getUsers() async {
     users = [];
     List<dynamic> resp = await EndPointApi.httpGet('user');
-    resp.forEach((element) => {users.add(Usuario.fromMap(element))});
+    resp.forEach((element) => users.add(Usuario.fromMap(element)));
     isLoading = false;
     notifyListeners();
   }

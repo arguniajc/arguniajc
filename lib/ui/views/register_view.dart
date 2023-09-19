@@ -1,9 +1,10 @@
-import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/providers/register_form_provider.dart';
+import 'package:control_actividades/Models/http/auth_response.dart';
 import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/buttons/link_text.dart';
 import 'package:control_actividades/ui/inputs/custom_inputs.dart';
+import 'package:control_actividades/ui/views/rol_view.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -134,16 +135,25 @@ class RegisterView extends StatelessWidget {
                           final validForm = registerFormProvider.validateForm();
                           if (!validForm) return;
 
-                          final authProvider =
-                              Provider.of<AuthProvider>(context, listen: false);
-                          authProvider.register(
-                              registerFormProvider.name,
-                              registerFormProvider.apellido,
-                              registerFormProvider.documento,
-                              registerFormProvider.email,
-                              registerFormProvider.password);
+                          Usuario user = Usuario (
+                            idusuario: 0,
+                            documento: registerFormProvider.documento,
+                            nombre: registerFormProvider.name,
+                            apellido: registerFormProvider.apellido,
+                            email: registerFormProvider.email,
+                            password: registerFormProvider.password,
+                            idTipoUsuario: 1,
+                            response: '',
+                            token: '',
+                            img: ''
+                          );
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return RoleCardView(user: user);
+                            }
+                          ));
                         },
-                        text: 'Crear cuenta',
+                        text: 'Continuar',
                       ),
 
                       const SizedBox(height: 20),

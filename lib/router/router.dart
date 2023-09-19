@@ -11,16 +11,19 @@ class Flurorouter {
   // Auth Router
   static String loginRoute = '/auth/login';
   static String registerRoute = '/auth/register';
+  static String roleCardRoute = '/auth/role';
 
   // Dashboard
   static String dashboardRoute = '/dashboard';
   static String iconsRoute = '/dashboard/icons';
   static String blankRoute = '/dashboard/blank';
   static String userRoute = '/dashboard/users';
+  static String typeuserRoute = '/dashboard/typeUsers';
   static String edituserRoute = '/dashboard/users/:uid';
   static String activitiesRoute = '/dashboard/activities';
   static String activitiesArgRoute = '/dashboard/activitiesArgRoute';
-  static String infArgRoute = '/dashboard/infarg';
+  static String argRoute = '/dashboard/arg/';
+  static String infArgRoute = '/dashboard/editarg';
   static String timeLineRoute = '/dashboard/timeline';
   static String medioRoute = '/dashboard/medio';
   static String estudiantesRoute = '/dashboard/estudiantes';
@@ -34,6 +37,8 @@ class Flurorouter {
         handler: AdminHandlers.login, transitionType: TransitionType.none);
     router.define(registerRoute,
         handler: AdminHandlers.register, transitionType: TransitionType.none);
+    router.define(roleCardRoute,
+        handler: AdminHandlers.role, transitionType: TransitionType.none);
 
     // Dashboard
     router.define(dashboardRoute,
@@ -56,6 +61,9 @@ class Flurorouter {
     router.define(activitiesArgRoute,
         handler: DashboardHandlers.activitiesArg,
         transitionType: TransitionType.fadeIn);
+    router.define(argRoute,
+        handler: DashboardHandlers.argRoute,
+        transitionType: TransitionType.fadeIn);
     router.define(infArgRoute,
         handler: DashboardHandlers.infArgRoute,
         transitionType: TransitionType.fadeIn);
@@ -71,6 +79,9 @@ class Flurorouter {
     router.define(notasRoute,
         handler: DashboardHandlers.notas,
         transitionType: TransitionType.fadeIn);
+    router.define(typeuserRoute,
+        handler: DashboardHandlers.typeUser,
+        transitionType: TransitionType.fadeIn);    
 
     // 404
     router.notFoundHandler = NoPageFoundHandlers.noPageFound;

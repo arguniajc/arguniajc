@@ -8,7 +8,9 @@ import 'package:control_actividades/ui/views/estudiante_view.dart';
 import 'package:control_actividades/ui/views/icons_view.dart';
 import 'package:control_actividades/ui/views/login_view.dart';
 import 'package:control_actividades/ui/views/notas_view.dart';
+import 'package:control_actividades/ui/views/typeUser_view.dart';
 import 'package:control_actividades/ui/views/user_view.dart';
+import 'package:control_actividades/ui/views/arg_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 import '../ui/views/activities_arg_view.dart';
@@ -66,6 +68,18 @@ class DashboardHandlers {
     }
   });
 
+  static Handler typeUser = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.typeuserRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const TypeUserView();
+    } else {
+      return const LoginView();
+    }
+  });
+
   static Handler edituser = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
@@ -100,7 +114,19 @@ class DashboardHandlers {
         .setCurrentPageUrl(Flurorouter.activitiesArgRoute);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
-      return activitiesArgView();
+      return ActivitiesArgView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler argRoute = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.infArgRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const ArgView();
     } else {
       return const LoginView();
     }
@@ -112,7 +138,7 @@ class DashboardHandlers {
         .setCurrentPageUrl(Flurorouter.infArgRoute);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
-      return const InfArgView();
+      return InfArgView();
     } else {
       return const LoginView();
     }
@@ -135,7 +161,7 @@ class DashboardHandlers {
         .setCurrentPageUrl(Flurorouter.medioRoute);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
-      return medioView();
+      return MediosView();
     } else {
       return const LoginView();
     }

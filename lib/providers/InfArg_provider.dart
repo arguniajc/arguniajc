@@ -16,7 +16,7 @@ class InfArgProvider extends ChangeNotifier {
   getArg() async {
     args = [];
     List<dynamic> resp = await EndPointApi.httpGet('arg');
-    resp.forEach((element) => {args.add(InfArg.fromMap(element))});
+    resp.forEach((element) => args.add(InfArg.fromMap(element)));
     isLoading = false;
     notifyListeners();
   }

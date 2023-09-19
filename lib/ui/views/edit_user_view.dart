@@ -227,8 +227,8 @@ class UserViewForm extends StatelessWidget {
                               MaterialStateProperty.all(Colors.indigo),
                           shadowColor:
                               MaterialStateProperty.all(Colors.transparent)),
-                      child: Row(
-                        children: const [
+                      child: const Row(
+                        children: [
                           Icon(
                             Icons.save_outlined,
                             size: 20,
@@ -281,7 +281,7 @@ class AvatarContainer extends StatelessWidget {
                             child: FloatingActionButton(
                               backgroundColor: Colors.indigo,
                               elevation: 0,
-                              child: Icon(
+                              child: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 20,
                               ),

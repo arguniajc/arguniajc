@@ -22,7 +22,7 @@ class AuthProvider extends ChangeNotifier {
     EndPointApi.httpPost('/user/auth', data).then((json) {
       usuario = Usuario.fromMap(json);
       final res = Usuario.fromMap(json);
-      if (usuario?.response.isNotEmpty == false) {
+      if (usuario!.response.isEmpty) {
         authStatus = AuthStatus.authenticated;
         LocalStorage.prefs.setString('token', res.token);
         NavigationService.replaceTo(Flurorouter.dashboardRoute);
@@ -50,7 +50,7 @@ class AuthProvider extends ChangeNotifier {
 
     EndPointApi.httpPost('/user', data).then((json) {
       usuario = Usuario.fromMap(json);
-      if (usuario!.response.isNotEmpty) {
+      if (usuario!.response.isEmpty) {
         authStatus = AuthStatus.authenticated;
         LocalStorage.prefs.setString('token', usuario!.token);
         NavigationService.replaceTo(Flurorouter.dashboardRoute);
