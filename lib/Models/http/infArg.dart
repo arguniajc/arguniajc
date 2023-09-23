@@ -18,6 +18,7 @@ class InfArg {
   String pais;
   String lugardeejecucion;
   int idPuppetmaster;
+  int token;
   String response;
 
   InfArg({
@@ -38,6 +39,7 @@ class InfArg {
     required this.pais,
     required this.lugardeejecucion,
     required this.idPuppetmaster,
+    required this.token,
     required this.response,
   });
 
@@ -63,6 +65,7 @@ class InfArg {
         pais: json["pais"],
         lugardeejecucion: json["lugardeejecucion"],
         idPuppetmaster: json["idPuppetmaster"],
+        token: json["token"],
         response: json["response"],
       );
 
@@ -84,6 +87,7 @@ class InfArg {
         "pais": pais,
         "lugardeejecucion": lugardeejecucion,
         "idPuppetmaste": idPuppetmaster,
+        "token": token,
         "response": response,
       };
 

@@ -8,6 +8,7 @@ class RegisterFormProvider extends ChangeNotifier {
   String name = '';
   String apellido = '';
   int documento = 0;
+  int? token;
 
   validateForm() {
     if (formKey.currentState!.validate()) {

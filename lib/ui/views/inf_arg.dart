@@ -278,19 +278,6 @@ class CreateArgViewState extends State<InfArgView> {
                       children: [
                         Expanded(
                           child: FooterWiget(
-                              label: "Medios utilizados",
-                              child: TextFormField(
-                                initialValue: '',
-                                style: const TextStyle(color: Colors.black),
-                                decoration: CustomInputs.loginInputDecoration(
-                                    hint: 'Ingrese los medios utilizados',
-                                    label: 'Medios utilizados',
-                                    icon: Icons.addchart),
-                              )),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: FooterWiget(
                               label: "Entidad desarrolladora",
                               child: TextFormField(
                                 initialValue: widget.arg?.entidad ?? '',

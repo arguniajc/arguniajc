@@ -47,14 +47,14 @@ class Sidebar extends StatelessWidget {
           MenuItem(
               text: 'Activities',
               icon: Icons.menu_book,
-              onPressed: () => navigateTo(Flurorouter.activitiesArgRoute),
+              onPressed: () => navigateTo(Flurorouter.activitiesTableArgRoute),
               isActive: sideMenuProvider.currentPage ==
-                  Flurorouter.activitiesArgRoute),
+                  Flurorouter.activitiesTableArgRoute),
           MenuItem(
               text: 'Medio',
               icon: Icons.apps,
-              onPressed: () => navigateTo(Flurorouter.medioRoute),
-              isActive: sideMenuProvider.currentPage == Flurorouter.medioRoute),
+              onPressed: () => navigateTo(Flurorouter.medioTalaRoute),
+              isActive: sideMenuProvider.currentPage == Flurorouter.medioTalaRoute),
           MenuItem(
               text: 'Timeline',
               icon: Icons.timeline_sharp,

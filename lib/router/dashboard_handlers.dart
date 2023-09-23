@@ -11,6 +11,8 @@ import 'package:control_actividades/ui/views/notas_view.dart';
 import 'package:control_actividades/ui/views/typeUser_view.dart';
 import 'package:control_actividades/ui/views/user_view.dart';
 import 'package:control_actividades/ui/views/arg_view.dart';
+import 'package:control_actividades/ui/views/actividadesTabla_arg_view.dart';
+import 'package:control_actividades/ui/views/MedioTabla_arg_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 import '../ui/views/activities_arg_view.dart';
@@ -108,6 +110,18 @@ class DashboardHandlers {
     }
   });
 
+  static Handler activitiesTable = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.activitiesTableArgRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const ActividadesArgView();
+    } else {
+      return const LoginView();
+    }
+  });
+
   static Handler activitiesArg = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
@@ -155,6 +169,7 @@ class DashboardHandlers {
       return const LoginView();
     }
   });
+
   static Handler medio = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
@@ -162,6 +177,18 @@ class DashboardHandlers {
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return MediosView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler medioTabla = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.medioTalaRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return MedioTablaArgView();
     } else {
       return const LoginView();
     }

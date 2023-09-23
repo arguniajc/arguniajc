@@ -12,6 +12,7 @@ class Flurorouter {
   static String loginRoute = '/auth/login';
   static String registerRoute = '/auth/register';
   static String roleCardRoute = '/auth/role';
+  static String registerTokenRoute = '/auth/registerToken';
 
   // Dashboard
   static String dashboardRoute = '/dashboard';
@@ -22,10 +23,12 @@ class Flurorouter {
   static String edituserRoute = '/dashboard/users/:uid';
   static String activitiesRoute = '/dashboard/activities';
   static String activitiesArgRoute = '/dashboard/activitiesArgRoute';
+  static String activitiesTableArgRoute = '/dashboard/activitiesTablesArgRoute';
   static String argRoute = '/dashboard/arg/';
   static String infArgRoute = '/dashboard/editarg';
   static String timeLineRoute = '/dashboard/timeline';
   static String medioRoute = '/dashboard/medio';
+  static String medioTalaRoute = '/dashboard/medioTabla';
   static String estudiantesRoute = '/dashboard/estudiantes';
   static String notasRoute = '/dashboard/notas';
 
@@ -39,6 +42,8 @@ class Flurorouter {
         handler: AdminHandlers.register, transitionType: TransitionType.none);
     router.define(roleCardRoute,
         handler: AdminHandlers.role, transitionType: TransitionType.none);
+    router.define(registerTokenRoute,
+        handler: AdminHandlers.registerToken, transitionType: TransitionType.none);
 
     // Dashboard
     router.define(dashboardRoute,
@@ -61,6 +66,9 @@ class Flurorouter {
     router.define(activitiesArgRoute,
         handler: DashboardHandlers.activitiesArg,
         transitionType: TransitionType.fadeIn);
+    router.define(activitiesTableArgRoute,
+        handler: DashboardHandlers.activitiesTable,
+        transitionType: TransitionType.fadeIn);
     router.define(argRoute,
         handler: DashboardHandlers.argRoute,
         transitionType: TransitionType.fadeIn);
@@ -72,6 +80,9 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn);
     router.define(medioRoute,
         handler: DashboardHandlers.medio,
+        transitionType: TransitionType.fadeIn);
+    router.define(medioTalaRoute,
+        handler: DashboardHandlers.medioTabla,
         transitionType: TransitionType.fadeIn);
     router.define(estudiantesRoute,
         handler: DashboardHandlers.estudiantes,
