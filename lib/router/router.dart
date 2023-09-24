@@ -6,6 +6,10 @@ import 'package:fluro/fluro.dart';
 class Flurorouter {
   static final FluroRouter router = FluroRouter();
 
+  rutasIguales(String path) {
+    return router.match(path);
+  }
+
   static String rootRoute = '/';
 
   // Auth Router

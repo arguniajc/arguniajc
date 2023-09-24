@@ -39,6 +39,7 @@ class EditRoleCardView extends State<RegisterTokenView> {
                   key: registerFormProvider.formKey,
                   child: Column(
                     children: [
+                      const Text('Ingrese el token del arg al que se va registrar'),
                       TextFormField(
                           onChanged: (value) => registerFormProvider.token = int.parse(value),
                           validator: (value) {
@@ -49,7 +50,7 @@ class EditRoleCardView extends State<RegisterTokenView> {
                           },
                           style: const TextStyle(color: Colors.black),
                           decoration: CustomInputs.loginInputDecoration(
-                              hint: 'Ingrese el token del arg',
+                              hint: 'Token',
                               label: 'Token del arg',
                               icon: Icons.extension),
                         ),
