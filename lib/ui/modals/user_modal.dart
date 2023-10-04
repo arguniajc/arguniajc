@@ -147,7 +147,7 @@ class _UserModalState extends State<UserModal> {
     );
   }
 
-  BoxDecoration builBoxDecoration() => BoxDecoration(
+  BoxDecoration builBoxDecoration() => const BoxDecoration(
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       color: Color(0xff0F2041),

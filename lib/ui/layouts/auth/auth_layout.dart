@@ -1,5 +1,9 @@
 import 'package:control_actividades/ui/layouts/auth/widgets/background_twitter.dart';
 import 'package:control_actividades/ui/layouts/auth/widgets/custom_title.dart';
+import 'package:control_actividades/ui/layouts/auth/widgets/custom_logo.dart';
+import 'package:control_actividades/providers/sidemenu_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:control_actividades/router/router.dart';
 import 'package:flutter/material.dart';
 
 class AuthLayout extends StatelessWidget {
@@ -36,6 +40,8 @@ class _MobileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sideMenuProvider = Provider.of<SideMenuProvider>(context);
+
     return Container(
       height: 950,
       color: Colors.white,
@@ -43,7 +49,8 @@ class _MobileBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
-          CustomTitle(),
+          if (sideMenuProvider.currentPage != Flurorouter.registerTokenRoute) CustomTitle()
+          else CustomLogo(),
           SizedBox(
             width: double.infinity,
             height: 650,
@@ -63,6 +70,7 @@ class _DesktopBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final sideMenuProvider = Provider.of<SideMenuProvider>(context);
 
     return Container(
       width: size.width,
@@ -81,7 +89,8 @@ class _DesktopBody extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                CustomTitle(),
+                if (sideMenuProvider.currentPage != Flurorouter.registerTokenRoute) CustomTitle()
+                else CustomLogo(),
                 Expanded(child: child),
               ],
             ),

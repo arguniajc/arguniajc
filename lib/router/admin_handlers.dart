@@ -3,6 +3,8 @@ import 'package:control_actividades/ui/views/dashboard_view.dart';
 import 'package:control_actividades/ui/views/login_view.dart';
 import 'package:control_actividades/ui/views/register_view.dart';
 import 'package:control_actividades/ui/views/rol_view.dart';
+import 'package:control_actividades/router/router.dart';
+import 'package:control_actividades/providers/sidemenu_provider.dart';
 import 'package:control_actividades/ui/views/registerConArg_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,8 @@ import 'package:provider/provider.dart';
 class AdminHandlers {
   static Handler login = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.loginRoute);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
       return const LoginView();
@@ -20,9 +24,11 @@ class AdminHandlers {
 
   static Handler register = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.registerRoute);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
-      return const RegisterView();
+      return RegisterView();
     } else {
       return const DashboardView();
     }
@@ -30,6 +36,8 @@ class AdminHandlers {
 
   static Handler role = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.roleCardRoute);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
       return const RoleCardView();
@@ -40,9 +48,11 @@ class AdminHandlers {
 
   static Handler registerToken = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.registerTokenRoute);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
-      return const RegisterTokenView();
+      return RegisterTokenView(token: params['token']?.first);
     } else {
       return const DashboardView();
     }

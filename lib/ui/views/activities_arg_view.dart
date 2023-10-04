@@ -136,7 +136,7 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                 );
                                 
                                 if(pickedDate != null ) {
-                                    fecharealizacion = pickedDate!;
+                                    fecharealizacion = pickedDate;
                                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                                     
                                     setState(() {

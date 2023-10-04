@@ -90,6 +90,20 @@ class Sidebar extends StatelessWidget {
                 sideMenuProvider.currentPage == Flurorouter.estudiantesRoute,
           ),
           MenuItem(
+            text: 'Grupos',
+            icon: Icons.group_add_rounded,
+            onPressed: () => navigateTo(Flurorouter.gruposTablaRoute),
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.gruposTablaRoute,
+          ),
+          MenuItem(
+            text: 'Sede',
+            icon: Icons.business,
+            onPressed: () => navigateTo(Flurorouter.sedeRoute),
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.sedeRoute,
+          ),
+          MenuItem(
             text: 'Notas',
             icon: Icons.note_alt,
             onPressed: () => navigateTo(Flurorouter.notasRoute),

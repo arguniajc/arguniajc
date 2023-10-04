@@ -6,7 +6,7 @@ import 'package:fluro/fluro.dart';
 class Flurorouter {
   static final FluroRouter router = FluroRouter();
 
-  rutasIguales(String path) {
+  static rutasIguales(String path) {
     return router.match(path);
   }
 
@@ -16,7 +16,7 @@ class Flurorouter {
   static String loginRoute = '/auth/login';
   static String registerRoute = '/auth/register';
   static String roleCardRoute = '/auth/role';
-  static String registerTokenRoute = '/auth/registerToken';
+  static String registerTokenRoute = '/auth/registerToken/:token';
 
   // Dashboard
   static String dashboardRoute = '/dashboard';
@@ -35,6 +35,10 @@ class Flurorouter {
   static String medioTalaRoute = '/dashboard/medioTabla';
   static String estudiantesRoute = '/dashboard/estudiantes';
   static String notasRoute = '/dashboard/notas';
+  static String gruposRoute = '/dashboard/grupos';
+  static String gruposTablaRoute = '/dashboard/gruposTabla';
+  static String sedeRoute = '/dashboard/sede';
+  static String sedeTalaRoute = '/dashboard/sedeTabla';
 
   static void configureRoutes() {
     // Auth Routes
@@ -96,7 +100,19 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn);
     router.define(typeuserRoute,
         handler: DashboardHandlers.typeUser,
-        transitionType: TransitionType.fadeIn);    
+        transitionType: TransitionType.fadeIn);
+    router.define(gruposRoute,
+        handler: DashboardHandlers.grupos,
+        transitionType: TransitionType.fadeIn);
+    router.define(gruposTablaRoute,
+        handler: DashboardHandlers.gruposTabla,
+        transitionType: TransitionType.fadeIn);
+    router.define(sedeRoute,
+        handler: DashboardHandlers.sedes,
+        transitionType: TransitionType.fadeIn);
+    router.define(sedeTalaRoute,
+        handler: DashboardHandlers.sedeTabla,
+        transitionType: TransitionType.fadeIn);
 
     // 404
     router.notFoundHandler = NoPageFoundHandlers.noPageFound;

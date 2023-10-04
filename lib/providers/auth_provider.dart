@@ -45,7 +45,7 @@ class AuthProvider extends ChangeNotifier {
       "apellido": apellido,
       "email": email,
       "password": password,
-      "id_tipo_usuario": 1
+      "id_tipo_usuario": 3
     };
 
     EndPointApi.httpPost('/user', data).then((json) {
@@ -55,6 +55,39 @@ class AuthProvider extends ChangeNotifier {
         LocalStorage.prefs.setString('token', usuario!.token);
         NavigationService.replaceTo(Flurorouter.dashboardRoute);
         EndPointApi.configureDio();
+        notifyListeners();
+      } else {
+        NotificationsService.showSnackbarError(usuario!.response);
+      }
+    }).catchError((e) {
+      throw 'Error en la peticion auht';
+    });
+  }
+
+  registerToken(String name, String apellido, int documento, String email,
+      String? password, String idArg, String idTipoUsuario) {
+    if (idTipoUsuario == '1') password = 'admin123*';
+    // Petición post HTTP
+    final data = {
+      "documento": documento,
+      "nombre": name,
+      "apellido": apellido,
+      "email": email,
+      "password": password,
+      "id_tipo_usuario": int.parse(idTipoUsuario)
+    };
+
+    EndPointApi.httpPost('user/register/$idArg', data).then((json) {
+      usuario = Usuario.fromMap(json);
+      if (usuario!.response.isEmpty) {
+        if (idTipoUsuario != '1') {
+          authStatus = AuthStatus.authenticated;
+          LocalStorage.prefs.setString('token', usuario!.token);
+          NavigationService.replaceTo(Flurorouter.dashboardRoute);
+          EndPointApi.configureDio();
+        } else {
+          NotificationsService.showSnackbar('usuario estudiante ${usuario!.nombre} ${usuario!.apellido} ha sido creado');
+        }
         notifyListeners();
       } else {
         NotificationsService.showSnackbarError(usuario!.response);
@@ -94,6 +127,7 @@ class AuthProvider extends ChangeNotifier {
   logout() {
     LocalStorage.prefs.remove('token');
     authStatus = AuthStatus.notAuthenticated;
+    NavigationService.replaceTo('/');
     notifyListeners();
   }
 }

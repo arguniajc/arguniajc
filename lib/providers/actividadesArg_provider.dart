@@ -16,7 +16,7 @@ class ActividadesArgProvider extends ChangeNotifier {
   getActividades() async {
     activitiesArgs = [];
     List<dynamic> resp = await EndPointApi.httpGet('activities');
-    resp.forEach((element) => {activitiesArgs.add(ActividadesArg.fromMap(element))});
+    resp.forEach((element) => activitiesArgs.add(ActividadesArg.fromMap(element)));
     isLoading = false;
     notifyListeners();
   }

@@ -32,7 +32,12 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ActividadesArgProvider()),
         ChangeNotifierProvider(create: (_) => MediosProvider()),
         ChangeNotifierProvider(create: (_) => TypeUserModalProvider()),
-        ChangeNotifierProvider(create: (_) => TypeUsersProvider())
+        ChangeNotifierProvider(create: (_) => TypeUsersProvider()),
+        ChangeNotifierProvider(create: (_) => SedeProvider()),
+        ChangeNotifierProvider(create: (_) => SedeFormProvider()),
+        ChangeNotifierProvider(create: (_) => GruposProvider()),
+        ChangeNotifierProvider(create: (_) => GruposFormProvider()),
+        ChangeNotifierProvider(create: (_) => TypeRegisterTokenModalProvider())
       ],
       child: MyApp(),
     );

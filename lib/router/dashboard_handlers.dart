@@ -5,14 +5,18 @@ import 'package:control_actividades/ui/views/blank_view.dart';
 import 'package:control_actividades/ui/views/dashboard_view.dart';
 import 'package:control_actividades/ui/views/edit_user_view.dart';
 import 'package:control_actividades/ui/views/estudiante_view.dart';
+import 'package:control_actividades/ui/views/grupoTabla_arg_view.dart';
 import 'package:control_actividades/ui/views/icons_view.dart';
 import 'package:control_actividades/ui/views/login_view.dart';
 import 'package:control_actividades/ui/views/notas_view.dart';
+import 'package:control_actividades/ui/views/sede_view.dart';
 import 'package:control_actividades/ui/views/typeUser_view.dart';
 import 'package:control_actividades/ui/views/user_view.dart';
 import 'package:control_actividades/ui/views/arg_view.dart';
+import 'package:control_actividades/ui/views/grupos_view.dart';
 import 'package:control_actividades/ui/views/actividadesTabla_arg_view.dart';
 import 'package:control_actividades/ui/views/MedioTabla_arg_view.dart';
+import 'package:control_actividades/ui/views/sedeTabla_arg_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 import '../ui/views/activities_arg_view.dart';
@@ -213,6 +217,54 @@ class DashboardHandlers {
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return NotasView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler grupos = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.gruposRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return GruposView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler gruposTabla = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.gruposTablaRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return GruposTablaArgView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler sedes = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.sedeRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return SedeTablaArgView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler sedeTabla = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.sedeTalaRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const SedeView();
     } else {
       return const LoginView();
     }

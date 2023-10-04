@@ -1,19 +1,43 @@
 import 'package:control_actividades/providers/register_form_provider.dart';
-import 'package:control_actividades/Models/http/auth_response.dart';
 import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/buttons/link_text.dart';
 import 'package:control_actividades/ui/inputs/custom_inputs.dart';
-import 'package:control_actividades/ui/views/rol_view.dart';
+//import 'package:control_actividades/ui/views/rol_view.dart';
+import 'package:control_actividades/providers/sidemenu_provider.dart';
+import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+class RegisterView extends StatefulWidget {
+  final String? idarg;
+  final String? tipoUsuario;
+
+  RegisterView({Key? key, this.idarg, this.tipoUsuario}) : super(key: key);
+
+  @override
+  CreateRegisterView createState() => CreateRegisterView();
+}
+
+class CreateRegisterView extends State<RegisterView> {
+  String idarg = '';
+  String tipoUsuario = '';
+  bool visibleContrasena = true;
+  
+  @override
+  void initState() {
+    super.initState();
+    idarg = widget.idarg ?? '';
+    tipoUsuario = widget.tipoUsuario ?? '';
+    if (idarg != '' && tipoUsuario == '1') {
+        visibleContrasena = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final sideMenuProvider = Provider.of<SideMenuProvider>(context);
     return ChangeNotifierProvider(
       create: (_) => RegisterFormProvider(),
       child: Builder(builder: (context) {
@@ -106,28 +130,30 @@ class RegisterView extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 20),
+                      Visibility(
+                        visible: visibleContrasena,
+                        child: TextFormField(
+                          onChanged: (value) =>
+                              registerFormProvider.password = value,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Ingrese su contraseña';
+                            }
+                            if (value.length < 6) {
+                              return 'La contraseña debe de ser de 6 caracteres';
+                            }
 
-                      // Password
-                      TextFormField(
-                        onChanged: (value) =>
-                            registerFormProvider.password = value,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Ingrese su contraseña';
-                          }
-                          if (value.length < 6) {
-                            return 'La contraseña debe de ser de 6 caracteres';
-                          }
-
-                          return null; // Válido
-                        },
-                        obscureText: true,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: CustomInputs.loginInputDecoration(
-                            hint: '*********',
-                            label: 'Contraseña',
-                            icon: Icons.lock_outline_rounded),
+                            return null; // Válido
+                          },
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.black),
+                          decoration: CustomInputs.loginInputDecoration(
+                              hint: '*********',
+                              label: 'Contraseña',
+                              icon: Icons.lock_outline_rounded),
+                        ),
                       ),
+                      // Password
 
                       const SizedBox(height: 20),
                       CustomOutlinedButton(
@@ -135,25 +161,29 @@ class RegisterView extends StatelessWidget {
                           final validForm = registerFormProvider.validateForm();
                           if (!validForm) return;
 
-                          Usuario user = Usuario (
-                            idusuario: 0,
-                            documento: registerFormProvider.documento,
-                            nombre: registerFormProvider.name,
-                            apellido: registerFormProvider.apellido,
-                            email: registerFormProvider.email,
-                            password: registerFormProvider.password,
-                            idTipoUsuario: 1,
-                            response: '',
-                            token: '',
-                            img: ''
-                          );
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return RoleCardView(user: user);
-                            }
-                          ));
+                          if (sideMenuProvider.currentPage == Flurorouter.registerRoute) {
+                            final authProvider =
+                              Provider.of<AuthProvider>(context, listen: false);
+                                authProvider.register(
+                                    registerFormProvider.name,
+                                    registerFormProvider.apellido,
+                                    registerFormProvider.documento,
+                                    registerFormProvider.email,
+                                    registerFormProvider.password);
+                          } else {
+                            final authProvider =
+                              Provider.of<AuthProvider>(context, listen: false);
+                                authProvider.registerToken(
+                                    registerFormProvider.name,
+                                    registerFormProvider.apellido,
+                                    registerFormProvider.documento,
+                                    registerFormProvider.email,
+                                    registerFormProvider.password,
+                                    idarg,
+                                    tipoUsuario);
+                          }
                         },
-                        text: 'Continuar',
+                        text: 'Crear Cuenta',
                       ),
 
                       const SizedBox(height: 20),
