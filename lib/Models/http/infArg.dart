@@ -13,7 +13,7 @@ class InfArg {
   String agujerodeconejo;
   String jugabilidad;
   String participantes;
-  int duracionaprox;
+  String duracionaprox;
   String entidad;
   String pais;
   String lugardeejecucion;

@@ -97,7 +97,7 @@ class Sidebar extends StatelessWidget {
                 sideMenuProvider.currentPage == Flurorouter.gruposTablaRoute,
           ),
           MenuItem(
-            text: 'Sede',
+            text: 'IE',
             icon: Icons.business,
             onPressed: () => navigateTo(Flurorouter.sedeRoute),
             isActive:

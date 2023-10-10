@@ -16,6 +16,7 @@ class CustomInputs {
       prefixIcon: Icon(icon, color: Colors.grey),
       labelStyle: const TextStyle(color: Colors.grey),
       hintStyle: const TextStyle(color: Colors.grey),
+      counterText: ''
     );
   }
 

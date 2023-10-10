@@ -4,7 +4,9 @@ import 'package:control_actividades/providers/actividadesArg_provider.dart';
 import 'package:control_actividades/Models/http/actividadesArg.dart';
 import '../../services/notifications_service.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'dart:math' as math;
 
 class ActivitiesArgView extends StatefulWidget {
   final ActividadesArg? actividades;
@@ -23,6 +25,7 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
   String descripcion = '';
   int idMedios = 0;
   TextEditingController dateinput = TextEditingController();
+  TextEditingController txtTimeController = TextEditingController();
 
   @override
   void initState() {
@@ -129,25 +132,78 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                   icon: Icons.calendar_today),
                               readOnly: true,
                               onTap: () async {
-                                DateTime? pickedDate = await showDatePicker(
-                                    context: context, initialDate: widget.actividades?.fecharealizacion ?? DateTime.now(),
-                                    firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2101)
+                                final DateTimeRange? picked =  await showDateRangePicker(
+                                  context: context,
+                                  firstDate: DateTime(2023),
+                                  lastDate: DateTime(2024),
+                                  initialDateRange: DateTimeRange(
+                                    start: DateTime.now(),
+                                    end: DateTime.now().add(const Duration(days: 7)),
+                                  ),
+                                  helpText: 'Select a date range',
+                                  cancelText: 'Cancel',
+                                  confirmText: 'Select',
                                 );
-                                
-                                if(pickedDate != null ) {
-                                    fecharealizacion = pickedDate;
-                                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                                    
+
+                                if (picked != null) {
+                                  DateTime startDate = picked.start;
+                                  DateTime endDate = picked.end;
+                                  // Do something with the selected date range
+
+                                  fecharealizacion = startDate;
+                                  String formattedDate = DateFormat('yyyy-MM-dd').format(startDate);
+                                  String formattedDate2 = DateFormat('yyyy-MM-dd').format(endDate);
                                     setState(() {
-                                      dateinput.text = formattedDate; //set output date to TextField value. 
+                                      dateinput.text = '$formattedDate - $formattedDate2'; 
                                     });
                                 }
-                              },
+                              }
                             )),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: FooterWiget(
+                            label: "Duración inicial",
+                            child: TextFormField(
+                              controller: txtTimeController,
+                              keyboardType: const TextInputType.numberWithOptions(decimal: false),
+                              decoration: CustomInputs.loginInputDecoration(
+                                  hint: '00:00:00',
+                                  label: 'tiempo',
+                                  icon: Icons.timelapse),
+                              inputFormatters: <TextInputFormatter>[
+                                TimeTextInputFormatter() // This input formatter will do the job        
+                              ],
+                              onChanged: (value) => {
+                                
+                              },
+                            ),
+                          )),
+                          const SizedBox(width: 16),
+                          Expanded(
+                          child: FooterWiget(
+                            label: "Duración final",
+                            child: TextFormField(
+                              controller: txtTimeController,
+                              keyboardType: const TextInputType.numberWithOptions(decimal: false),
+                              decoration: CustomInputs.loginInputDecoration(
+                                  hint: '00:00:00',
+                                  label: 'tiempo',
+                                  icon: Icons.timelapse),
+                              inputFormatters: <TextInputFormatter>[
+                                TimeTextInputFormatter() // This input formatter will do the job        
+                              ],
+                              onChanged: (value) => {
+                                
+                              },
+                            ),
+                          ))
+                      ],
+                    ),
                   const SizedBox(height: 20),
                   Center(
                     child: ConstrainedBox(
@@ -218,5 +274,118 @@ class FooterWiget extends StatelessWidget {
         child
       ],
     );
+  }
+}
+
+class TimeTextInputFormatter extends TextInputFormatter {
+  RegExp? exp;
+  TimeTextInputFormatter() {
+    exp = RegExp(r'^[0-9:]+$');
+  }
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (exp!.hasMatch(newValue.text)) {
+      TextSelection newSelection = newValue.selection;
+
+      String value = newValue.text;
+      String newText;
+
+      String leftChunk = '';
+      String rightChunk = '';
+
+      if (value.length >= 8) {
+        if (value.substring(0, 7) == '00:00:0') {
+          leftChunk = '00:00:';
+          rightChunk = value.substring(leftChunk.length + 1, value.length);
+        } else if (value.substring(0, 6) == '00:00:') {
+          leftChunk = '00:0';
+          rightChunk = value.substring(6, 7) + ":" + value.substring(7);
+        } else if (value.substring(0, 4) == '00:0') {
+          leftChunk = '00:';
+          rightChunk = value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7);
+        } else if (value.substring(0, 3) == '00:') {
+          leftChunk = '0';
+          rightChunk = value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7, 8) +
+              value.substring(8);
+        } else {
+          leftChunk = '';
+          rightChunk = value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7);
+        }
+      } else if (value.length == 7) {
+        if (value.substring(0, 7) == '00:00:0') {
+          leftChunk = '';
+          rightChunk = '';
+        } else if (value.substring(0, 6) == '00:00:') {
+          leftChunk = '00:00:0';
+          rightChunk = value.substring(6, 7);
+        } else if (value.substring(0, 1) == '0') {
+          leftChunk = '00:';
+          rightChunk = value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7);
+        } else {
+          leftChunk = '';
+          rightChunk = value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7);
+        }
+      } else {
+        leftChunk = '00:00:0';
+        rightChunk = value;
+      }
+
+      if (oldValue.text.isNotEmpty && oldValue.text.substring(0, 1) != '0') {
+        if (value.length > 7) {
+          return oldValue;
+        } else {
+          leftChunk = '0';
+          rightChunk = value.substring(0, 1) +
+              ":" +
+              value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7);
+        }
+      }
+
+      newText = leftChunk + rightChunk;
+
+      newSelection = newValue.selection.copyWith(
+        baseOffset: math.min(newText.length, newText.length),
+        extentOffset: math.min(newText.length, newText.length),
+      );
+
+      return TextEditingValue(
+        text: newText,
+        selection: newSelection,
+        composing: TextRange.empty,
+      );
+    }
+    return oldValue;
   }
 }

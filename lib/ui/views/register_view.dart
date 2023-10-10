@@ -14,7 +14,7 @@ class RegisterView extends StatefulWidget {
   final String? idarg;
   final String? tipoUsuario;
 
-  RegisterView({Key? key, this.idarg, this.tipoUsuario}) : super(key: key);
+  const RegisterView({Key? key, this.idarg, this.tipoUsuario}) : super(key: key);
 
   @override
   CreateRegisterView createState() => CreateRegisterView();

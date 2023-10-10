@@ -28,7 +28,7 @@ class AdminHandlers {
         .setCurrentPageUrl(Flurorouter.registerRoute);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
-      return RegisterView();
+      return const RegisterView();
     } else {
       return const DashboardView();
     }
@@ -53,6 +53,18 @@ class AdminHandlers {
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
       return RegisterTokenView(token: params['token']?.first);
+    } else {
+      return const DashboardView();
+    }
+  });
+
+  static Handler registerToken2 = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.registerTokenRoute);
+
+    if (authProvider.authStatus == AuthStatus.notAuthenticated) {
+      return const RegisterTokenView();
     } else {
       return const DashboardView();
     }

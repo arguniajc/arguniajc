@@ -17,6 +17,7 @@ class Flurorouter {
   static String registerRoute = '/auth/register';
   static String roleCardRoute = '/auth/role';
   static String registerTokenRoute = '/auth/registerToken/:token';
+  static String registerTokenRoute2 = '/auth/registerToken';
 
   // Dashboard
   static String dashboardRoute = '/dashboard';
@@ -52,6 +53,8 @@ class Flurorouter {
         handler: AdminHandlers.role, transitionType: TransitionType.none);
     router.define(registerTokenRoute,
         handler: AdminHandlers.registerToken, transitionType: TransitionType.none);
+    router.define(registerTokenRoute2,
+        handler: AdminHandlers.registerToken2, transitionType: TransitionType.none);
 
     // Dashboard
     router.define(dashboardRoute,

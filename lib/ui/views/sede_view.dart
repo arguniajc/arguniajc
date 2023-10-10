@@ -67,7 +67,7 @@ class CreateSedeView extends State<SedeView> {
                     children: [
                       Expanded(
                         child: FooterWiget(
-                            label: "Nombre de Sede",
+                            label: "Nombre de IE",
                             child: TextFormField(
                               initialValue: widget.sede?.nombre ?? '',
                               style: const TextStyle(color: Colors.black),
@@ -81,7 +81,7 @@ class CreateSedeView extends State<SedeView> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: FooterWiget(
-                            label: "Tipo de sede",
+                            label: "Tipo de IE",
                             child: TextFormField(
                               initialValue: widget.sede?.tipoSede ?? '',
                               style: const TextStyle(color: Colors.black),
@@ -100,7 +100,7 @@ class CreateSedeView extends State<SedeView> {
                         style: const TextStyle(color: Colors.black),
                         decoration: CustomInputs.loginInputDecoration(
                             hint: 'Ingrese la descripcion de sede',
-                            label: 'Tipo de sede',
+                            label: 'Descrpcion',
                             icon: Icons.layers),
                         onChanged: ((value) => descripcion = value)
                   ),

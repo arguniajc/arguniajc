@@ -1,12 +1,14 @@
 import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/providers/login_form_provider.dart';
-import 'package:control_actividades/router/router.dart';
+// import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/buttons/link_text.dart';
 import 'package:control_actividades/ui/inputs/custom_inputs.dart';
+import 'package:control_actividades/ui/views/register_view.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -88,8 +90,13 @@ class LoginView extends StatelessWidget {
                         LinkText(
                           text: 'Registrar nueva cuenta',
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, Flurorouter.registerRoute);
+                            // Navigator.pushReplacementNamed(
+                            //     context, Flurorouter.registerRoute);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return const RegisterView();
+                              }
+                            ));
                           },
                         )
                       ],
