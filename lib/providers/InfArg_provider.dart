@@ -48,7 +48,9 @@ class InfArgProvider extends ChangeNotifier {
       String entidad,
       String pais,
       String lugardeejecucion,
-      int idPuppetmaster) async {
+      int idPuppetmaster,
+      String estado,
+      String ciudad) async {
     // Petición post HTTP
     final data = {
       "idarg": 0,
@@ -68,6 +70,8 @@ class InfArgProvider extends ChangeNotifier {
       "pais": pais,
       "lugardeejecucion": lugardeejecucion,
       "idPuppetmaster": idPuppetmaster,
+      "estado": estado,
+      "ciudad": ciudad,
       "response": ''
     };
 
@@ -103,7 +107,9 @@ class InfArgProvider extends ChangeNotifier {
       String entidad,
       String pais,
       String lugardeejecucion,
-      int idPuppetmaster) async {
+      int idPuppetmaster,
+      String estado,
+      String ciudad) async {
     // Petición put HTTP
     final data = {
       "idarg": idarg,
@@ -123,6 +129,8 @@ class InfArgProvider extends ChangeNotifier {
       "pais": pais,
       "lugardeejecucion": lugardeejecucion,
       "id_puppetmaste": idPuppetmaster,
+      "estado": estado,
+      "ciudad": ciudad,
       "response": ''
     };
 

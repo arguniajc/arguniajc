@@ -19,7 +19,6 @@ class CreateMedioView extends State<MediosView> {
   String nombre = '';
   String tipoMedio = '';
   String medionotificacion = '';
-  int idArg = 0;
   String? selectedOption;
   List<String> dataMaker = ['Opción 1', 'Opción 2', 'Opción 3'];
 
@@ -30,7 +29,6 @@ class CreateMedioView extends State<MediosView> {
     nombre = widget.medio?.nombre ?? '';
     tipoMedio = widget.medio?.tipoMedio ?? '';
     medionotificacion = widget.medio?.medionotificacion ?? '';
-    idArg = widget.medio?.idArg ?? 0;
   }
 
   @override
@@ -114,42 +112,42 @@ class CreateMedioView extends State<MediosView> {
                               onChanged: ((value) => medionotificacion = value)
                             )),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FooterWiget(
-                          label: 'esto es un prueba',
-                          child: DropdownButtonFormField<String>(
-                                value: selectedOption,
-                                hint: const Text('Selecciona una opcion'),
-                                onChanged: (String? newValue) {
-                                              setState(() {
-                                                selectedOption = newValue;
-                                              });
-                                            },
-                                items: dataMaker.map((item) {
-                                  return DropdownMenuItem<String>(
-                                        value: item,
-                                        child: Text(item),
-                                      );
-                                    }).toList(),
-                                decoration: const InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
-                                    ),
-                                      focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.transparent,
-                                ), 
-                                style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-           
-                    ),
-                        ),
-                      )
+                      //   const SizedBox(width: 12),
+                      //   Expanded(
+                      //     child: FooterWiget(
+                      //       label: 'esto es un prueba',
+                      //       child: DropdownButtonFormField<String>(
+                      //             value: selectedOption,
+                      //             hint: const Text('Selecciona una opcion'),
+                      //             onChanged: (String? newValue) {
+                      //                           setState(() {
+                      //                             selectedOption = newValue;
+                      //                           });
+                      //                         },
+                      //             items: dataMaker.map((item) {
+                      //               return DropdownMenuItem<String>(
+                      //                     value: item,
+                      //                     child: Text(item),
+                      //                   );
+                      //                 }).toList(),
+                      //             decoration: const InputDecoration(
+                      //                   enabledBorder: OutlineInputBorder(
+                      //                   borderSide: BorderSide(color: Colors.grey),
+                      //                 ),
+                      //                   focusedBorder: OutlineInputBorder(
+                      //                   borderSide: BorderSide(color: Colors.grey),
+                      //                 ),
+                      //                 filled: true,
+                      //                 fillColor: Colors.transparent,
+                      //             ), 
+                      //             style: const TextStyle(
+                      //             fontSize: 15,
+                      //             fontWeight: FontWeight.w500,
+                      //           ),
+            
+                      // ),
+                      //     ),
+                      //   )
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -162,16 +160,14 @@ class CreateMedioView extends State<MediosView> {
                                     await form.neMedios(
                                       nombre,
                                       tipoMedio,
-                                      medionotificacion,
-                                      idArg
+                                      medionotificacion
                                     );
                                   } else {
                                     await form.updateMedios(
                                       idMedios,
                                       nombre,
                                       tipoMedio,
-                                      medionotificacion,
-                                      idArg
+                                      medionotificacion
                                     );
                                     NotificationsService.showSnackbar(
                                         'Medio $nombre actualizado');

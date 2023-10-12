@@ -34,22 +34,26 @@ class ActividadesArgProvider extends ChangeNotifier {
 
   Future newArg(
       int idactividades,
-      String medios,
-      DateTime fecharealizacion,
       String nombre,
       String descripcion,
-      int idMedios) async {
+      String fecharealizacion,
+      String fechadefinalizacion,
+      int idMedios,
+      String timeinicial,
+      String timeFinalizacion) async {
     // Petición post HTTP
     final data = {
       "idactividades": 0,
-      "medios": medios,
-      "fecharealizacion": fecharealizacion,
       "nombre": nombre,
       "descripcion": descripcion,
-      "idMedios": idMedios
+      "fecharealizacion": fecharealizacion,
+      "fechadefinalizacion": fechadefinalizacion,
+      "idMedios": idMedios,
+      "timeinicial": timeinicial,
+      "timeFinalizacion": timeFinalizacion,
+      "response": ''
     };
-
-    EndPointApi.httpPost('/activities', data).then((json) {
+    EndPointApi.httpPost('activities', data).then((json) {
       final res = ActividadesArg.fromMap(json);
       if (res.response.isNotEmpty) {
         NotificationsService.showSnackbarError('Actividades ya Existe');
@@ -66,22 +70,25 @@ class ActividadesArgProvider extends ChangeNotifier {
 
   Future updateArg(
       int idactividades,
-      String medios,
-      DateTime fecharealizacion,
       String nombre,
       String descripcion,
-      int idMedios) async {
+      String fecharealizacion,
+      String fechadefinalizacion,
+      int idMedios,
+      String timeinicial,
+      String timeFinalizacion) async {
     // Petición put HTTP
     final data = {
       "idactividades": idactividades,
-      "medios": medios,
-      "fecharealizacion": fecharealizacion,
       "nombre": nombre,
       "descripcion": descripcion,
+      "fecharealizacion": fecharealizacion,
       "idMedios": idMedios,
+      "timeinicial": timeinicial,
+      "timeFinalizacion": timeFinalizacion,
       "response": ''
     };
-
+    print(data);
     EndPointApi.httpPut('/activities/$idactividades', data).then((json) {
       activitiesArgs = activitiesArgs.map((arg) {
         if (arg.idactividades != idactividades) return arg;
@@ -89,7 +96,6 @@ class ActividadesArgProvider extends ChangeNotifier {
         arg.nombre = nombre;
         arg.descripcion = descripcion;
         arg.fecharealizacion = fecharealizacion;
-        arg.medios = medios;
         arg.idMedios = idMedios;
         return arg;
       }).toList();

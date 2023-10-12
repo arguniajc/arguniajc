@@ -19,6 +19,8 @@ class InfArg {
   String lugardeejecucion;
   int idPuppetmaster;
   int token;
+  String estado;
+  String ciudad;
   String response;
 
   InfArg({
@@ -40,6 +42,8 @@ class InfArg {
     required this.lugardeejecucion,
     required this.idPuppetmaster,
     required this.token,
+    required this.estado,
+    required this.ciudad,
     required this.response,
   });
 
@@ -66,6 +70,8 @@ class InfArg {
         lugardeejecucion: json["lugardeejecucion"],
         idPuppetmaster: json["idPuppetmaster"],
         token: json["token"],
+        estado: json["estado"],
+        ciudad: json["ciudad"],
         response: json["response"],
       );
 
@@ -88,6 +94,8 @@ class InfArg {
         "lugardeejecucion": lugardeejecucion,
         "idPuppetmaste": idPuppetmaster,
         "token": token,
+        "estado": estado,
+        "ciudad": ciudad,
         "response": response,
       };
 

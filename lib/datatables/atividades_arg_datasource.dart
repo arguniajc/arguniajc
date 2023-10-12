@@ -12,18 +12,18 @@ class ActividadesArgDTS extends DataTableSource {
 
   @override
   DataRow getRow(int index) {
-    final ActivitiesArg = actividadargs[index];
+    final activitiesArg = actividadargs[index];
 
     return DataRow.byIndex(index: index, cells: [
-      DataCell(Text(ActivitiesArg.nombre)),
-      DataCell(Text(ActivitiesArg.descripcion)),
+      DataCell(Text(activitiesArg.nombre)),
+      DataCell(Text(activitiesArg.descripcion)),
       DataCell(Row(
         children: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return ActivitiesArgView(actividades: ActivitiesArg);
+                    return ActivitiesArgView(actividades: activitiesArg);
                   }
                 ));
               },
@@ -33,7 +33,7 @@ class ActividadesArgDTS extends DataTableSource {
                 final dialog = AlertDialog(
                   title: const Text('¿Está seguro de borrarlo?'),
                   content: Text(
-                      'Borrar definitivamente ${ActivitiesArg.nombre}?'),
+                      'Borrar definitivamente ${activitiesArg.nombre}?'),
                   actions: [
                     TextButton(
                       child: const Text('No'),
@@ -45,7 +45,7 @@ class ActividadesArgDTS extends DataTableSource {
                       child: const Text('Si, borrar'),
                       onPressed: () async {
                         Provider.of<InfArgProvider>(context, listen: false)
-                            .deleteArg(ActivitiesArg.idactividades);
+                            .deleteArg(activitiesArg.idactividades);
                         Navigator.of(context).pop();
                       },
                     ),

@@ -21,12 +21,11 @@ class MedioDTS extends DataTableSource {
         children: [
           IconButton(
               onPressed: () {
-                showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (_) => MediosView(
-                          medio: medio,
-                        ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return MediosView(medio: medio);
+                  }
+                ));
               },
               icon: const Icon(Icons.edit_outlined)),
           IconButton(

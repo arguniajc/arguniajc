@@ -23,7 +23,6 @@ class MediosFormProvider extends ChangeNotifier {
       nombre: nombre ?? medios!.nombre,
       tipoMedio: tipoMedio ?? medios!.tipoMedio,
       medionotificacion: medionotificacion ?? medios!.medionotificacion,
-      idArg: idArg ?? medios!.idArg,
       response: response ?? medios!.response
     );
     notifyListeners();
@@ -43,7 +42,6 @@ class MediosFormProvider extends ChangeNotifier {
         "nombre": medios!.nombre,
         "tipoMedio": medios!.tipoMedio,
         "medionotificacion": medios!.medionotificacion,
-        "idArg": medios!.idArg,
         "response": medios!.response,
     };
 

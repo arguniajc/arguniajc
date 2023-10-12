@@ -13,19 +13,23 @@ class ArgFormProvider extends ChangeNotifier {
 
   copyUserWith(
       {int? idactividades,
-      String? medios,
-      DateTime? fecharealizacion,
       String? nombre,
       String? descripcion,
+      String? fecharealizacion,
+      String? fechadefinalizacion,
       int? idMedios,
+      String? timeinicial,
+      String? timeFinalizacion,
       String? response}) {
     actividades = ActividadesArg(
           idactividades: idactividades ?? actividades!.idactividades,
-          medios: medios ?? actividades!.medios,
-          fecharealizacion: fecharealizacion ?? actividades!.fecharealizacion,
           nombre: nombre ?? actividades!.nombre,
           descripcion: descripcion ?? actividades!.descripcion,
+          fecharealizacion: fecharealizacion ?? actividades!.fecharealizacion,
+          fechadefinalizacion: fechadefinalizacion ?? actividades!.fechadefinalizacion,
           idMedios: idMedios ?? actividades!.idMedios,
+          timeinicial: timeinicial ?? actividades!.timeinicial,
+          timeFinalizacion: timeFinalizacion ?? actividades!.timeFinalizacion,
           response: response ?? actividades!.response
       );
     notifyListeners();
@@ -42,11 +46,12 @@ class ArgFormProvider extends ChangeNotifier {
 
     final data = {
       "idactividades": actividades!.idactividades,
-      "medios": actividades!.medios,
-      "fecharealizacion": actividades!.fecharealizacion,
       "nombre": actividades!.nombre,
       "descripcion": actividades!.descripcion,
-      "idMedios": actividades!.idMedios
+      "fecharealizacion": actividades!.fecharealizacion,
+      "idMedios": actividades!.idMedios,
+      "timeinicial": actividades!.timeinicial,
+      "timeFinalizacion": actividades!.timeFinalizacion,
     };
 
     try {

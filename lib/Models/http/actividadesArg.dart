@@ -2,20 +2,24 @@ import 'dart:convert';
 
 class ActividadesArg {
   int idactividades;
-  String medios;
-  DateTime fecharealizacion;
   String nombre;
   String descripcion;
+  String fecharealizacion;
+  String fechadefinalizacion;
   int idMedios;
+  String timeinicial;
+  String timeFinalizacion;
   String response;
 
   ActividadesArg({
     required this.idactividades,
-    required this.medios,
-    required this.fecharealizacion,
     required this.nombre,
     required this.descripcion,
+    required this.fecharealizacion,
+    required this.fechadefinalizacion,
     required this.idMedios,
+    required this.timeinicial,
+    required this.timeFinalizacion,
     required this.response
   });
 
@@ -25,21 +29,25 @@ class ActividadesArg {
 
   factory ActividadesArg.fromMap(Map<String, dynamic> json) => ActividadesArg(
         idactividades: json["idactividades"],
-        medios: json["medios"],
-        fecharealizacion: json["fecharealizacion"],
         nombre: json["nombre"],
         descripcion: json["descripcion"],
+        fecharealizacion: json["fecharealizacion"],
+        fechadefinalizacion: json["fechadefinalizacion"],
         idMedios: json["idMedios"],
+        timeinicial: json["timeinicial"],
+        timeFinalizacion: json["timeFinalizacion"],
         response: json["response"],
       );
 
   Map<String, dynamic> toMap() => {
         "idactividades": idactividades,
-        "medios": medios,
-        "fecharealizacion": fecharealizacion,
         "nombre": nombre,
         "descripcion": descripcion,
+        "fecharealizacion": fecharealizacion,
+        "fechadefinalizacion": fechadefinalizacion,
         "idMedios": idMedios,
+        "timeinicial": timeinicial,
+        "timeFinalizacion": timeFinalizacion,
         "response": response,
       };
 

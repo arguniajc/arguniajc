@@ -35,15 +35,13 @@ class MediosProvider extends ChangeNotifier {
   Future neMedios(
       String nombre,
       String tipoMedio,
-      String medionotificacion,
-      int idArg) async {
+      String medionotificacion) async {
     // Petición post HTTP
     final data = {
       "idMedios": 0,
       "nombre": nombre,
       "tipoMedio": tipoMedio,
       "medionotificacion": medionotificacion,
-      "idArg": idArg,
       "response": '',
     };
 
@@ -66,26 +64,23 @@ class MediosProvider extends ChangeNotifier {
       int idMedios,
       String nombre,
       String tipoMedio,
-      String medionotificacion,
-      int idArg) async {
+      String medionotificacion) async {
     // Petición put HTTP
     final data = {
       "idMedios": idMedios,
       "nombre": nombre,
       "tipoMedio": tipoMedio,
       "medionotificacion": medionotificacion,
-      "idArg": idArg,
-      "response": '',
+      "response": ''
     };
 
     EndPointApi.httpPut('/medios/$idMedios', data).then((json) {
       mediosArgs = mediosArgs.map((md) {
-        if (md.idArg != idMedios) return md;
-        md.idArg = idArg;
+        if (md.idMedios != idMedios) return md;
+        md.idMedios = idMedios;
         md.nombre = nombre;
         md.tipoMedio = tipoMedio;
         md.medionotificacion = medionotificacion;
-        md.idArg = idArg;
         md.response = '';
         return md;
       }).toList();
@@ -98,7 +93,7 @@ class MediosProvider extends ChangeNotifier {
 
   Future deleteMedios(int id) async {
     EndPointApi.httpDelete('/medios/$id').then((json) {
-      mediosArgs.removeWhere((element) => element.idArg == id);
+      mediosArgs.removeWhere((element) => element.idMedios == id);
 
       notifyListeners();
     }).catchError((e) {
@@ -121,10 +116,10 @@ class MediosProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void refreshMedios(MediosArg newArg) {
-    mediosArgs = mediosArgs.map((arg) {
-      if (arg.idArg == newArg.idArg) return arg = newArg;
-      return arg;
+  void refreshMedios(MediosArg newMedio) {
+    mediosArgs = mediosArgs.map((medio) {
+      if (medio.idMedios == newMedio.idMedios) return medio = newMedio;
+      return medio;
     }).toList();
 
     notifyListeners();

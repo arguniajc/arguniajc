@@ -1,3 +1,7 @@
+import 'dart:html';
+
+import 'package:control_actividades/providers/MediosArg_form_provider.dart';
+import 'package:control_actividades/providers/provider.dart';
 import 'package:flutter/material.dart';
 import '../inputs/custom_inputs.dart';
 import 'package:control_actividades/providers/actividadesArg_provider.dart';
@@ -19,28 +23,36 @@ class ActivitiesArgView extends StatefulWidget {
 
 class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
   int idactividades = 0;
-  String medios = '';
-  DateTime fecharealizacion = DateTime.now();
   String nombre = '';
   String descripcion = '';
+  String fecharealizacion = '';
+  String fechadefinalizacion = '';
   int idMedios = 0;
+  String timeinicial = '';
+  String timeFinalizacion = '';
   TextEditingController dateinput = TextEditingController();
   TextEditingController txtTimeController = TextEditingController();
+  TextEditingController txtTimeController2 = TextEditingController();
+  String? selectedOption;
 
   @override
   void initState() {
     super.initState();
     idactividades = widget.actividades?.idactividades ?? 0;
-    medios = widget.actividades?.medios ?? '';
-    fecharealizacion = widget.actividades?.fecharealizacion ?? DateTime.now();
     nombre = widget.actividades?.nombre ?? '';
     descripcion = widget.actividades?.descripcion ?? '';
+    fecharealizacion = widget.actividades?.fecharealizacion ?? '';
+    fechadefinalizacion = widget.actividades?.fechadefinalizacion ?? '';
     idMedios = widget.actividades?.idMedios ?? 0;
+    timeinicial = widget.actividades?.timeinicial ?? '';
+    timeFinalizacion = widget.actividades?.timeFinalizacion ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
     final form = Provider.of<ActividadesArgProvider>(context, listen: false);
+    final medio = Provider.of<MediosProvider>(context);
+    final dataMedio = medio.mediosArgs;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -108,16 +120,41 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                     children: [
                       Expanded(
                         child: FooterWiget(
-                            label: "Medios utilizados",
-                            child: TextFormField(
-                              initialValue: widget.actividades?.medios ?? '',
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese los medios utilizados',
-                                  label: 'Medios utilizados',
-                                  icon: Icons.addchart),
-                              onChanged: ((value) => medios = value),
-                            )),
+                          label: 'Seleccionar un arg',
+                          child: DropdownButtonFormField<String>(
+                                value: selectedOption,
+                                hint: const Text('Selecciona una opcion'),
+                                onChanged: (String? newValue) {
+                                              setState(() {
+                                                selectedOption = newValue;
+                                                if (selectedOption != null) {
+                                                  idMedios = int.parse(selectedOption!);
+                                                }
+                                              });
+                                            },
+                                items: dataMedio.map((item) {
+                                  return DropdownMenuItem<String>(
+                                        value: item.idMedios.toString(),
+                                        child: Text(item.nombre),
+                                      );
+                                    }).toList(),
+                                decoration: const InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.grey),
+                                    ),
+                                      focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.grey),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.transparent,
+                                ), 
+                                style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+           
+                          ),
+                        ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -148,9 +185,11 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                 if (picked != null) {
                                   DateTime startDate = picked.start;
                                   DateTime endDate = picked.end;
+
                                   // Do something with the selected date range
 
-                                  fecharealizacion = startDate;
+                                  fecharealizacion = startDate.toString();
+                                  fechadefinalizacion = endDate.toString();
                                   String formattedDate = DateFormat('yyyy-MM-dd').format(startDate);
                                   String formattedDate2 = DateFormat('yyyy-MM-dd').format(endDate);
                                     setState(() {
@@ -179,7 +218,7 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                 TimeTextInputFormatter() // This input formatter will do the job        
                               ],
                               onChanged: (value) => {
-                                
+                                timeinicial = value
                               },
                             ),
                           )),
@@ -188,17 +227,17 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                           child: FooterWiget(
                             label: "Duración final",
                             child: TextFormField(
-                              controller: txtTimeController,
+                              controller: txtTimeController2,
                               keyboardType: const TextInputType.numberWithOptions(decimal: false),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: '00:00:00',
                                   label: 'tiempo',
                                   icon: Icons.timelapse),
                               inputFormatters: <TextInputFormatter>[
-                                TimeTextInputFormatter() // This input formatter will do the job        
+                                TimeTextInputFormatter2() // This input formatter will do the job        
                               ],
                               onChanged: (value) => {
-                                
+                                timeFinalizacion = value
                               },
                             ),
                           ))
@@ -212,21 +251,25 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                         onPressed: () async {
                                   if (idactividades == 0) {
                                     await form.newArg(
-                                      idactividades,
-                                      medios,
-                                      fecharealizacion,
+                                      0,
                                       nombre,
                                       descripcion,
-                                      idMedios
+                                      fecharealizacion,
+                                      fechadefinalizacion,
+                                      idMedios,
+                                      timeinicial,
+                                      timeFinalizacion
                                     );
                                   } else {
                                     await form.updateArg(
                                       idactividades,
-                                      medios,
-                                      fecharealizacion,
                                       nombre,
                                       descripcion,
-                                      idMedios
+                                      fecharealizacion,
+                                      fechadefinalizacion,
+                                      idMedios,
+                                      timeinicial,
+                                      timeFinalizacion
                                     );
                                     NotificationsService.showSnackbar(
                                         'Actividades $nombre actualizado');
@@ -280,6 +323,119 @@ class FooterWiget extends StatelessWidget {
 class TimeTextInputFormatter extends TextInputFormatter {
   RegExp? exp;
   TimeTextInputFormatter() {
+    exp = RegExp(r'^[0-9:]+$');
+  }
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (exp!.hasMatch(newValue.text)) {
+      TextSelection newSelection = newValue.selection;
+
+      String value = newValue.text;
+      String newText;
+
+      String leftChunk = '';
+      String rightChunk = '';
+
+      if (value.length >= 8) {
+        if (value.substring(0, 7) == '00:00:0') {
+          leftChunk = '00:00:';
+          rightChunk = value.substring(leftChunk.length + 1, value.length);
+        } else if (value.substring(0, 6) == '00:00:') {
+          leftChunk = '00:0';
+          rightChunk = value.substring(6, 7) + ":" + value.substring(7);
+        } else if (value.substring(0, 4) == '00:0') {
+          leftChunk = '00:';
+          rightChunk = value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7);
+        } else if (value.substring(0, 3) == '00:') {
+          leftChunk = '0';
+          rightChunk = value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7, 8) +
+              value.substring(8);
+        } else {
+          leftChunk = '';
+          rightChunk = value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7);
+        }
+      } else if (value.length == 7) {
+        if (value.substring(0, 7) == '00:00:0') {
+          leftChunk = '';
+          rightChunk = '';
+        } else if (value.substring(0, 6) == '00:00:') {
+          leftChunk = '00:00:0';
+          rightChunk = value.substring(6, 7);
+        } else if (value.substring(0, 1) == '0') {
+          leftChunk = '00:';
+          rightChunk = value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7);
+        } else {
+          leftChunk = '';
+          rightChunk = value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7) +
+              ":" +
+              value.substring(7);
+        }
+      } else {
+        leftChunk = '00:00:0';
+        rightChunk = value;
+      }
+
+      if (oldValue.text.isNotEmpty && oldValue.text.substring(0, 1) != '0') {
+        if (value.length > 7) {
+          return oldValue;
+        } else {
+          leftChunk = '0';
+          rightChunk = value.substring(0, 1) +
+              ":" +
+              value.substring(1, 2) +
+              value.substring(3, 4) +
+              ":" +
+              value.substring(4, 5) +
+              value.substring(6, 7);
+        }
+      }
+
+      newText = leftChunk + rightChunk;
+
+      newSelection = newValue.selection.copyWith(
+        baseOffset: math.min(newText.length, newText.length),
+        extentOffset: math.min(newText.length, newText.length),
+      );
+
+      return TextEditingValue(
+        text: newText,
+        selection: newSelection,
+        composing: TextRange.empty,
+      );
+    }
+    return oldValue;
+  }
+}
+
+class TimeTextInputFormatter2 extends TextInputFormatter {
+  RegExp? exp;
+  TimeTextInputFormatter2() {
     exp = RegExp(r'^[0-9:]+$');
   }
 

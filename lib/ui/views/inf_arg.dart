@@ -35,6 +35,8 @@ class CreateArgViewState extends State<InfArgView> {
   String pais = '';
   String lugardeejecucion = '';
   int idPuppetmaster = 0;
+  String estado = '';
+  String ciduad = '';
   String response = '';
   List<String> modalidadEstudios = ['Presencial', 'A distancia', 'Semipresencial','Virtual','Modalidad mixta'];
   TextEditingController txtTimeController = TextEditingController();
@@ -63,9 +65,13 @@ class CreateArgViewState extends State<InfArgView> {
     pais = widget.arg?.pais ?? '';
     lugardeejecucion = widget.arg?.lugardeejecucion ?? '';
     idPuppetmaster = widget.arg?.idPuppetmaster ?? 0;
+    estado = widget.arg?.estado ?? '';
+    ciduad = widget.arg?.ciudad ?? '';
     response = widget.arg?.response ?? '';
     txtTimeController.text = duracionaprox;
     country.text = pais;
+    state.text = estado;
+    city.text = ciduad;
   }
 
   @override
@@ -427,6 +433,8 @@ class CreateArgViewState extends State<InfArgView> {
                             child: ElevatedButton(
                                 onPressed: () async {
                                   pais = country.text;
+                                  estado = state.text;
+                                  ciduad = city.text;
                                   if (idarg == 0) {
                                     await form.newArg(
                                         titulo,
@@ -444,7 +452,9 @@ class CreateArgViewState extends State<InfArgView> {
                                         entidad,
                                         pais,
                                         lugardeejecucion,
-                                        idPuppetmaster);
+                                        idPuppetmaster,
+                                        estado,
+                                        ciduad);
                                   } else {
                                     await form.updateArg(
                                         idarg,
@@ -463,7 +473,9 @@ class CreateArgViewState extends State<InfArgView> {
                                         entidad,
                                         pais,
                                         lugardeejecucion,
-                                        idPuppetmaster);
+                                        idPuppetmaster,
+                                        estado,
+                                        ciduad);
                                     NotificationsService.showSnackbar(
                                         'Arg $titulo actualizado');
                                   }
