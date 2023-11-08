@@ -1,10 +1,6 @@
-import 'dart:html';
-
-import 'package:control_actividades/providers/MediosArg_form_provider.dart';
 import 'package:control_actividades/providers/provider.dart';
 import 'package:flutter/material.dart';
 import '../inputs/custom_inputs.dart';
-import 'package:control_actividades/providers/actividadesArg_provider.dart';
 import 'package:control_actividades/Models/http/actividadesArg.dart';
 import '../../services/notifications_service.dart';
 import 'package:provider/provider.dart';
@@ -30,10 +26,12 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
   int idMedios = 0;
   String timeinicial = '';
   String timeFinalizacion = '';
+  int idArg = 0;
   TextEditingController dateinput = TextEditingController();
   TextEditingController txtTimeController = TextEditingController();
   TextEditingController txtTimeController2 = TextEditingController();
   String? selectedOption;
+  String? selectedOptionArg;
 
   @override
   void initState() {
@@ -46,6 +44,18 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
     idMedios = widget.actividades?.idMedios ?? 0;
     timeinicial = widget.actividades?.timeinicial ?? '';
     timeFinalizacion = widget.actividades?.timeFinalizacion ?? '';
+    idArg = widget.actividades?.idArg ?? 0;
+    if (idMedios != 0) {
+      selectedOption = idMedios.toString();
+    }
+    if (idArg != 0) {
+      selectedOptionArg = idArg.toString();
+    }
+    if (fecharealizacion != '') {
+      dateinput.text = '${fecharealizacion.substring(0,10) }  -  ${fechadefinalizacion.substring(0,10)}';
+      txtTimeController.text = timeinicial;
+      txtTimeController2.text = timeFinalizacion;
+    }
   }
 
   @override
@@ -53,6 +63,8 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
     final form = Provider.of<ActividadesArgProvider>(context, listen: false);
     final medio = Provider.of<MediosProvider>(context);
     final dataMedio = medio.mediosArgs;
+    final arg = Provider.of<InfArgProvider>(context);
+    final dataArg = arg.args;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -116,11 +128,48 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                     ],
                   ),
                   const SizedBox(height: 20),
+                  FooterWiget(
+                    label: 'Seleccionar un Arg',
+                    child: DropdownButtonFormField<String>(
+                          value: selectedOptionArg,
+                          hint: const Text('Selecciona una opcion'),
+                          onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedOptionArg = newValue;
+                                          if (selectedOptionArg != null) {
+                                            idArg = int.parse(selectedOptionArg!);
+                                          }
+                                        });
+                                      },
+                          items: dataArg.map((item) {
+                            return DropdownMenuItem<String>(
+                                  value: item.idarg.toString(),
+                                  child: Text(item.titulo),
+                                );
+                              }).toList(),
+                          decoration: const InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                                focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                          ), 
+                          style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                        ),
+      
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
                         child: FooterWiget(
-                          label: 'Seleccionar un arg',
+                          label: 'Seleccionar un medio',
                           child: DropdownButtonFormField<String>(
                                 value: selectedOption,
                                 hint: const Text('Selecciona una opcion'),
@@ -258,7 +307,8 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                       fechadefinalizacion,
                                       idMedios,
                                       timeinicial,
-                                      timeFinalizacion
+                                      timeFinalizacion,
+                                      idArg
                                     );
                                   } else {
                                     await form.updateArg(
@@ -269,7 +319,8 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                       fechadefinalizacion,
                                       idMedios,
                                       timeinicial,
-                                      timeFinalizacion
+                                      timeFinalizacion,
+                                      idArg
                                     );
                                     NotificationsService.showSnackbar(
                                         'Actividades $nombre actualizado');

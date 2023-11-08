@@ -15,6 +15,7 @@ class Flurorouter {
   // Auth Router
   static String loginRoute = '/auth/login';
   static String registerRoute = '/auth/register';
+  static String registerRoute2 = '/auth/register/:idarg/:tipoUser';
   static String roleCardRoute = '/auth/role';
   static String registerTokenRoute = '/auth/registerToken/:token';
   static String registerTokenRoute2 = '/auth/registerToken';
@@ -49,6 +50,8 @@ class Flurorouter {
         handler: AdminHandlers.login, transitionType: TransitionType.none);
     router.define(registerRoute,
         handler: AdminHandlers.register, transitionType: TransitionType.none);
+    router.define(registerRoute2,
+        handler: AdminHandlers.register2, transitionType: TransitionType.none);
     router.define(roleCardRoute,
         handler: AdminHandlers.role, transitionType: TransitionType.none);
     router.define(registerTokenRoute,

@@ -14,3 +14,4 @@ export 'package:control_actividades/providers/SedeArg_form_provider.dart';
 export 'package:control_actividades/providers/GruposArg_form_provider.dart';
 export 'package:control_actividades/providers/GruposArg_provider.dart';
 export 'package:control_actividades/providers/typeRegisterTokenModal_provider.dart';
+export 'package:control_actividades/providers/lineaDeTiempo_provider.dart';

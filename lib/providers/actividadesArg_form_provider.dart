@@ -20,6 +20,7 @@ class ArgFormProvider extends ChangeNotifier {
       int? idMedios,
       String? timeinicial,
       String? timeFinalizacion,
+      int? idArg,
       String? response}) {
     actividades = ActividadesArg(
           idactividades: idactividades ?? actividades!.idactividades,
@@ -30,6 +31,7 @@ class ArgFormProvider extends ChangeNotifier {
           idMedios: idMedios ?? actividades!.idMedios,
           timeinicial: timeinicial ?? actividades!.timeinicial,
           timeFinalizacion: timeFinalizacion ?? actividades!.timeFinalizacion,
+          idArg: idArg ?? actividades!.idArg,
           response: response ?? actividades!.response
       );
     notifyListeners();
@@ -52,6 +54,7 @@ class ArgFormProvider extends ChangeNotifier {
       "idMedios": actividades!.idMedios,
       "timeinicial": actividades!.timeinicial,
       "timeFinalizacion": actividades!.timeFinalizacion,
+      "idArg": actividades!.idArg
     };
 
     try {
