@@ -37,7 +37,8 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SedeFormProvider()),
         ChangeNotifierProvider(create: (_) => GruposProvider()),
         ChangeNotifierProvider(create: (_) => GruposFormProvider()),
-        ChangeNotifierProvider(create: (_) => TypeRegisterTokenModalProvider())
+        ChangeNotifierProvider(create: (_) => TypeRegisterTokenModalProvider()),
+        ChangeNotifierProvider(create: (_) => LineaDeTiempoProvider())
       ],
       child: MyApp(),
     );

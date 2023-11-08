@@ -40,7 +40,8 @@ class ActividadesArgProvider extends ChangeNotifier {
       String fechadefinalizacion,
       int idMedios,
       String timeinicial,
-      String timeFinalizacion) async {
+      String timeFinalizacion,
+      int idArg) async {
     // Petición post HTTP
     final data = {
       "idactividades": 0,
@@ -51,6 +52,7 @@ class ActividadesArgProvider extends ChangeNotifier {
       "idMedios": idMedios,
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
+      "idArg": idArg,
       "response": ''
     };
     EndPointApi.httpPost('activities', data).then((json) {
@@ -76,7 +78,8 @@ class ActividadesArgProvider extends ChangeNotifier {
       String fechadefinalizacion,
       int idMedios,
       String timeinicial,
-      String timeFinalizacion) async {
+      String timeFinalizacion,
+      int idArg) async {
     // Petición put HTTP
     final data = {
       "idactividades": idactividades,
@@ -86,9 +89,9 @@ class ActividadesArgProvider extends ChangeNotifier {
       "idMedios": idMedios,
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
+      "idArg": idArg,
       "response": ''
     };
-    print(data);
     EndPointApi.httpPut('/activities/$idactividades', data).then((json) {
       activitiesArgs = activitiesArgs.map((arg) {
         if (arg.idactividades != idactividades) return arg;
