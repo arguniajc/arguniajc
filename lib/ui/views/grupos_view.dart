@@ -88,7 +88,7 @@ class CreateGruposView extends State<GruposView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                   const SizedBox(height: 20),
-                  Row(
+                                    Row(
                     children: [
                       Expanded(
                         child: FooterWiget(
@@ -99,17 +99,27 @@ class CreateGruposView extends State<GruposView> {
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese el nombre del grupo',
                                   label: 'Nombre del grupo',
-                                  icon: Icons.wysiwyg),
+                                  icon: Icons.group_add),
                               onChanged: ((value) => nombreGrupo = value)
                             )),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 12, height: 12),
                       Expanded(
                         child: FooterWiget(
-                          label: 'Seleccionar un arg',
+                          label: 'Seleccionar un ARG',
+                             child:SizedBox(
+                              height: 51, 
+
                           child: DropdownButtonFormField<String>(
                                 value: selectedOption,
-                                hint: const Text('Selecciona una opcion'),
+                                hint: const Row(
+                              children: [
+                                 Icon(Icons.book, color: Colors.grey),
+                                 SizedBox(width: 10),
+                                 Text('Selecciona una opción'),
+                              ],
+                            ),
+                                
                                 onChanged: (String? newValue) {
                                               setState(() {
                                                 selectedOption = newValue;
@@ -142,12 +152,44 @@ class CreateGruposView extends State<GruposView> {
                           ),
                         ),
                       )
+                      )
                     ],
+                                    
                   ),
-                  const SizedBox(height: 20),
-                  DropdownButtonFormField<String>(
+
+            const Padding(padding: EdgeInsets.all(2) ),
+
+                Row(
+           
+                    children: [
+                       Expanded(
+                        child: FooterWiget(
+                            label: "Nombre profesor",
+                            child: TextFormField(
+                              initialValue: widget.grupos?.nombreGrupo ?? '',
+                              style: const TextStyle(color: Colors.black),
+                              decoration: CustomInputs.loginInputDecoration(
+                                  hint: 'Ingrese el nombre del profesor',
+                                  label: 'Nombre del profesor',
+                                  icon: Icons.person_search),
+                              onChanged: ((value) => nombreGrupo = value)
+                            )),
+                      ),
+                        const SizedBox(width: 12, height: 100 ),
+                      Expanded(
+                          child: FooterWiget(
+                          label:  "Nombre IE",
+                             child: SizedBox(
+                              height:51 , 
+                        child:  DropdownButtonFormField<String>(
                         value: selectedOptionSede,
-                        hint: const Text('Selecciona una opcion'),
+                        hint: const Row(
+                              children: [
+                                 Icon(Icons.school, color: Colors.grey),
+                                 SizedBox(width: 10),
+                                 Text('Selecciona una opción'),
+                              ],
+                            ),
                         onChanged: (String? newValue) {
                                       setState(() {
                                         selectedOptionSede = newValue;
@@ -177,6 +219,11 @@ class CreateGruposView extends State<GruposView> {
                         fontWeight: FontWeight.w500,
                       ),
                   ),
+                  )
+                  )
+                  )
+                  ],
+                  ),       
                   // Center(
                   //  child: CountryStateCityPicker(
                   //     country: country,
