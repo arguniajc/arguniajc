@@ -86,13 +86,14 @@ class ActividadesArgProvider extends ChangeNotifier {
       "nombre": nombre,
       "descripcion": descripcion,
       "fecharealizacion": fecharealizacion,
+      "fechadefinalizacion": fechadefinalizacion,
       "idMedios": idMedios,
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
       "idArg": idArg,
       "response": ''
     };
-    EndPointApi.httpPut('/activities/$idactividades', data).then((json) {
+    EndPointApi.httpPut('activities/$idactividades', data).then((json) {
       activitiesArgs = activitiesArgs.map((arg) {
         if (arg.idactividades != idactividades) return arg;
         arg.idactividades = idactividades;

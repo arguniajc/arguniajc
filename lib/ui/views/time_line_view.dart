@@ -79,7 +79,15 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                           children: [
                             Text(lineaDeTimepo!.nombreActividad, style: const TextStyle(fontWeight: FontWeight.bold)),
                             const SizedBox(height: 20),
-                            Text(lineaDeTimepo!.descripcionActividad)
+                            Text(lineaDeTimepo!.descripcionActividad),
+                            const SizedBox(height: 30),
+                            Row(
+                              children: [
+                                Text('Titulo Arg: ${lineaDeTimepo!.titulo}'),
+                                const SizedBox(width: 16),
+                                Text('medio: ${lineaDeTimepo!.nombreMedio}')
+                              ],
+                            )
                           ],
                         ),
                       ),
