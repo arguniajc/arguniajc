@@ -1,5 +1,5 @@
 import 'package:control_actividades/Models/http/TypeUser.dart';
-import 'package:control_actividades/providers/typeUserModal_provider.dart';
+import 'package:control_actividades/providers/typeUsers_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../ui/modals/Typeuser_modal.dart';
@@ -44,7 +44,7 @@ class TipoUsuarioDTS extends DataTableSource {
                     TextButton(
                       child: const Text('Si, borrar'),
                       onPressed: () async {
-                        Provider.of<TypeUserModalProvider>(context, listen: false)
+                        Provider.of<TypeUsersProvider>(context, listen: false)
                             .deleteUser(tipo.idTypeUser);
                         Navigator.of(context).pop();
                       },

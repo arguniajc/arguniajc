@@ -1,5 +1,6 @@
 import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/providers/login_form_provider.dart';
+import 'package:control_actividades/services/navigation_service.dart';
 // import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/buttons/link_text.dart';
@@ -90,13 +91,8 @@ class LoginView extends StatelessWidget {
                         LinkText(
                           text: 'Registrar nueva cuenta',
                           onPressed: () {
-                            // Navigator.pushReplacementNamed(
-                            //     context, Flurorouter.registerRoute);
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return const RegisterView();
-                              }
-                            ));
+                            NavigationService.replaceTo(
+                              '/auth/register');
                           },
                         )
                       ],

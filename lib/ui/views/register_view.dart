@@ -51,7 +51,7 @@ class CreateRegisterView extends State<RegisterView> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 370),
               child: Form(
-                  autovalidateMode: AutovalidateMode.always,
+                  autovalidateMode: AutovalidateMode.disabled,
                   key: registerFormProvider.formKey,
                   child: Column(
                     children: [
@@ -165,20 +165,20 @@ class CreateRegisterView extends State<RegisterView> {
                             final authProvider =
                               Provider.of<AuthProvider>(context, listen: false);
                                 authProvider.register(
-                                    registerFormProvider.name,
-                                    registerFormProvider.apellido,
-                                    registerFormProvider.documento,
-                                    registerFormProvider.email,
-                                    registerFormProvider.password);
+                                    registerFormProvider.name!,
+                                    registerFormProvider.apellido!,
+                                    registerFormProvider.documento!,
+                                    registerFormProvider.email!,
+                                    registerFormProvider.password!);
                           } else {
                             final authProvider =
                               Provider.of<AuthProvider>(context, listen: false);
                                 authProvider.registerToken(
-                                    registerFormProvider.name,
-                                    registerFormProvider.apellido,
-                                    registerFormProvider.documento,
-                                    registerFormProvider.email,
-                                    registerFormProvider.password,
+                                    registerFormProvider.name!,
+                                    registerFormProvider.apellido!,
+                                    registerFormProvider.documento!,
+                                    registerFormProvider.email!,
+                                    registerFormProvider.password!,
                                     idarg,
                                     tipoUsuario);
                           }

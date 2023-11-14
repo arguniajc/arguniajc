@@ -29,7 +29,7 @@ class TypeUserViewState extends State<TypeUserView> {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: ListView(physics: const ClampingScrollPhysics(), children: [
-          Text('Medio', style: CustomLabels.h1),
+          Text('Tipo de usuario', style: CustomLabels.h1),
           const SizedBox(height: 10),
           PaginatedDataTable(
             columns: const [

@@ -5,11 +5,11 @@ import 'package:control_actividades/api/endpointApi.dart';
 class RegisterFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  String email = '';
-  String password = '';
-  String name = '';
-  String apellido = '';
-  int documento = 0;
+  String? email;
+  String? password;
+  String? name;
+  String? apellido;
+  int? documento;
   InfArg? args;
 
   validateForm() {
