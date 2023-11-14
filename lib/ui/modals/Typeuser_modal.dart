@@ -1,12 +1,11 @@
 import 'package:control_actividades/Models/http/TypeUser.dart';
+import 'package:control_actividades/providers/typeUsers_provider.dart';
 import 'package:control_actividades/services/notifications_service.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/inputs/custom_inputs.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../providers/typeUserModal_provider.dart';
 
 class TypeUserModal extends StatefulWidget {
   final TypeUser? tipo;
@@ -31,7 +30,7 @@ class _TypeModalState extends State<TypeUserModal> {
 
   @override
   Widget build(BuildContext context) {
-    final typeUserProvider = Provider.of<TypeUserModalProvider>(context, listen: false);
+    final typeUserProvider = Provider.of<TypeUsersProvider>(context, listen: false);
     return Container(
       padding: const EdgeInsets.all(20),
       height: 1000,
@@ -74,9 +73,9 @@ class _TypeModalState extends State<TypeUserModal> {
             child: CustomOutlinedButton(
               onPressed: () async {
                 if (id == null) {
-                  await typeUserProvider.newTypeUser(descripcion);
+                  await typeUserProvider.newUser(descripcion);
                 } else {
-                  await typeUserProvider.updateTypeUser(id!,descripcion);
+                  await typeUserProvider.updateUser(id!,descripcion,'');
                   NotificationsService.showSnackbar(
                       'Tipo usuario $descripcion actualizado');
                 }

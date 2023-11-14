@@ -42,72 +42,65 @@ class Sidebar extends StatelessWidget {
               text: 'ARG',
               icon: Icons.book,
               onPressed: () => navigateTo(Flurorouter.argRoute),
-              isActive:
-                  sideMenuProvider.currentPage == Flurorouter.argRoute),
+              ),
           MenuItem(
               text: 'Activities',
               icon: Icons.menu_book,
               onPressed: () => navigateTo(Flurorouter.activitiesTableArgRoute),
-              isActive: sideMenuProvider.currentPage ==
-                  Flurorouter.activitiesTableArgRoute),
+          ),
           MenuItem(
               text: 'Medio',
               icon: Icons.apps,
-              onPressed: () => navigateTo(Flurorouter.medioTalaRoute),
-              isActive: sideMenuProvider.currentPage == Flurorouter.medioTalaRoute),
+              onPressed: () => navigateTo(Flurorouter.medio),
+              ),
           MenuItem(
               text: 'Timeline',
               icon: Icons.timeline_sharp,
               onPressed: () => navigateTo(Flurorouter.timeLineRoute),
-              isActive:
-                  sideMenuProvider.currentPage == Flurorouter.timeLineRoute),
+              ),
           const TextSeparator(text: 'Account'),
           MenuItem(
             text: 'User',
             icon: Icons.people_alt_outlined,
             onPressed: () => navigateTo(Flurorouter.userRoute),
-            isActive: sideMenuProvider.currentPage == Flurorouter.userRoute,
+            
           ),
           MenuItem(
             text: 'Type user',
             icon: Icons.supervised_user_circle,
             onPressed: () => navigateTo(Flurorouter.typeuserRoute),
-            isActive: sideMenuProvider.currentPage == Flurorouter.typeuserRoute,
+            
           ),
           MenuItem(
             text: 'Activities',
             icon: Icons.note_alt,
             onPressed: () => navigateTo(Flurorouter.activitiesRoute),
-            isActive:
-                sideMenuProvider.currentPage == Flurorouter.activitiesRoute,
+            
           ),
           const TextSeparator(text: 'Notas'),
           MenuItem(
             text: 'Estudiantes',
             icon: Icons.school,
             onPressed: () => navigateTo(Flurorouter.estudiantesRoute),
-            isActive:
-                sideMenuProvider.currentPage == Flurorouter.estudiantesRoute,
+            
           ),
           MenuItem(
             text: 'Grupos',
             icon: Icons.group_add_rounded,
             onPressed: () => navigateTo(Flurorouter.gruposTablaRoute),
-            isActive:
-                sideMenuProvider.currentPage == Flurorouter.gruposTablaRoute,
+            
           ),
           MenuItem(
             text: 'IE',
             icon: Icons.business,
             onPressed: () => navigateTo(Flurorouter.sedeRoute),
-            isActive:
-                sideMenuProvider.currentPage == Flurorouter.sedeRoute,
+            
           ),
           MenuItem(
             text: 'Notas',
             icon: Icons.note_alt,
             onPressed: () => navigateTo(Flurorouter.notasRoute),
-            isActive: sideMenuProvider.currentPage == Flurorouter.notasRoute,
+            
           ),
           const SizedBox(height: 30),
           const TextSeparator(text: 'UI Elements'),
@@ -115,7 +108,7 @@ class Sidebar extends StatelessWidget {
             text: 'Icons',
             icon: Icons.list_alt_outlined,
             onPressed: () => navigateTo(Flurorouter.iconsRoute),
-            isActive: sideMenuProvider.currentPage == Flurorouter.iconsRoute,
+            
           ),
           MenuItem(
               text: 'Marketing',

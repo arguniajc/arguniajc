@@ -28,13 +28,13 @@ class Flurorouter {
   static String typeuserRoute = '/dashboard/typeUsers';
   static String edituserRoute = '/dashboard/users/:uid';
   static String activitiesRoute = '/dashboard/activities';
-  static String activitiesArgRoute = '/dashboard/activitiesArgRoute';
-  static String activitiesTableArgRoute = '/dashboard/activitiesTablesArgRoute';
+  static String activitiesArgRoute = '/dashboard/activitiesArg';
+  static String activitiesTableArgRoute = '/dashboard/actividades/';
   static String argRoute = '/dashboard/arg/';
   static String infArgRoute = '/dashboard/editarg';
   static String timeLineRoute = '/dashboard/timeline';
-  static String medioRoute = '/dashboard/medio';
-  static String medioTalaRoute = '/dashboard/medioTabla';
+  static String medioRoute = '/dashboard/Editmedio';
+  static String medio = '/dashboard/medio/';
   static String estudiantesRoute = '/dashboard/estudiantes';
   static String notasRoute = '/dashboard/notas';
   static String gruposRoute = '/dashboard/grupos';
@@ -93,10 +93,10 @@ class Flurorouter {
         handler: DashboardHandlers.timeline,
         transitionType: TransitionType.fadeIn);
     router.define(medioRoute,
-        handler: DashboardHandlers.medio,
+        handler: DashboardHandlers.medioForm,
         transitionType: TransitionType.fadeIn);
-    router.define(medioTalaRoute,
-        handler: DashboardHandlers.medioTabla,
+    router.define(medio,
+        handler: DashboardHandlers.medio,
         transitionType: TransitionType.fadeIn);
     router.define(estudiantesRoute,
         handler: DashboardHandlers.estudiantes,

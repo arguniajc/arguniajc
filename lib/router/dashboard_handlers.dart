@@ -117,7 +117,7 @@ class DashboardHandlers {
   static Handler activitiesTable = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
-        .setCurrentPageUrl(Flurorouter.activitiesTableArgRoute);
+        .setCurrentPageUrl(Flurorouter.activitiesArgRoute);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return const ActividadesArgView();
@@ -162,22 +162,22 @@ class DashboardHandlers {
     }
   });
 
-  static Handler timeline = Handler(handlerFunc: (context, params) {
+  static Handler medio = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
-        .setCurrentPageUrl(Flurorouter.timeLineRoute);
+        .setCurrentPageUrl(Flurorouter.medio);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
-      return TimeLineView();
+      return const MedioTablaArgView();
     } else {
       return const LoginView();
     }
   });
 
-  static Handler medio = Handler(handlerFunc: (context, params) {
+  static Handler medioForm = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
-        .setCurrentPageUrl(Flurorouter.medioRoute);
+        .setCurrentPageUrl(Flurorouter.medio);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return MediosView();
@@ -186,13 +186,13 @@ class DashboardHandlers {
     }
   });
 
-  static Handler medioTabla = Handler(handlerFunc: (context, params) {
+  static Handler timeline = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
-        .setCurrentPageUrl(Flurorouter.medioTalaRoute);
+        .setCurrentPageUrl(Flurorouter.timeLineRoute);
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
-      return MedioTablaArgView();
+      return TimeLineView();
     } else {
       return const LoginView();
     }
