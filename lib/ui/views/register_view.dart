@@ -161,7 +161,7 @@ class CreateRegisterView extends State<RegisterView> {
                           final validForm = registerFormProvider.validateForm();
                           if (!validForm) return;
 
-                          if (sideMenuProvider.currentPage == Flurorouter.registerRoute) {
+                          if (sideMenuProvider.currentPage == Flurorouter.registerRoute || sideMenuProvider.currentPage == '/auth/login') {
                             final authProvider =
                               Provider.of<AuthProvider>(context, listen: false);
                                 authProvider.register(
