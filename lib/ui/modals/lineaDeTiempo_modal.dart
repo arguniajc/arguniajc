@@ -1,4 +1,4 @@
-import 'package:control_actividades/services/notifications_service.dart';
+import 'package:control_actividades/providers/lineaDeTiempo_provider.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/inputs/custom_inputs.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
-import '../../providers/actividadesArg_provider.dart';
 
 class LineaDeTiempoModal extends StatefulWidget {
   final int? idActividad;
@@ -59,7 +58,7 @@ class _TypeModalState extends State<LineaDeTiempoModal> {
 
   @override
   Widget build(BuildContext context) {
-    final form = Provider.of<ActividadesArgProvider>(context, listen: false);
+    final form = Provider.of<LineaDeTiempoProvider>(context, listen: false);
     return Container(
       padding: const EdgeInsets.all(20),
       height: 700,
@@ -184,6 +183,7 @@ class _TypeModalState extends State<LineaDeTiempoModal> {
                   timeinicial,
                   timeFinalizacion
                 );
+               Navigator.of(context).pop();
               },
               text: 'Guardar',
               color: Colors.white,

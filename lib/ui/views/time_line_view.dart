@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:control_actividades/providers/provider.dart';
 import '../../Models/http/lineaDeTiempo.dart';
-import 'package:control_actividades/ui/views/activities_arg_view.dart';
 // ignore: use_key_in_widget_constructors
 class TimeLineView extends StatefulWidget {
   @override
@@ -14,10 +13,23 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
   int index = 0;
   String? selectedOptionArg;
   List<LineaDeTiempo> lineaDeTimepo = [];
+  List<LineaDeTiempo> dataLineaTiempo = [];
+  @override
+  void initState() {
+    super.initState();
+    final timeline = Provider.of<LineaDeTiempoProvider>(context, listen: false);
+    dataLineaTiempo = timeline.lineaDeTiempo;
+  }
+
+  @override
+  void dispose() {
+    dataLineaTiempo = [];
+    Provider.of<LineaDeTiempoProvider>(context, listen: false).dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final timeline = Provider.of<LineaDeTiempoProvider>(context);
-    final dataLineaTiempo = timeline.lineaDeTiempo;
     final arg = Provider.of<InfArgProvider>(context);
     final dataArg = arg.args;
     return Padding(
@@ -40,9 +52,11 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                     lineaDeTimepo = [];
                                                     selectedOptionArg = newValue;
                                                     if (selectedOptionArg != null) {
-                                                      final data = dataLineaTiempo.where((e) => e.idarg == int.parse(newValue!));
-                                                      if (data.isNotEmpty) {
-                                                        lineaDeTimepo.addAll(data);
+                                                      if (dataLineaTiempo.isNotEmpty) {
+                                                        final data = dataLineaTiempo.where((e) => e.idarg == int.parse(newValue!));
+                                                        if (data.isNotEmpty) {
+                                                          lineaDeTimepo.addAll(data);
+                                                        }
                                                       }
                                                     }
                                                   });
