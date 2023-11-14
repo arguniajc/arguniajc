@@ -32,6 +32,43 @@ class LineaDeTiempoProvider extends ChangeNotifier {
     }
   }
 
+  
+  Future updateArg2(
+      int idactividades,
+      String fecharealizacion,
+      String fechadefinalizacion,
+      String timeinicial,
+      String timeFinalizacion) async {
+    // Petición put HTTP
+    final data = {
+      "idactividades": idactividades,
+      "nombre": '',
+      "descripcion": '',
+      "fecharealizacion": fecharealizacion,
+      "fechadefinalizacion": fechadefinalizacion,
+      "idMedios": 0,
+      "timeinicial": timeinicial,
+      "timeFinalizacion": timeFinalizacion,
+      "idArg": 0,
+      "response": ''
+    };
+    EndPointApi.httpPut('activities/timeline/$idactividades', data).then((json) {
+      lineaDeTiempo = lineaDeTiempo.map((arg) {
+        if (arg.idactividades != idactividades) return arg;
+        arg.idactividades = idactividades;
+        arg.fecharealizacion = fecharealizacion;
+        arg.fechadefinalizacion = fechadefinalizacion;
+        arg.timeFinalizacion = timeFinalizacion;
+        arg.timeinicial = timeinicial;
+        return arg;
+      }).toList();
+
+      notifyListeners();
+    }).catchError((e) {
+      throw 'Error en la peticion Put';
+    });
+  }
+
   void refreshArg(LineaDeTiempo newLineaTiempo) {
     lineaDeTiempo = lineaDeTiempo.map((arg) {
       if (arg.idarg == newLineaTiempo.idarg) return arg = newLineaTiempo;
@@ -39,5 +76,9 @@ class LineaDeTiempoProvider extends ChangeNotifier {
     }).toList();
 
     notifyListeners();
+  }
+
+  disposeLineaTiempo() {
+    lineaDeTiempo = [];
   }
 }

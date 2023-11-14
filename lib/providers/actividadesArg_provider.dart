@@ -86,19 +86,23 @@ class ActividadesArgProvider extends ChangeNotifier {
       "nombre": nombre,
       "descripcion": descripcion,
       "fecharealizacion": fecharealizacion,
+      "fechadefinalizacion": fechadefinalizacion,
       "idMedios": idMedios,
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
       "idArg": idArg,
       "response": ''
     };
-    EndPointApi.httpPut('/activities/$idactividades', data).then((json) {
+    EndPointApi.httpPut('activities/$idactividades', data).then((json) {
       activitiesArgs = activitiesArgs.map((arg) {
         if (arg.idactividades != idactividades) return arg;
         arg.idactividades = idactividades;
         arg.nombre = nombre;
         arg.descripcion = descripcion;
         arg.fecharealizacion = fecharealizacion;
+        arg.fechadefinalizacion = fechadefinalizacion;
+        arg.timeinicial = timeinicial;
+        arg.timeFinalizacion = timeFinalizacion;
         arg.idMedios = idMedios;
         return arg;
       }).toList();
@@ -108,7 +112,7 @@ class ActividadesArgProvider extends ChangeNotifier {
       throw 'Error en la peticion Put';
     });
   }
-
+  
   Future deleteActividadesArg(int id) async {
     EndPointApi.httpDelete('/activities/$id').then((json) {
       activitiesArgs.removeWhere((element) => element.idactividades == id);
