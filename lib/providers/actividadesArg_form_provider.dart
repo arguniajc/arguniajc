@@ -2,7 +2,7 @@ import 'package:control_actividades/Models/http/actividadesArg.dart';
 import 'package:flutter/material.dart';
 import '../api/endpointApi.dart';
 
-class ArgFormProvider extends ChangeNotifier {
+class ActividadesFormProvider extends ChangeNotifier {
   ActividadesArg? actividades;
 
   late GlobalKey<FormState> formKey;

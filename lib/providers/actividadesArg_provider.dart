@@ -100,7 +100,49 @@ class ActividadesArgProvider extends ChangeNotifier {
         arg.nombre = nombre;
         arg.descripcion = descripcion;
         arg.fecharealizacion = fecharealizacion;
+        arg.fechadefinalizacion = fechadefinalizacion;
+        arg.timeinicial = timeinicial;
+        arg.timeFinalizacion = timeFinalizacion;
         arg.idMedios = idMedios;
+        return arg;
+      }).toList();
+
+      notifyListeners();
+    }).catchError((e) {
+      throw 'Error en la peticion Put';
+    });
+  }
+
+  Future updateArg2(
+      int idactividades,
+      String fecharealizacion,
+      String fechadefinalizacion,
+      String timeinicial,
+      String timeFinalizacion) async {
+    // Petición put HTTP
+    final data = {
+      "idactividades": idactividades,
+      "nombre": '',
+      "descripcion": '',
+      "fecharealizacion": fecharealizacion,
+      "fechadefinalizacion": fechadefinalizacion,
+      "idMedios": 0,
+      "timeinicial": timeinicial,
+      "timeFinalizacion": timeFinalizacion,
+      "idArg": 0,
+      "response": ''
+    };
+    EndPointApi.httpPut('activities/timeline/$idactividades', data).then((json) {
+      activitiesArgs = activitiesArgs.map((arg) {
+        if (arg.idactividades != idactividades) return arg;
+        arg.idactividades = idactividades;
+        arg.nombre = arg.nombre;
+        arg.descripcion = arg.descripcion;
+        arg.fecharealizacion = fecharealizacion;
+        arg.fechadefinalizacion = fechadefinalizacion;
+        arg.timeFinalizacion = timeFinalizacion;
+        arg.timeinicial = timeinicial;
+        arg.idMedios = arg.idMedios;
         return arg;
       }).toList();
 
