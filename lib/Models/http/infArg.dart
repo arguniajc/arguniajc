@@ -21,6 +21,7 @@ class InfArg {
   int token;
   String estado;
   String ciudad;
+  String tokenUser;
   String response;
 
   InfArg({
@@ -44,6 +45,7 @@ class InfArg {
     required this.token,
     required this.estado,
     required this.ciudad,
+    required this.tokenUser,
     required this.response,
   });
 
@@ -72,6 +74,7 @@ class InfArg {
         token: json["token"],
         estado: json["estado"],
         ciudad: json["ciudad"],
+        tokenUser: json["tokenUser"],
         response: json["response"],
       );
 
@@ -96,6 +99,7 @@ class InfArg {
         "token": token,
         "estado": estado,
         "ciudad": ciudad,
+        "tokenUser": tokenUser,
         "response": response,
       };
 

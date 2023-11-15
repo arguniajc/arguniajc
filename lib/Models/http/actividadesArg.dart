@@ -10,6 +10,7 @@ class ActividadesArg {
   String timeinicial;
   String timeFinalizacion;
   int idArg;
+  String tokenUser;
   String response;
 
   ActividadesArg({
@@ -22,6 +23,7 @@ class ActividadesArg {
     required this.timeinicial,
     required this.timeFinalizacion,
     required this.idArg,
+    required this.tokenUser,
     required this.response
   });
 
@@ -39,6 +41,7 @@ class ActividadesArg {
         timeinicial: json["timeinicial"],
         timeFinalizacion: json["timeFinalizacion"],
         idArg: json["idArg"],
+        tokenUser: json["tokenUser"],
         response: json["response"],
       );
 
@@ -52,6 +55,7 @@ class ActividadesArg {
         "timeinicial": timeinicial,
         "timeFinalizacion": timeFinalizacion,
         "idArg": idArg,
+        "tokenUser": tokenUser,
         "response": response,
       };
 

@@ -21,6 +21,7 @@ class ActividadesFormProvider extends ChangeNotifier {
       String? timeinicial,
       String? timeFinalizacion,
       int? idArg,
+      String? tokenUser,
       String? response}) {
     actividades = ActividadesArg(
           idactividades: idactividades ?? actividades!.idactividades,
@@ -32,6 +33,7 @@ class ActividadesFormProvider extends ChangeNotifier {
           timeinicial: timeinicial ?? actividades!.timeinicial,
           timeFinalizacion: timeFinalizacion ?? actividades!.timeFinalizacion,
           idArg: idArg ?? actividades!.idArg,
+          tokenUser: tokenUser ?? actividades!.tokenUser,
           response: response ?? actividades!.response
       );
     notifyListeners();
@@ -54,11 +56,12 @@ class ActividadesFormProvider extends ChangeNotifier {
       "idMedios": actividades!.idMedios,
       "timeinicial": actividades!.timeinicial,
       "timeFinalizacion": actividades!.timeFinalizacion,
+       "tokenUser": actividades!.tokenUser,
       "idArg": actividades!.idArg
     };
 
     try {
-      final activities = EndPointApi.httpPut('/activities/${actividades!.idactividades}', data);
+      final activities = EndPointApi.httpPut('activities/${actividades!.idactividades}', data);
 
       return true;
     } catch (e) {

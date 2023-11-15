@@ -7,7 +7,7 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final user = Provider.of<AuthProvider>(context).usuario!;
+    // final user = Provider.of<AuthProvider>(context).usuario!;
 
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

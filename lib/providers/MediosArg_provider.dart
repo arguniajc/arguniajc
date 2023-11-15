@@ -35,13 +35,15 @@ class MediosProvider extends ChangeNotifier {
   Future neMedios(
       String nombre,
       String tipoMedio,
-      String medionotificacion) async {
+      String medionotificacion,
+      String tokenUser) async {
     // Petición post HTTP
     final data = {
       "idMedios": 0,
       "nombre": nombre,
       "tipoMedio": tipoMedio,
       "medionotificacion": medionotificacion,
+      "tokenUser": tokenUser,
       "response": '',
     };
 
@@ -64,13 +66,15 @@ class MediosProvider extends ChangeNotifier {
       int idMedios,
       String nombre,
       String tipoMedio,
-      String medionotificacion) async {
+      String medionotificacion,
+      String tokenUser) async {
     // Petición put HTTP
     final data = {
       "idMedios": idMedios,
       "nombre": nombre,
       "tipoMedio": tipoMedio,
       "medionotificacion": medionotificacion,
+      "tokenUser": tokenUser,
       "response": ''
     };
 

@@ -60,6 +60,7 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context).usuario!;
     final form = Provider.of<ActividadesArgProvider>(context, listen: false);
     final medio = Provider.of<MediosProvider>(context);
     final dataMedio = medio.mediosArgs;
@@ -308,7 +309,8 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                       idMedios,
                                       timeinicial,
                                       timeFinalizacion,
-                                      idArg
+                                      idArg,
+                                      user.token
                                     );
                                   } else {
                                     await form.updateArg(
@@ -320,7 +322,8 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                                       idMedios,
                                       timeinicial,
                                       timeFinalizacion,
-                                      idArg
+                                      idArg,
+                                      user.token
                                     );
                                     NotificationsService.showSnackbar(
                                         'Actividades $nombre actualizado');

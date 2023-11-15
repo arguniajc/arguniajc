@@ -1,4 +1,5 @@
 import 'package:control_actividades/datatables/arg_datasource.dart';
+import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
 import 'package:control_actividades/ui/views/inf_arg.dart';
 import 'package:control_actividades/ui/buttons/custom_icon_button.dart';
@@ -12,7 +13,7 @@ class ArgView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final argProvider = Provider.of<InfArgProvider>(context);
-
+    
     final agrsDataSource = ArgDTS(argProvider.args, context);
 
     return Container(

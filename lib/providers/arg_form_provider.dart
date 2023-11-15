@@ -32,6 +32,7 @@ class ArgFormProvider extends ChangeNotifier {
       int? token,
       String? estado,
       String? ciudad,
+      String? tokenUser,
       String? response}) {
     arg = InfArg(
         idarg: idarg ?? arg!.idarg,
@@ -54,6 +55,7 @@ class ArgFormProvider extends ChangeNotifier {
         token: idPuppetmaster ?? arg!.idPuppetmaster,
         estado: estado ?? arg!.estado,
         ciudad: ciudad ?? arg!.ciudad,
+        tokenUser: tokenUser ?? arg!.tokenUser,
         response: response ?? arg!.response);
     notifyListeners();
   }

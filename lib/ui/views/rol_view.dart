@@ -60,7 +60,7 @@ class EditRoleCardView extends State<RoleCardView> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 370),
               child: Form(
-                  autovalidateMode: AutovalidateMode.always,
+                  autovalidateMode: AutovalidateMode.disabled,
                   key: registerFormProvider.formKey,
                   child: Column(
                     children: [

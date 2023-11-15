@@ -17,12 +17,14 @@ class MediosFormProvider extends ChangeNotifier {
       String? tipoMedio,
       String? medionotificacion,
       int? idArg,
+      String? tokenUser,
       String? response}) {
     medios = MediosArg(
       idMedios: idMedios ?? medios!.idMedios,
       nombre: nombre ?? medios!.nombre,
       tipoMedio: tipoMedio ?? medios!.tipoMedio,
       medionotificacion: medionotificacion ?? medios!.medionotificacion,
+      tokenUser: tokenUser ?? medios!.tokenUser,
       response: response ?? medios!.response
     );
     notifyListeners();
