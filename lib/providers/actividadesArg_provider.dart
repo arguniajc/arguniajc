@@ -118,7 +118,7 @@ class ActividadesArgProvider extends ChangeNotifier {
   }
   
   Future deleteActividadesArg(int id) async {
-    EndPointApi.httpDelete('/activities/$id').then((json) {
+    EndPointApi.httpDelete('activities/$id').then((json) {
       activitiesArgs.removeWhere((element) => element.idactividades == id);
 
       notifyListeners();

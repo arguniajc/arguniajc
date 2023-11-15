@@ -1,4 +1,5 @@
 import 'package:control_actividades/Models/http/MediosArg.dart';
+import 'package:control_actividades/providers/MediosArg_provider.dart';
 import 'package:control_actividades/providers/users_provider.dart';
 import 'package:control_actividades/ui/views/medio_view.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,8 @@ class MedioDTS extends DataTableSource {
                     TextButton(
                       child: const Text('Si, borrar'),
                       onPressed: () async {
-                        Provider.of<UsersProvider>(context, listen: false)
-                            .deleteUser(medio.idMedios);
+                        Provider.of<MediosProvider>(context, listen: false)
+                            .deleteMedios(medio.idMedios);
                         Navigator.of(context).pop();
                       },
                     ),

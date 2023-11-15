@@ -1,4 +1,5 @@
 import 'package:control_actividades/Models/http/actividadesArg.dart';
+import 'package:control_actividades/providers/actividadesArg_provider.dart';
 import 'package:control_actividades/ui/views/activities_arg_view.dart';
 import 'package:control_actividades/providers/InfArg_provider.dart';
 import 'package:provider/provider.dart';
@@ -44,8 +45,8 @@ class ActividadesArgDTS extends DataTableSource {
                     TextButton(
                       child: const Text('Si, borrar'),
                       onPressed: () async {
-                        Provider.of<InfArgProvider>(context, listen: false)
-                            .deleteArg(activitiesArg.idactividades);
+                        Provider.of<ActividadesArgProvider>(context, listen: false)
+                            .deleteActividadesArg(activitiesArg.idactividades);
                         Navigator.of(context).pop();
                       },
                     ),

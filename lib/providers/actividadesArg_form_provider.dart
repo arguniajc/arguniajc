@@ -56,11 +56,12 @@ class ActividadesFormProvider extends ChangeNotifier {
       "idMedios": actividades!.idMedios,
       "timeinicial": actividades!.timeinicial,
       "timeFinalizacion": actividades!.timeFinalizacion,
+       "tokenUser": actividades!.tokenUser,
       "idArg": actividades!.idArg
     };
 
     try {
-      final activities = EndPointApi.httpPut('/activities/${actividades!.idactividades}', data);
+      final activities = EndPointApi.httpPut('activities/${actividades!.idactividades}', data);
 
       return true;
     } catch (e) {
