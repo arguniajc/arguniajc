@@ -15,7 +15,7 @@ class MedioTablaArgView extends StatelessWidget {
     final user = Provider.of<AuthProvider>(context).usuario!;
     final medioProvider = Provider.of<MediosProvider>(context);
 
-    final medioDataSource = MedioDTS(medioProvider.mediosArgs.where((element) => element.tokenUser == user.token).toList() ?? [], context);
+    final medioDataSource = MedioDTS(user.idTipoUsuario == 5 ? medioProvider.mediosArgs : medioProvider.mediosArgs.where((element) => element.tokenUser == user.token).toList() ?? [], context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

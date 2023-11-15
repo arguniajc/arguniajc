@@ -15,7 +15,7 @@ class ActividadesArgView extends StatelessWidget {
     final user = Provider.of<AuthProvider>(context).usuario!;
     final actividadArgProvider = Provider.of<ActividadesArgProvider>(context);
 
-    final actividadAgrsDataSource = ActividadesArgDTS(actividadArgProvider.activitiesArgs.where((element) => element.tokenUser == user.token).toList() ?? [], context);
+    final actividadAgrsDataSource = ActividadesArgDTS(user.idTipoUsuario == 5 ? actividadArgProvider.activitiesArgs : actividadArgProvider.activitiesArgs.where((element) => element.tokenUser == user.token).toList() ?? [], context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

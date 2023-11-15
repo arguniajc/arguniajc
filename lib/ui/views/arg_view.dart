@@ -17,7 +17,7 @@ class ArgView extends StatelessWidget {
     final user = Provider.of<AuthProvider>(context).usuario!;
     final argProvider = Provider.of<InfArgProvider>(context);
     
-    final agrsDataSource = ArgDTS(argProvider.args.where((element) => element.tokenUser == user.token).toList() ?? [], context);
+    final agrsDataSource = ArgDTS(user.idTipoUsuario == 5 ? argProvider.args : argProvider.args.where((element) => element.tokenUser == user.token).toList() ?? [], context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
