@@ -21,6 +21,7 @@ class ActividadesFormProvider extends ChangeNotifier {
       String? timeinicial,
       String? timeFinalizacion,
       int? idArg,
+      String? tokenUser,
       String? response}) {
     actividades = ActividadesArg(
           idactividades: idactividades ?? actividades!.idactividades,
@@ -32,6 +33,7 @@ class ActividadesFormProvider extends ChangeNotifier {
           timeinicial: timeinicial ?? actividades!.timeinicial,
           timeFinalizacion: timeFinalizacion ?? actividades!.timeFinalizacion,
           idArg: idArg ?? actividades!.idArg,
+          tokenUser: tokenUser ?? actividades!.tokenUser,
           response: response ?? actividades!.response
       );
     notifyListeners();

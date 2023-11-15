@@ -5,6 +5,7 @@ class MediosArg {
   String nombre;
   String tipoMedio;
   String medionotificacion;
+  String tokenUser;
   String response;
 
   MediosArg({
@@ -12,6 +13,7 @@ class MediosArg {
     required this.nombre,
     required this.tipoMedio,
     required this.medionotificacion,
+    required this.tokenUser,
     required this.response
   });
 
@@ -24,6 +26,7 @@ class MediosArg {
         nombre: json["nombre"],
         tipoMedio: json["tipoMedio"],
         medionotificacion: json["medionotificacion"],
+        tokenUser: json["tokenUser"],
         response: json["response"],
       );
 
@@ -32,6 +35,7 @@ class MediosArg {
         "nombre": nombre,
         "tipoMedio": tipoMedio,
         "medionotificacion": medionotificacion,
+        "tokenUser": tokenUser,
         "response": response,
       };
 

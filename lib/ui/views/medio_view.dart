@@ -33,6 +33,7 @@ class CreateMedioView extends State<MediosView> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context).usuario!;
     final form = Provider.of<MediosProvider>(context, listen: false);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10),
@@ -160,14 +161,16 @@ class CreateMedioView extends State<MediosView> {
                                     await form.neMedios(
                                       nombre,
                                       tipoMedio,
-                                      medionotificacion
+                                      medionotificacion,
+                                      user.token
                                     );
                                   } else {
                                     await form.updateMedios(
                                       idMedios,
                                       nombre,
                                       tipoMedio,
-                                      medionotificacion
+                                      medionotificacion,
+                                      user.token
                                     );
                                     NotificationsService.showSnackbar(
                                         'Medio $nombre actualizado');

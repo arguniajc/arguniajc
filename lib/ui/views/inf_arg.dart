@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:control_actividades/Models/http/infArg.dart';
 import 'package:control_actividades/providers/InfArg_provider.dart';
+import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/notifications_service.dart';
@@ -76,6 +77,7 @@ class CreateArgViewState extends State<InfArgView> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context).usuario!;
     final form = Provider.of<InfArgProvider>(context, listen: false);
     return SingleChildScrollView(
         padding: const EdgeInsets.all(10),
@@ -454,7 +456,8 @@ class CreateArgViewState extends State<InfArgView> {
                                         lugardeejecucion,
                                         idPuppetmaster,
                                         estado,
-                                        ciduad);
+                                        ciduad,
+                                        user.token);
                                   } else {
                                     await form.updateArg(
                                         idarg,
@@ -475,7 +478,8 @@ class CreateArgViewState extends State<InfArgView> {
                                         lugardeejecucion,
                                         idPuppetmaster,
                                         estado,
-                                        ciduad);
+                                        ciduad,
+                                        user.token);
                                     NotificationsService.showSnackbar(
                                         'Arg $titulo actualizado');
                                   }
