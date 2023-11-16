@@ -1,4 +1,5 @@
 import 'package:control_actividades/datatables/atividades_arg_datasource.dart';
+import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
 import 'package:control_actividades/ui/views/activities_arg_view.dart';
 import 'package:control_actividades/ui/buttons/custom_icon_button.dart';
@@ -11,9 +12,10 @@ class ActividadesArgView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context).usuario!;
     final actividadArgProvider = Provider.of<ActividadesArgProvider>(context);
 
-    final actividadAgrsDataSource = ActividadesArgDTS(actividadArgProvider.activitiesArgs, context);
+    final actividadAgrsDataSource = ActividadesArgDTS(user.idTipoUsuario == 5 ? actividadArgProvider.activitiesArgs : actividadArgProvider.activitiesArgs.where((element) => element.tokenUser == user.token).toList() ?? [], context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

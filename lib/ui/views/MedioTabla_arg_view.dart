@@ -1,4 +1,5 @@
 import 'package:control_actividades/datatables/medio_datasource.dart';
+import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
 import 'package:control_actividades/ui/views/medio_view.dart';
 import 'package:control_actividades/ui/buttons/custom_icon_button.dart';
@@ -11,9 +12,10 @@ class MedioTablaArgView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context).usuario!;
     final medioProvider = Provider.of<MediosProvider>(context);
 
-    final medioDataSource = MedioDTS(medioProvider.mediosArgs, context);
+    final medioDataSource = MedioDTS(user.idTipoUsuario == 5 ? medioProvider.mediosArgs : medioProvider.mediosArgs.where((element) => element.tokenUser == user.token).toList() ?? [], context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

@@ -1,3 +1,4 @@
+import 'package:control_actividades/Models/http/auth_response.dart';
 import 'package:control_actividades/datatables/arg_datasource.dart';
 import 'package:control_actividades/providers/auth_provider.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
@@ -8,13 +9,15 @@ import 'package:provider/provider.dart';
 import '../../providers/InfArg_provider.dart';
 
 class ArgView extends StatelessWidget {
+  
   const ArgView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context).usuario!;
     final argProvider = Provider.of<InfArgProvider>(context);
     
-    final agrsDataSource = ArgDTS(argProvider.args, context);
+    final agrsDataSource = ArgDTS(user.idTipoUsuario == 5 ? argProvider.args : argProvider.args.where((element) => element.tokenUser == user.token).toList() ?? [], context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
