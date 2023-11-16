@@ -21,9 +21,9 @@ class LineaDeTiempoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<LineaDeTiempo?> getLineaDeTiempoById(String id) async {
+  Future<LineaDeTiempo?> getLineaDeTiempoById(String id, String idgrupos) async {
     try {
-      final resp = await EndPointApi.httpGet('timeline/$id');
+      final resp = await EndPointApi.httpGet('timeline/$id/$idgrupos');
       final timeLine = LineaDeTiempo.fromMap(resp);
       return timeLine;
     } catch (e) {

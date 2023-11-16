@@ -12,6 +12,7 @@ class TimeLineView extends StatefulWidget {
 class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
   int index = 0;
   String? selectedOptionArg;
+  String? selectedOptionGrupo;
   List<LineaDeTiempo> lineaDeTimepo = [];
   List<LineaDeTiempo> dataLineaTiempo = [];
   @override
@@ -32,6 +33,8 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final arg = Provider.of<InfArgProvider>(context);
     final dataArg = arg.args;
+    final grupos = Provider.of<GruposProvider>(context);
+    final datagrupos = grupos.gruposArgs;
     return Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -39,10 +42,8 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      FooterWiget(
+                    child: Expanded(
+                      child: FooterWiget(
                             label: 'Seleccionar un Arg',
                             child: DropdownButtonFormField<String>(
                                     value: selectedOptionArg,
@@ -51,14 +52,14 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                   setState(() {
                                                     lineaDeTimepo = [];
                                                     selectedOptionArg = newValue;
-                                                    if (selectedOptionArg != null) {
-                                                      if (dataLineaTiempo.isNotEmpty) {
-                                                        final data = dataLineaTiempo.where((e) => e.idarg == int.parse(newValue!));
-                                                        if (data.isNotEmpty) {
-                                                          lineaDeTimepo.addAll(data);
-                                                        }
+                                                    if (selectedOptionArg != null && selectedOptionGrupo != null) {
+                                                    if (dataLineaTiempo.isNotEmpty) {
+                                                      final data = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!));
+                                                      if (data.isNotEmpty) {
+                                                        lineaDeTimepo.addAll(data);
                                                       }
                                                     }
+                                                  }
                                                   });
                                                 },
                                     items: dataArg.map((item) {
@@ -84,11 +85,58 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
 
                               ),
                             ),
-                      
-                      ],
-                    ),
+                    )
                   )
                 ), 
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Expanded(
+                      child: FooterWiget(
+                          label: 'Seleccionar un grupo',
+                          child: DropdownButtonFormField<String>(
+                                value: selectedOptionGrupo,
+                                hint: const Text('Selecciona una opcion'),
+                                onChanged: (String? newValue) {
+                                              setState(() {
+                                                lineaDeTimepo = [];
+                                                selectedOptionGrupo = newValue;
+                                                if (selectedOptionArg != null && selectedOptionGrupo != null) {
+                                                  if (dataLineaTiempo.isNotEmpty) {
+                                                    final data = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!));
+                                                    if (data.isNotEmpty) {
+                                                      lineaDeTimepo.addAll(data);
+                                                    }
+                                                  }
+                                                }
+                                              });
+                                            },
+                                items: datagrupos.map((item) {
+                                  return DropdownMenuItem<String>(
+                                        value: item.idGrupos.toString(),
+                                        child: Text(item.nombreGrupo),
+                                      );
+                                    }).toList(),
+                                decoration: const InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.grey),
+                                    ),
+                                      focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.grey),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.transparent,
+                                ), 
+                                style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+           
+                          ),
+                        ),
+                    )
+                  )
+                ),
                 const SizedBox(height: 10),
                 if (lineaDeTimepo.isNotEmpty) 
                   Flexible(

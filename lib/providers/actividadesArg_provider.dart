@@ -16,7 +16,7 @@ class ActividadesArgProvider extends ChangeNotifier {
   getActividades() async {
     activitiesArgs = [];
     List<dynamic> resp = await EndPointApi.httpGet('activities');
-    resp.forEach((element) => activitiesArgs.add(ActividadesArg.fromMap(element)));
+    activitiesArgs = resp.map((element) => ActividadesArg.fromJson(element)).toList();
     isLoading = false;
     notifyListeners();
   }
@@ -24,7 +24,7 @@ class ActividadesArgProvider extends ChangeNotifier {
   Future<ActividadesArg?> getActivitiesArgById(String id) async {
     try {
       final resp = await EndPointApi.httpGet('activities/$id');
-      final actividadesArg = ActividadesArg.fromMap(resp);
+      final actividadesArg = ActividadesArg.fromJson(resp);
       return actividadesArg;
     } catch (e) {
       NotificationsService.showSnackbarError('activities no existe');
@@ -36,29 +36,30 @@ class ActividadesArgProvider extends ChangeNotifier {
       int idactividades,
       String nombre,
       String descripcion,
-      String fecharealizacion,
-      String fechadefinalizacion,
       int idMedios,
       String timeinicial,
       String timeFinalizacion,
       int idArg,
-      String tokenUser) async {
+      String tokenUser,
+      List<ActividadesGrupo> grupos) async {
     // Petición post HTTP
     final data = {
       "idactividades": 0,
       "nombre": nombre,
       "descripcion": descripcion,
-      "fecharealizacion": fecharealizacion,
-      "fechadefinalizacion": fechadefinalizacion,
       "idMedios": idMedios,
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
       "idArg": idArg,
       "tokenUser": tokenUser,
-      "response": ''
+      "response": '',
+      "actividadesGrupos": grupos,
+      "nombre_grupo": '',
+      "correo_profesor": '',
+      "nombre_arg": ''
     };
     EndPointApi.httpPost('activities', data).then((json) {
-      final res = ActividadesArg.fromMap(json);
+      final res = ActividadesArg.fromJson(json);
       if (res.response.isNotEmpty) {
         NotificationsService.showSnackbarError('Actividades ya Existe');
       } else {
@@ -76,26 +77,27 @@ class ActividadesArgProvider extends ChangeNotifier {
       int idactividades,
       String nombre,
       String descripcion,
-      String fecharealizacion,
-      String fechadefinalizacion,
       int idMedios,
       String timeinicial,
       String timeFinalizacion,
       int idArg,
-      String tokenUser) async {
+      String tokenUser,
+      List<ActividadesGrupo> grupos) async {
     // Petición put HTTP
     final data = {
       "idactividades": idactividades,
       "nombre": nombre,
       "descripcion": descripcion,
-      "fecharealizacion": fecharealizacion,
-      "fechadefinalizacion": fechadefinalizacion,
       "idMedios": idMedios,
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
       "idArg": idArg,
       "tokenUser": tokenUser,
-      "response": ''
+      "response": '',
+      "actividadesGrupos": grupos,
+      "nombre_grupo": '',
+      "correo_profesor": '',
+      "nombre_arg": ''
     };
     EndPointApi.httpPut('activities/$idactividades', data).then((json) {
       activitiesArgs = activitiesArgs.map((arg) {
@@ -103,8 +105,6 @@ class ActividadesArgProvider extends ChangeNotifier {
         arg.idactividades = idactividades;
         arg.nombre = nombre;
         arg.descripcion = descripcion;
-        arg.fecharealizacion = fecharealizacion;
-        arg.fechadefinalizacion = fechadefinalizacion;
         arg.timeinicial = timeinicial;
         arg.timeFinalizacion = timeFinalizacion;
         arg.idMedios = idMedios;
@@ -120,6 +120,20 @@ class ActividadesArgProvider extends ChangeNotifier {
   Future deleteActividadesArg(int id) async {
     EndPointApi.httpDelete('activities/$id').then((json) {
       activitiesArgs.removeWhere((element) => element.idactividades == id);
+
+      notifyListeners();
+    }).catchError((e) {
+      throw 'Error en la peticion Delete';
+    });
+  }
+
+  Future deleteActividadesArg2(int idActividades, int id) async {
+    EndPointApi.httpDelete('activities/$id/edit').then((json) {
+      activitiesArgs = activitiesArgs.map((e) {
+        if (e.idactividades != idActividades) return e;
+        e.actividadesGrupos.removeWhere((element) => element.idactividadesGrupos == id);
+        return e;
+      }).toList();
 
       notifyListeners();
     }).catchError((e) {
