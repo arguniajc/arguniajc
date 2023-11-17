@@ -56,7 +56,10 @@ class ActividadesArgProvider extends ChangeNotifier {
       "actividadesGrupos": grupos,
       "nombre_grupo": '',
       "correo_profesor": '',
-      "nombre_arg": ''
+      "nombre_arg": '',
+      "descripcion_actividad": '',
+      "tipo_medio": '',
+      "fecha_realizacion": ''
     };
     EndPointApi.httpPost('activities', data).then((json) {
       final res = ActividadesArg.fromJson(json);
@@ -97,7 +100,10 @@ class ActividadesArgProvider extends ChangeNotifier {
       "actividadesGrupos": grupos,
       "nombre_grupo": '',
       "correo_profesor": '',
-      "nombre_arg": ''
+      "nombre_arg": '',
+      "descripcion_actividad": '',
+      "tipo_medio": '',
+      "fecha_realizacion": ''
     };
     EndPointApi.httpPut('activities/$idactividades', data).then((json) {
       activitiesArgs = activitiesArgs.map((arg) {
