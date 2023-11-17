@@ -27,7 +27,12 @@ class CreateMedioView extends State<MediosView> {
     super.initState();
     idMedios = widget.medio?.idMedios ?? 0;
     nombre = widget.medio?.nombre ?? '';
-    tipoMedio = widget.medio?.tipoMedio ?? '';
+    // Inicializar tipoMedio con un valor predeterminado que esté en la lista
+    // Inicializar tipoMedio con un valor predeterminado que esté en la lista
+    tipoMedio =
+        ['Medio Digital', 'Medio Físico'].contains(widget.medio?.tipoMedio)
+            ? widget.medio?.tipoMedio ?? 'Medio Digital'
+            : 'Medio Digital';
     medionotificacion = widget.medio?.medionotificacion ?? '';
   }
 
@@ -72,28 +77,46 @@ class CreateMedioView extends State<MediosView> {
                         child: FooterWiget(
                             label: "Nombre de medio",
                             child: TextFormField(
-                              initialValue: widget.medio?.nombre ?? '',
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el nombre del medio',
-                                  label: 'Nombre del medio',
-                                  icon: Icons.wysiwyg),
-                              onChanged: ((value) => nombre = value)
-                            )),
+                                initialValue: widget.medio?.nombre ?? '',
+                                style: const TextStyle(color: Colors.black),
+                                decoration: CustomInputs.loginInputDecoration(
+                                    hint: 'Ingrese el nombre del medio',
+                                    label: 'Nombre del medio',
+                                    icon: Icons.wysiwyg),
+                                onChanged: ((value) => nombre = value))),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: FooterWiget(
-                            label: "Tipo de medio",
-                            child: TextFormField(
-                              initialValue: widget.medio?.tipoMedio ?? '',
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el tipo de medio',
-                                  label: 'Tipo de medio',
-                                  icon: Icons.layers),
-                              onChanged: ((value) => tipoMedio = value)
-                            )),
+                          label: "Tipo de medio",
+                          child: DropdownButtonFormField<String>(
+                            value: tipoMedio, // Valor seleccionado
+                            hint: const Text('Selecciona el tipo de medio'),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                tipoMedio = newValue ??
+                                    ''; // Actualiza el valor seleccionado
+                              });
+                            },
+                            items:
+                                ['Medio Digital', 'Medio Físico'].map((item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(item),
+                              );
+                            }).toList(),
+                            decoration: CustomInputs.loginInputDecoration(
+                              hint: 'Selecciona el tipo de medio',
+                              label: 'Tipo de medio',
+                              icon: Icons.layers,
+                            ),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -104,14 +127,14 @@ class CreateMedioView extends State<MediosView> {
                         child: FooterWiget(
                             label: "Medios de notificación",
                             child: TextFormField(
-                              initialValue: widget.medio?.medionotificacion,
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el medio de de notificación',
-                                  label: 'Medio de de notificación',
-                                  icon: Icons.notifications_active),
-                              onChanged: ((value) => medionotificacion = value)
-                            )),
+                                initialValue: widget.medio?.medionotificacion,
+                                style: const TextStyle(color: Colors.black),
+                                decoration: CustomInputs.loginInputDecoration(
+                                    hint: 'Ingrese el medio de de notificación',
+                                    label: 'Medio de de notificación',
+                                    icon: Icons.notifications_active),
+                                onChanged: ((value) =>
+                                    medionotificacion = value))),
                       ),
                       //   const SizedBox(width: 12),
                       //   Expanded(
@@ -140,12 +163,12 @@ class CreateMedioView extends State<MediosView> {
                       //                 ),
                       //                 filled: true,
                       //                 fillColor: Colors.transparent,
-                      //             ), 
+                      //             ),
                       //             style: const TextStyle(
                       //             fontSize: 15,
                       //             fontWeight: FontWeight.w500,
                       //           ),
-            
+
                       // ),
                       //     ),
                       //   )
@@ -153,46 +176,35 @@ class CreateMedioView extends State<MediosView> {
                   ),
                   const SizedBox(height: 20),
                   Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 150),
-                      child: ElevatedButton(
+                      child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 150),
+                    child: ElevatedButton(
                         onPressed: () async {
-                                  if (idMedios == 0) {
-                                    await form.neMedios(
-                                      nombre,
-                                      tipoMedio,
-                                      medionotificacion,
-                                      user.token
-                                    );
-                                  } else {
-                                    await form.updateMedios(
-                                      idMedios,
-                                      nombre,
-                                      tipoMedio,
-                                      medionotificacion,
-                                      user.token
-                                    );
-                                    NotificationsService.showSnackbar(
-                                        'Medio $nombre actualizado');
-                                  }
-                                },
-                          style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Colors.indigo),
-                                  shadowColor: MaterialStateProperty.all(
-                                    Colors.transparent)),    
-                          child: const Row(
-                             children: [
-                                    Icon(
-                                      Icons.save_outlined,
-                                      size: 20,
-                                    ),
-                                    Text(' Guardar')
-                                  ],
-                                )     
-                      ),
-                    )
-                  ),
+                          if (idMedios == 0) {
+                            await form.neMedios(nombre, tipoMedio,
+                                medionotificacion, user.token);
+                          } else {
+                            await form.updateMedios(idMedios, nombre, tipoMedio,
+                                medionotificacion, user.token);
+                            NotificationsService.showSnackbar(
+                                'Medio $nombre actualizado');
+                          }
+                        },
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.indigo),
+                            shadowColor:
+                                MaterialStateProperty.all(Colors.transparent)),
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.save_outlined,
+                              size: 20,
+                            ),
+                            Text(' Guardar')
+                          ],
+                        )),
+                  )),
                 ])),
           ))
         ],
