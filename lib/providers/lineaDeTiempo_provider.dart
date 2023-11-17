@@ -35,6 +35,7 @@ class LineaDeTiempoProvider extends ChangeNotifier {
   
   Future updateArg2(
       int idactividades,
+      int idgrupo,
       String fecharealizacion,
       String fechadefinalizacion,
       String timeinicial,
@@ -42,24 +43,21 @@ class LineaDeTiempoProvider extends ChangeNotifier {
     // Petición put HTTP
     final data = {
       "idactividades": idactividades,
-      "nombre": '',
-      "descripcion": '',
-      "fecharealizacion": fecharealizacion,
-      "fechadefinalizacion": fechadefinalizacion,
-      "idMedios": 0,
+      "idgrupos": idgrupo,
+      "fecharealizacion": fecharealizacion.substring(0,10),
+      "fechadefinalizacion": fechadefinalizacion.substring(0,10),
       "timeinicial": timeinicial,
       "timeFinalizacion": timeFinalizacion,
-      "idArg": 0,
-      "response": ''
     };
-    EndPointApi.httpPut('activities/timeline/$idactividades', data).then((json) {
+    EndPointApi.httpPut('timeline', data).then((json) {
       lineaDeTiempo = lineaDeTiempo.map((arg) {
-        if (arg.idactividades != idactividades) return arg;
-        arg.idactividades = idactividades;
-        arg.fecharealizacion = fecharealizacion;
-        arg.fechadefinalizacion = fechadefinalizacion;
-        arg.timeFinalizacion = timeFinalizacion;
-        arg.timeinicial = timeinicial;
+        if (arg.idactividades == idactividades) {
+          arg.fecharealizacion = fecharealizacion;
+          arg.fechadefinalizacion = fechadefinalizacion;
+          arg.timeFinalizacion = timeFinalizacion;
+          arg.timeinicial = timeinicial;
+          refreshArg(arg);
+        }
         return arg;
       }).toList();
 

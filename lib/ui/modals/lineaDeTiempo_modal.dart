@@ -10,6 +10,7 @@ import 'dart:math' as math;
 
 class LineaDeTiempoModal extends StatefulWidget {
   final int? idActividad;
+  final int? idgrupo;
   final String? titulo;
   final String? fechaRealizacion;
   final String? fechaDeFinalizacion;
@@ -18,6 +19,7 @@ class LineaDeTiempoModal extends StatefulWidget {
 
   const LineaDeTiempoModal({Key? key, 
                             this.idActividad,
+                            this.idgrupo,
                             this.titulo, 
                             this.fechaRealizacion, 
                             this.fechaDeFinalizacion,
@@ -30,6 +32,7 @@ class LineaDeTiempoModal extends StatefulWidget {
 
 class _TypeModalState extends State<LineaDeTiempoModal> {
   int idActividad = 0;
+  int idgrupo = 0;
   String fecharealizacion = '';
   String fechadefinalizacion = '';
   String timeinicial = '';
@@ -43,6 +46,7 @@ class _TypeModalState extends State<LineaDeTiempoModal> {
     super.initState();
 
     idActividad = widget.idActividad ?? 0;
+    idgrupo = widget.idgrupo ?? 0;
     fecharealizacion = widget.fechaRealizacion ?? '';
     fechadefinalizacion = widget.fechaDeFinalizacion ?? '';
     timeinicial = widget.tiempoInicial ?? '';
@@ -178,6 +182,7 @@ class _TypeModalState extends State<LineaDeTiempoModal> {
               onPressed: () async {
                 await form.updateArg2(
                   idActividad,
+                  idgrupo,
                   fecharealizacion,
                   fechadefinalizacion,
                   timeinicial,

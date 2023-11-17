@@ -157,6 +157,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                       context: context,
                                       builder: (_) => LineaDeTiempoModal(
                                             idActividad: lineaDeTimepo[index].idactividades,
+                                            idgrupo: lineaDeTimepo[index].idgrupos,
                                             titulo: lineaDeTimepo[index].nombreActividad,
                                             fechaRealizacion: lineaDeTimepo[index].fecharealizacion,
                                             fechaDeFinalizacion: lineaDeTimepo[index].fechadefinalizacion,
