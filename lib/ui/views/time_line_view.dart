@@ -139,7 +139,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                 ),
                 const SizedBox(height: 10),
                 if (lineaDeTimepo.isNotEmpty) 
-                  Flexible(
+                  Expanded(
                     child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: lineaDeTimepo.length,

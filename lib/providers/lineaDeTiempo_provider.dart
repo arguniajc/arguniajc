@@ -51,13 +51,12 @@ class LineaDeTiempoProvider extends ChangeNotifier {
     };
     EndPointApi.httpPut('timeline', data).then((json) {
       lineaDeTiempo = lineaDeTiempo.map((arg) {
-        if (arg.idactividades == idactividades) {
+        if (arg.idactividades != idactividades) return arg;
+          arg.idactividades = idactividades;
           arg.fecharealizacion = fecharealizacion;
           arg.fechadefinalizacion = fechadefinalizacion;
           arg.timeFinalizacion = timeFinalizacion;
           arg.timeinicial = timeinicial;
-          refreshArg(arg);
-        }
         return arg;
       }).toList();
 

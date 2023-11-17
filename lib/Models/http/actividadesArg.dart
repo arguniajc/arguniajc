@@ -18,6 +18,9 @@ class ActividadesArg {
     String nombreGrupo;
     String correoProfesor;
     String nombreArg;
+    String descripcionActividad;
+    String tipoMedio;
+    String fechaRealizacion;
 
     ActividadesArg({
         required this.idactividades,
@@ -33,6 +36,9 @@ class ActividadesArg {
         required this.nombreGrupo,
         required this.correoProfesor,
         required this.nombreArg,
+        required this.descripcionActividad,
+        required this.tipoMedio,
+        required this.fechaRealizacion
     });
 
     factory ActividadesArg.fromJson(Map<String, dynamic> json) => ActividadesArg(
@@ -49,6 +55,9 @@ class ActividadesArg {
         nombreGrupo: json["nombre_grupo"],
         correoProfesor: json["correo_profesor"],
         nombreArg: json["nombre_arg"],
+        descripcionActividad: json["descripcion_actividad"],
+        tipoMedio: json["tipo_medio"],
+        fechaRealizacion: json["fecha_realizacion"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -65,6 +74,9 @@ class ActividadesArg {
         "nombre_grupo": nombreGrupo,
         "correo_profesor": correoProfesor,
         "nombre_arg": nombreArg,
+        "descripcion_actividad": descripcionActividad,
+        "tipo_medio": tipoMedio,
+        "fecha_realizacion": fechaRealizacion
     };
 }
 
