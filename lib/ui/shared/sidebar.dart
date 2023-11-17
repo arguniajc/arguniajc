@@ -38,7 +38,10 @@ class Sidebar extends StatelessWidget {
                   sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
           ),
           const SizedBox(height: 10),
-          const TextSeparator(text: 'ARG'),
+          Visibility(
+            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
+            child: const TextSeparator(text: 'ARG'),
+          ),
           Visibility(
             visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3,
             child: MenuItem(

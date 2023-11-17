@@ -22,18 +22,24 @@ class ActividadesFormProvider extends ChangeNotifier {
       String? timeFinalizacion,
       int? idArg,
       String? tokenUser,
+      List<ActividadesGrupo>? actividadesGrupos,
+      String? nombreGrupo,
+      String? correoProfesor,
+      String? nombreArg,
       String? response}) {
     actividades = ActividadesArg(
           idactividades: idactividades ?? actividades!.idactividades,
           nombre: nombre ?? actividades!.nombre,
           descripcion: descripcion ?? actividades!.descripcion,
-          fecharealizacion: fecharealizacion ?? actividades!.fecharealizacion,
-          fechadefinalizacion: fechadefinalizacion ?? actividades!.fechadefinalizacion,
           idMedios: idMedios ?? actividades!.idMedios,
           timeinicial: timeinicial ?? actividades!.timeinicial,
           timeFinalizacion: timeFinalizacion ?? actividades!.timeFinalizacion,
           idArg: idArg ?? actividades!.idArg,
           tokenUser: tokenUser ?? actividades!.tokenUser,
+          actividadesGrupos: actividadesGrupos ?? actividades!.actividadesGrupos,
+          nombreGrupo: nombreGrupo ?? '',
+          correoProfesor: correoProfesor ?? '',
+          nombreArg: nombreArg ?? '',
           response: response ?? actividades!.response
       );
     notifyListeners();
@@ -52,11 +58,10 @@ class ActividadesFormProvider extends ChangeNotifier {
       "idactividades": actividades!.idactividades,
       "nombre": actividades!.nombre,
       "descripcion": actividades!.descripcion,
-      "fecharealizacion": actividades!.fecharealizacion,
       "idMedios": actividades!.idMedios,
       "timeinicial": actividades!.timeinicial,
       "timeFinalizacion": actividades!.timeFinalizacion,
-       "tokenUser": actividades!.tokenUser,
+      "tokenUser": actividades!.tokenUser,
       "idArg": actividades!.idArg
     };
 

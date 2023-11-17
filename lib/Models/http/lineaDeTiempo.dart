@@ -9,6 +9,7 @@ class LineaDeTiempo {
   String timeinicial;
   String timeFinalizacion;
   int idarg;
+  int idgrupos;
   String titulo;
   String lugardeejecucion;
   String ciudad;
@@ -24,6 +25,7 @@ class LineaDeTiempo {
     required this.timeinicial,
     required this.timeFinalizacion,
     required this.idarg,
+    required this.idgrupos,
     required this.titulo,
     required this.lugardeejecucion,
     required this.ciudad,
@@ -43,6 +45,7 @@ class LineaDeTiempo {
         fechadefinalizacion: json["fechadefinalizacion"],
         timeinicial: json["timeinicial"],
         timeFinalizacion: json["timeFinalizacion"],
+        idgrupos: json["idgrupos"],
         idarg: json["idarg"],
         titulo: json["titulo"],
         lugardeejecucion: json["lugardeejecucion"],
@@ -59,6 +62,7 @@ class LineaDeTiempo {
         "fechadefinalizacion": fechadefinalizacion,
         "timeinicial": timeinicial,
         "timeFinalizacion": timeFinalizacion,
+        "idgrupos": idgrupos,
         "idarg": idarg,
         "titulo": titulo,
         "lugardeejecucion": lugardeejecucion,
