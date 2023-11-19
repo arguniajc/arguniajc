@@ -53,13 +53,10 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                     lineaDeTimepo = [];
                                                     selectedOptionArg = newValue;
                                                     if (selectedOptionArg != null && selectedOptionGrupo != null) {
-                                                    if (dataLineaTiempo.isNotEmpty) {
-                                                      final data = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!));
-                                                      if (data.isNotEmpty) {
-                                                        lineaDeTimepo.addAll(data);
+                                                      if (dataLineaTiempo.isNotEmpty) {
+                                                        lineaDeTimepo = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!)).toList();
                                                       }
                                                     }
-                                                  }
                                                   });
                                                 },
                                     items: dataArg.map((item) {
@@ -103,10 +100,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                 selectedOptionGrupo = newValue;
                                                 if (selectedOptionArg != null && selectedOptionGrupo != null) {
                                                   if (dataLineaTiempo.isNotEmpty) {
-                                                    final data = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!));
-                                                    if (data.isNotEmpty) {
-                                                      lineaDeTimepo.addAll(data);
-                                                    }
+                                                    lineaDeTimepo = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!)).toList();
                                                   }
                                                 }
                                               });
@@ -151,19 +145,22 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                   child:  InkWell(
                                     splashColor: Colors.grey,
                                     highlightColor: Colors.grey,
-                                    onTap: () => {
-                                      showModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      builder: (_) => LineaDeTiempoModal(
-                                            idActividad: lineaDeTimepo[index].idactividades,
-                                            idgrupo: lineaDeTimepo[index].idgrupos,
-                                            titulo: lineaDeTimepo[index].nombreActividad,
-                                            fechaRealizacion: lineaDeTimepo[index].fecharealizacion,
-                                            fechaDeFinalizacion: lineaDeTimepo[index].fechadefinalizacion,
-                                            tiempoInicial: lineaDeTimepo[index].timeinicial,
-                                            tiempoFinal: lineaDeTimepo[index].timeFinalizacion,
-                                          ))
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (_) => LineaDeTiempoModal(
+                                          idActividad: lineaDeTimepo[index].idactividades,
+                                          idgrupo: lineaDeTimepo[index].idgrupos,
+                                          titulo: lineaDeTimepo[index].nombreActividad,
+                                          fechaRealizacion: lineaDeTimepo[index].fecharealizacion,
+                                          fechaDeFinalizacion: lineaDeTimepo[index].fechadefinalizacion,
+                                          tiempoInicial: lineaDeTimepo[index].timeinicial,
+                                          tiempoFinal: lineaDeTimepo[index].timeFinalizacion,
+                                        ));
+                                      setState(() {
+                                        lineaDeTimepo = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!)).toList();
+                                      });
                                     },
                                     borderRadius: BorderRadius.circular(10),
                                     customBorder: const StadiumBorder(),
