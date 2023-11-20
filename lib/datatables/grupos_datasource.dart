@@ -13,7 +13,7 @@ class GruposDTS extends DataTableSource {
 
   @override
   DataRow getRow(int index) {
-    final gruposArg = grupos[index];
+    final gruposArg = grupos[index]; 
 
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text(gruposArg.nombreGrupo)),
@@ -22,7 +22,7 @@ class GruposDTS extends DataTableSource {
       DataCell(Text(gruposArg.titulo)),
       DataCell(Row(
         children: [
-          IconButton(
+          IconButton( 
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) {
