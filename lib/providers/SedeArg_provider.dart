@@ -89,7 +89,7 @@ class SedeProvider extends ChangeNotifier {
     }).catchError((e) {
       throw 'Error en la peticion Put';
     });
-  }
+  }  
 
   Future deleteSede(int id) async {
     EndPointApi.httpDelete('sede/$id').then((json) {

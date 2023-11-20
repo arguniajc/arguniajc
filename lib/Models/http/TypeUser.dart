@@ -5,6 +5,7 @@ class TypeUser {
   String descripcion;
   String response;
 
+
   TypeUser({
     required this.idTypeUser,
     required this.descripcion,

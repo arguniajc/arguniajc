@@ -69,7 +69,8 @@ class GruposTablaArgView extends StatelessWidget {
                   },
                   text: 'Crear',
                   icon: Icons.add_outlined)
-              ])
+              ]
+              )
         ],
       ),
     );

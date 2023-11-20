@@ -10,7 +10,8 @@ class GruposArg {
   String profesorNombre;
   String titulo;
   String respuesta;
-
+ 
+ 
   GruposArg({
     required this.idGrupos,
     required this.nombreGrupo,

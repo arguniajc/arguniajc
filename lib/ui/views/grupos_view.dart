@@ -20,6 +20,7 @@ class GruposView extends StatefulWidget {
       await Future.delayed(const Duration(seconds: 1));
       html.window.location.reload();
     }
+    
 
 class CreateGruposView extends State<GruposView> {
   int idGrupos = 0;

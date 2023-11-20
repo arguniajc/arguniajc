@@ -6,6 +6,7 @@ class SedeArg {
   String tipoSede;
   String descripcion;
   String response;
+  
 
   SedeArg({
     required this.idUniversidad,
@@ -27,7 +28,7 @@ class SedeArg {
         response: json["response"],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() => { 
         "idUniversidad": idUniversidad,
         "nombre": nombre,
         "tipo_sede": tipoSede,

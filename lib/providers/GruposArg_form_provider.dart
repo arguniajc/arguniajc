@@ -11,6 +11,7 @@ class GruposFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   copyUserWith(
     {int? idGrupos,
     String? nombreGrupo,
@@ -35,6 +36,7 @@ class GruposFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   bool validForm() {
     return formKey.currentState!.validate();
   }
@@ -56,11 +58,14 @@ class GruposFormProvider extends ChangeNotifier {
       "respuesta": grupos!.respuesta,
     };
 
+//hola
+
     try {
       final grupo = EndPointApi.httpPut('grupos/${grupos!.idGrupos}', data);
       return true;
     } catch (e) {
-      throw 'Error en la peticion Put';
+      throw 'Error en la peticion Put.';
+
     }
   }
 }
