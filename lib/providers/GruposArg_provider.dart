@@ -12,7 +12,7 @@ class GruposProvider extends ChangeNotifier {
   int? sortColumnIndex;
 
   GruposProvider() {
-    getGrupos();
+    getGrupos();  
   }
 
   getGrupos() async {
