@@ -10,6 +10,7 @@ export 'package:control_actividades/providers/actividadesArg_form_provider.dart'
 export 'package:control_actividades/providers/MediosArg_provider.dart';
 export 'package:control_actividades/providers/typeUserModal_provider.dart';
 export 'package:control_actividades/providers/typeUsers_provider.dart';
+export 'package:control_actividades/providers/ProfesoresProvider.dart';
 export 'package:control_actividades/providers/SedeArg_provider.dart';
 export 'package:control_actividades/providers/SedeArg_form_provider.dart';
 export 'package:control_actividades/providers/GruposArg_form_provider.dart';

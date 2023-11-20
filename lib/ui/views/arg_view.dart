@@ -24,14 +24,14 @@ class ArgView extends StatelessWidget {
       child: ListView(
         physics: const ClampingScrollPhysics(),
         children: [
-          Text('Args', style: CustomLabels.h1),
+          Text('ARGs', style: CustomLabels.h1),
           const SizedBox(height: 10),
           PaginatedDataTable(
               sortAscending: argProvider.ascending,
               sortColumnIndex: argProvider.sortColumnIndex,
               columns: [
                 DataColumn(
-                    label: const Text('Titulo'),
+                    label: const Text('Título'),
                     onSort: (colIndex, _) {
                       argProvider.sortColumnIndex = colIndex;
                       argProvider.sort((arg) => arg.titulo);
@@ -42,11 +42,11 @@ class ArgView extends StatelessWidget {
                       argProvider.sortColumnIndex = colIndex;
                       argProvider.sort((arg) => arg.asignatura);
                     }),
-                const DataColumn(label: Text('Propsito')),
-                const DataColumn(label: Text('Action'))
+                const DataColumn(label: Text('Propósito')),
+                const DataColumn(label: Text('Acción'))
               ],
               header: const Text(
-                'Lista de args',
+                'Lista de ARGs',
                 maxLines: 2,
               ),
               source: agrsDataSource,

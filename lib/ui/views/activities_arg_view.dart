@@ -143,13 +143,13 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                       const SizedBox(width: 12),
                       Expanded(
                         child: FooterWiget(
-                            label: "Descripcion",
+                            label: "Descripción",
                             child: TextFormField(
                               initialValue: widget.actividades?.descripcion ?? '',
                               style: const TextStyle(color: Colors.black),
                               decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese la Descripcion',
-                                  label: 'Descripcion',
+                                  hint: 'Ingrese la Descripción',
+                                  label: 'Descripción',
                                   icon: Icons.description),
                               onChanged: ((value) => descripcion = value),
                             )),

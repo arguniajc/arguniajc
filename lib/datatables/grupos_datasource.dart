@@ -1,6 +1,6 @@
 import 'package:control_actividades/Models/http/GruposArg.dart';
 import 'package:control_actividades/providers/provider.dart';
-import 'package:control_actividades/providers/users_provider.dart';
+import 'package:control_actividades/services/notifications_service.dart';
 import 'package:control_actividades/ui/views/Grupos_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +18,7 @@ class GruposDTS extends DataTableSource {
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text(gruposArg.nombreGrupo)),
       DataCell(Text(gruposArg.nombreSede)),
+      DataCell(Text(gruposArg.profesorNombre)),
       DataCell(Text(gruposArg.titulo)),
       DataCell(Row(
         children: [
@@ -47,7 +48,8 @@ class GruposDTS extends DataTableSource {
                       child: const Text('Si, borrar'),
                       onPressed: () async {
                         Provider.of<GruposProvider>(context, listen: false)
-                            .deleteGrupos(gruposArg.idArg);
+                            .deleteGrupos(gruposArg.idGrupos);
+                             NotificationsService.showSnackbarError('El grupo  ${gruposArg.nombreGrupo} ha sido eliminado');
                         Navigator.of(context).pop();
                       },
                     ),

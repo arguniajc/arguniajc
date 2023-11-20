@@ -33,8 +33,8 @@ class TypeUserViewState extends State<TypeUserView> {
           const SizedBox(height: 10),
           PaginatedDataTable(
             columns: const [
-              DataColumn(label: Text('Descripcion')),
-              DataColumn(label: Text('Action'))
+              DataColumn(label: Text('Descripción')),
+              DataColumn(label: Text('Acción'))
             ],
             source: TipoUsuarioDTS(users, context),
             header: const Text(

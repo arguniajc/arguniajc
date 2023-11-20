@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:control_actividades/api/endpointApi.dart';
 import '../Models/http/GruposArg.dart';
 import '../services/notifications_service.dart';
+import 'dart:html' as html;
+import 'dart:async';
 
 class GruposProvider extends ChangeNotifier {
   List<GruposArg> gruposArgs = [];
@@ -36,19 +38,28 @@ class GruposProvider extends ChangeNotifier {
     String nombreGrupo,
     int idArg,
     int idSede,
-    String respuesta,) async {
+    int idProfesor,
+    String profesorNombre,
+    String respuesta,
+  ) async {
     // Petición post HTTP
     final data = {
       "idGrupos": 0,
       "nombreGrupo": nombreGrupo,
       "idArg": idArg,
-      "idProfesor": 0,
+      "idProfesor": idProfesor,
       "idSede": idSede,
-      "titulo": '',
       "nombreSede": '',
+      "titulo": '',
+      "profesorNombre": profesorNombre,
       "respuesta": respuesta,
     };
-    
+
+    Future<void> reloadPageAfterDelay() async {
+      await Future.delayed(const Duration(seconds: 1));
+      html.window.location.reload();
+    }
+
     EndPointApi.httpPost('grupos', data).then((json) {
       final res = GruposArg.fromMap(json);
       if (res.respuesta.isNotEmpty) {
@@ -56,6 +67,7 @@ class GruposProvider extends ChangeNotifier {
       } else {
         gruposArgs.add(res);
         NotificationsService.showSnackbar('Arg ${res.nombreGrupo} creado');
+        reloadPageAfterDelay();
       }
 
       notifyListeners();
@@ -64,13 +76,8 @@ class GruposProvider extends ChangeNotifier {
     });
   }
 
-  Future updateGrupos(
-    int idGrupos,
-    String nombreGrupo,
-    int idArg,
-    int idProfesor,
-    int idSede,
-    String respuesta) async {
+  Future updateGrupos(int idGrupos, String nombreGrupo, int idArg,
+      int idProfesor, int idSede, String respuesta) async {
     // Petición put HTTP
     final data = {
       "idGrupos": idGrupos,
@@ -78,8 +85,9 @@ class GruposProvider extends ChangeNotifier {
       "idArg": idArg,
       "idProfesor": idProfesor,
       "idSede": idSede,
-      "titulo": '',
       "nombreSede": '',
+      "titulo": '',
+      "profesorNombre": '',
       "respuesta": respuesta,
     };
 
@@ -95,14 +103,16 @@ class GruposProvider extends ChangeNotifier {
       }).toList();
 
       notifyListeners();
+  
     }).catchError((e) {
       throw 'Error en la peticion Put';
     });
+ 
   }
 
   Future deleteGrupos(int id) async {
     EndPointApi.httpDelete('grupos/$id').then((json) {
-      gruposArgs.removeWhere((element) => element.idArg == id);
+      gruposArgs.removeWhere((element) => element.idGrupos == id);
 
       notifyListeners();
     }).catchError((e) {

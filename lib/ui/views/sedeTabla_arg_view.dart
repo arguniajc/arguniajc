@@ -39,12 +39,12 @@ class SedeTablaArgView extends StatelessWidget {
                       sedeProvider.sort((sede) => sede.tipoSede);
                     }),
                 DataColumn(
-                    label: const Text('Descripcion'),
+                    label: const Text('Descripción'),
                     onSort: (colIndex, _) {
                       sedeProvider.sortColumnIndex = colIndex;
                       sedeProvider.sort((sede) => sede.descripcion);
                     }),
-                const DataColumn(label: Text('Action'))
+                const DataColumn(label: Text('Acción'))
               ],
               header: const Text(
                 'Lista de Sede',

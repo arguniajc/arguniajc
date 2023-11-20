@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../inputs/custom_inputs.dart';
 //import 'package:country_state_city_pro/country_state_city_pro.dart';
+import 'dart:html' as html;
 
 class GruposView extends StatefulWidget {
   final GruposArg? grupos;
@@ -15,17 +16,24 @@ class GruposView extends StatefulWidget {
   State<GruposView> createState() => CreateGruposView();
 }
 
+   Future<void> reloadPageAfterDelay() async {
+      await Future.delayed(const Duration(seconds: 1));
+      html.window.location.reload();
+    }
+
 class CreateGruposView extends State<GruposView> {
   int idGrupos = 0;
   String nombreGrupo = '';
   int idArg = 0;
   int idProfesor = 0;
+  String profesorNombre = '';
   int idSede = 0;
   String nombreSede = '';
   String titulo = '';
   String respuesta = '';
-  String? selectedOption;
-  String? selectedOptionSede;
+  String? selectedOptionARG;
+  String? selectedOptionIE;
+  String? selectedOptionProfesor;
   String countryValue = "";
   TextEditingController country = TextEditingController();
   TextEditingController state = TextEditingController();
@@ -38,16 +46,17 @@ class CreateGruposView extends State<GruposView> {
     nombreGrupo = widget.grupos?.nombreGrupo ?? '';
     idArg = widget.grupos?.idArg ?? 0;
     idProfesor = widget.grupos?.idProfesor ?? 0;
+    profesorNombre = widget.grupos?.profesorNombre ?? '';
     idSede = widget.grupos?.idSede ?? 0;
     nombreSede = widget.grupos?.titulo ?? '';
     titulo = widget.grupos?.titulo ?? '';
     respuesta = widget.grupos?.respuesta ?? '';
 
     if (widget.grupos != null) {
-      selectedOption = widget.grupos?.idArg.toString() ?? '';
-      selectedOptionSede = widget.grupos?.idSede.toString() ?? '';
+      selectedOptionARG = widget.grupos?.idArg.toString() ?? '';
+      selectedOptionIE = widget.grupos?.idSede.toString() ?? '';
+      selectedOptionProfesor = widget.grupos?.idProfesor.toString() ?? '';
     }
-    
   }
 
   @override
@@ -57,6 +66,9 @@ class CreateGruposView extends State<GruposView> {
     final dataArg = arg.args;
     final sede = Provider.of<SedeProvider>(context);
     final dataSede = sede.sedeArgs;
+    final profesor = Provider.of<ProfesoresProvider>(context);
+    final dataprofesor = profesor.profesores;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -88,142 +100,168 @@ class CreateGruposView extends State<GruposView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                   const SizedBox(height: 20),
-                                    Row(
+                  Row(
                     children: [
                       Expanded(
                         child: FooterWiget(
                             label: "Nombre del grupo",
                             child: TextFormField(
-                              initialValue: widget.grupos?.nombreGrupo ?? '',
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el nombre del grupo',
-                                  label: 'Nombre del grupo',
-                                  icon: Icons.group_add),
-                              onChanged: ((value) => nombreGrupo = value)
-                            )),
+                                initialValue: widget.grupos?.nombreGrupo ?? '',
+                                style: const TextStyle(color: Colors.black),
+                                decoration: CustomInputs.loginInputDecoration(
+                                    hint: 'Ingrese el nombre del grupo',
+                                    label: 'Nombre del grupo',
+                                    icon: Icons.group_add),
+                                onChanged: ((value) => nombreGrupo = value))),
                       ),
                       const SizedBox(width: 12, height: 12),
                       Expanded(
-                        child: FooterWiget(
-                          label: 'Seleccionar un ARG',
-                             child:SizedBox(
-                              height: 51, 
-
+                          child: FooterWiget(
+                        label: 'Seleccionar un ARG',
+                        child: SizedBox(
+                          height: 51,
                           child: DropdownButtonFormField<String>(
-                                value: selectedOption,
-                                hint: const Row(
+                            value: selectedOptionARG,
+                            hint: const Row(
                               children: [
-                                 Icon(Icons.book, color: Colors.grey),
-                                 SizedBox(width: 10),
-                                 Text('Selecciona una opción'),
+                                Icon(Icons.book, color: Colors.grey),
+                                SizedBox(width: 10),
+                                Text('Selecciona una opción'),
                               ],
                             ),
-                                
-                                onChanged: (String? newValue) {
-                                              setState(() {
-                                                selectedOption = newValue;
-                                                if (selectedOption != null) {
-                                                  idArg = int.parse(selectedOption!);
-                                                }
-                                              });
-                                            },
-                                items: dataArg.map((item) {
-                                  return DropdownMenuItem<String>(
-                                        value: item.idarg.toString(),
-                                        child: Text(item.titulo),
-                                      );
-                                    }).toList(),
-                                decoration: const InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedOptionARG = newValue;
+                                if (selectedOptionARG != null) {
+                                  idArg = int.parse(selectedOptionARG!);
+                                }
+                              });
+                            },
+                            items: dataArg.map((item) {
+                              return DropdownMenuItem<String>(
+                                value: item.idarg.toString(),
+                                child: Text(item.titulo),
+                              );
+                            }).toList(),
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                            ),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ))
+                    ],
+                  ),
+
+                  const Padding(padding: EdgeInsets.all(2)),
+
+                  Row(
+                    children: [
+                      Expanded(
+                          child: FooterWiget(
+                              label: "Nombre IE",
+                              child: SizedBox(
+                                height: 51,
+                                child: DropdownButtonFormField<String>(
+                                  value: selectedOptionIE,
+                                  hint: const Row(
+                                    children: [
+                                      Icon(Icons.school, color: Colors.grey),
+                                      SizedBox(width: 10),
+                                      Text('Selecciona una opción'),
+                                    ],
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedOptionIE = newValue;
+                                      if (selectedOptionIE != null) {
+                                        idSede = int.parse(selectedOptionIE!);
+                                      }
+                                    });
+                                  },
+                                  items: dataSede.map((item) {
+                                    return DropdownMenuItem<String>(
+                                      value: item.idUniversidad.toString(),
+                                      child: Text(item.nombre),
+                                    );
+                                   
+                                  }).toList(),
+                                  decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
                                     ),
-                                      focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
                                     ),
                                     filled: true,
                                     fillColor: Colors.transparent,
-                                ), 
-                                style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-           
-                          ),
-                        ),
-                      )
-                      )
-                    ],
-                                    
-                  ),
-
-            const Padding(padding: EdgeInsets.all(2) ),
-
-                Row(
-           
-                    children: [
-                       Expanded(
-                        child: FooterWiget(
-                            label: "Nombre profesor",
-                            child: TextFormField(
-                              initialValue: widget.grupos?.nombreGrupo ?? '',
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese el nombre del profesor',
-                                  label: 'Nombre del profesor',
-                                  icon: Icons.person_search),
-                              onChanged: ((value) => nombreGrupo = value)
-                            )),
-                      ),
-                        const SizedBox(width: 12, height: 100 ),
-                      Expanded(
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ))),
+                      const SizedBox(width: 12, height: 100),
+                    Expanded(
                           child: FooterWiget(
-                          label:  "Nombre IE",
-                             child: SizedBox(
-                              height:51 , 
-                        child:  DropdownButtonFormField<String>(
-                        value: selectedOptionSede,
-                        hint: const Row(
+                        label: 'Seleccionar un profesor',
+                        child: SizedBox(
+                          height: 51,
+                          child: DropdownButtonFormField<String>(
+                            value: selectedOptionProfesor,
+                            hint: const Row(
                               children: [
-                                 Icon(Icons.school, color: Colors.grey),
-                                 SizedBox(width: 10),
-                                 Text('Selecciona una opción'),
+                                Icon(Icons.book, color: Colors.grey),
+                                SizedBox(width: 10),
+                                Text('Selecciona un profesor'),
                               ],
                             ),
-                        onChanged: (String? newValue) {
-                                      setState(() {
-                                        selectedOptionSede = newValue;
-                                        if (selectedOptionSede != null) {
-                                          idSede = int.parse(selectedOptionSede!);
-                                        }
-                                      });
-                                    },
-                        items: dataSede.map((item) {
-                          return DropdownMenuItem<String>(
-                                value: item.idUniversidad.toString(),
-                                child: Text(item.nombre),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedOptionProfesor = newValue;
+                                if (selectedOptionProfesor != null) {
+                                  idProfesor = int.parse(selectedOptionProfesor!);
+                                }
+                              });
+                            },
+                            items: dataprofesor.map((item) {
+                              return DropdownMenuItem<String>(
+                                value: item.idProfesor.toString(),
+                                child: Text(item.nombreApellido),
                               );
                             }).toList(),
-                        decoration: const InputDecoration(
+                            decoration: const InputDecoration(
                               enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                            ),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
                               focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              filled: true,
+                              fillColor: Colors.transparent,
                             ),
-                            filled: true,
-                            fillColor: Colors.transparent,
-                        ), 
-                        style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                      ),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ))
+                    ],
                   ),
-                  )
-                  )
-                  )
-                  ],
-                  ),       
                   // Center(
                   //  child: CountryStateCityPicker(
                   //     country: country,
@@ -233,53 +271,43 @@ class CreateGruposView extends State<GruposView> {
                   //     textFieldDecoration: const InputDecoration(
                   //       fillColor: Colors.white,
                   //       filled: true,
-                  //       suffixIcon: Icon(Icons.expand_more), 
+                  //       suffixIcon: Icon(Icons.expand_more),
                   //       border:  OutlineInputBorder(borderSide: BorderSide.none))
-                  //   ), 
+                  //   ),
                   // ),
                   const SizedBox(height: 20),
                   Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 150),
-                      child: ElevatedButton(
+                      child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 150),
+                    child: ElevatedButton(
                         onPressed: () async {
-                                    if (idGrupos == 0) {
-                                    await form.newGrupos(
-                                        nombreGrupo,
-                                        idArg,
-                                        idSede,
-                                        respuesta
-                                      );
-                                  } else {
-                                    await form.updateGrupos(
-                                      idGrupos,
-                                      nombreGrupo,
-                                      idArg,
-                                      idProfesor,
-                                      idSede,
-                                      respuesta
-                                    );
-                                    NotificationsService.showSnackbar(
-                                        'Grupo $nombreGrupo actualizado');
-                                  }
-                                },
-                          style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Colors.indigo),
-                                  shadowColor: MaterialStateProperty.all(
-                                    Colors.transparent)),    
-                          child: const Row(
-                             children: [
-                                    Icon(
-                                      Icons.save_outlined,
-                                      size: 20,
-                                    ),
-                                    Text(' Guardar')
-                                  ],
-                                )     
-                      ),
-                    )
-                  ),
+                          if (idGrupos == 0) {
+                            await form.newGrupos(nombreGrupo, idArg, idSede,
+                                idProfesor,profesorNombre, respuesta);
+                          } else {
+                            await form.updateGrupos(idGrupos, nombreGrupo,
+                                idArg, idProfesor, idSede, respuesta);
+                            NotificationsService.showSnackbar(
+                                'Grupo $nombreGrupo actualizado');
+                              
+                               reloadPageAfterDelay();
+                          }
+                        },
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.indigo),
+                            shadowColor:
+                                MaterialStateProperty.all(Colors.transparent)),
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.save_outlined,
+                              size: 20,
+                            ),
+                            Text(' Guardar')
+                          ],
+                        )),
+                  )),
                 ])),
           ))
         ],

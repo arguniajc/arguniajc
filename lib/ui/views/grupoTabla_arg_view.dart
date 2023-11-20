@@ -27,24 +27,30 @@ class GruposTablaArgView extends StatelessWidget {
               sortColumnIndex: gruposProvider.sortColumnIndex,
               columns: [
                 DataColumn(
-                    label: const Text('Nombre'),
+                    label: const Text('Nombre grupo'),
                     onSort: (colIndex, _) {
                       gruposProvider.sortColumnIndex = colIndex;
                       gruposProvider.sort((grupos) => grupos.nombreGrupo);
                     }),
                 DataColumn(
-                    label: const Text('nombre sede'),
+                    label: const Text('Nombre IE'),
                     onSort: (colIndex, _) {
                       gruposProvider.sortColumnIndex = colIndex;
                       gruposProvider.sort((grupos) => grupos.nombreSede);
                     }),
+                    DataColumn(
+                    label: const Text('Nombre profesor'),
+                    onSort: (colIndex, _) {
+                      gruposProvider.sortColumnIndex = colIndex;
+                      gruposProvider.sort((grupos) => grupos.profesorNombre);
+                    }),
                 DataColumn(
-                    label: const Text('nombre arg'),
+                    label: const Text('Nombre ARG'),
                     onSort: (colIndex, _) {
                       gruposProvider.sortColumnIndex = colIndex;
                       gruposProvider.sort((grupos) => grupos.titulo);
                     }),
-                const DataColumn(label: Text('Action'))
+                const DataColumn(label: Text('Acción'))
               ],
               header: const Text(
                 'Lista de Grupos',

@@ -35,12 +35,12 @@ class ActividadesArgView extends StatelessWidget {
                       actividadArgProvider.sort((actividad) => actividad.nombre);
                     }),
                 DataColumn(
-                    label: const Text('Descripcion'),
+                    label: const Text('Descripción'),
                     onSort: (colIndex, _) {
                       actividadArgProvider.sortColumnIndex = colIndex;
                       actividadArgProvider.sort((actividad) => actividad.descripcion);
                     }),
-                const DataColumn(label: Text('Action'))
+                const DataColumn(label: Text('Acción'))
               ],
               header: const Text(
                 'Lista de actividades',

@@ -16,6 +16,7 @@ class GruposFormProvider extends ChangeNotifier {
     String? nombreGrupo,
     int? idArg,
     int? idProfesor,
+    String? nombreProfesor,
     int? idSede,
     String? nombreSede,
     String? titulo,
@@ -25,6 +26,7 @@ class GruposFormProvider extends ChangeNotifier {
       nombreGrupo: nombreGrupo ?? grupos!.nombreGrupo,
       idArg: idArg ?? grupos!.idArg,
       idProfesor: idProfesor ?? grupos!.idProfesor,
+      profesorNombre: nombreProfesor ?? grupos!.profesorNombre,
       idSede: idSede ?? grupos!.idSede,
       nombreSede: nombreSede ?? grupos!.nombreSede,
       titulo: titulo ?? grupos!.titulo,
@@ -47,6 +49,7 @@ class GruposFormProvider extends ChangeNotifier {
       "nombreGrupo": grupos!.nombreGrupo,
       "idArg": grupos!.idArg,
       "idProfesor": grupos!.idProfesor,
+      "profesorNombre": grupos!.profesorNombre,
       "idSede": grupos!.idSede,
       "nombreSede": grupos!.nombreSede,
       "titulo": grupos!.titulo,
@@ -55,7 +58,6 @@ class GruposFormProvider extends ChangeNotifier {
 
     try {
       final grupo = EndPointApi.httpPut('grupos/${grupos!.idGrupos}', data);
-
       return true;
     } catch (e) {
       throw 'Error en la peticion Put';

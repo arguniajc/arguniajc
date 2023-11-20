@@ -7,6 +7,7 @@ class GruposArg {
   int idProfesor;
   int idSede;
   String nombreSede;
+  String profesorNombre;
   String titulo;
   String respuesta;
 
@@ -15,6 +16,7 @@ class GruposArg {
     required this.nombreGrupo,
     required this.idArg,
     required this.idProfesor,
+    required this.profesorNombre,
     required this.idSede,
     required this.nombreSede,
     required this.titulo,
@@ -30,21 +32,26 @@ class GruposArg {
         nombreGrupo: json["nombreGrupo"],
         idArg: json["idArg"],
         idProfesor: json["idProfesor"],
+        profesorNombre: json["profesorNombre"],
         idSede: json["idSede"],
         nombreSede: json["nombreSede"],
         titulo: json["titulo"],
         respuesta: json["respuesta"],
       );
 
+
+
   Map<String, dynamic> toMap() => {
         "idGrupos": idGrupos,
         "nombreGrupo": nombreGrupo,
         "idArg": idArg,
+        "profesorNombre": profesorNombre,
         "idProfesor": idProfesor,
         "idSede": idSede,
         "nombreSede": nombreSede,
         "titulo": titulo,
         "respuesta": respuesta,
+        
       };
 
   @override

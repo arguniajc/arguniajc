@@ -40,7 +40,7 @@ class MedioTablaArgView extends StatelessWidget {
                       medioProvider.sortColumnIndex = colIndex;
                       medioProvider.sort((medio) => medio.tipoMedio);
                     }),
-                const DataColumn(label: Text('Action'))
+                const DataColumn(label: Text('Acción'))
               ],
               header: const Text(
                 'Lista de Medios',

@@ -44,10 +44,10 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                     padding: const EdgeInsets.all(20),
                     child: Expanded(
                       child: FooterWiget(
-                            label: 'Seleccionar un Arg',
+                            label: 'Seleccionar un ARG',
                             child: DropdownButtonFormField<String>(
                                     value: selectedOptionArg,
-                                    hint: const Text('Selecciona una opcion'),
+                                    hint: const Text('Selecciona una opción'),
                                     onChanged: (String? newValue) {
                                                   setState(() {
                                                     lineaDeTimepo = [];
@@ -96,7 +96,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                           label: 'Seleccionar un grupo',
                           child: DropdownButtonFormField<String>(
                                 value: selectedOptionGrupo,
-                                hint: const Text('Selecciona una opcion'),
+                                hint: const Text('Selecciona una opción'),
                                 onChanged: (String? newValue) {
                                               setState(() {
                                                 lineaDeTimepo = [];

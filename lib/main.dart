@@ -1,4 +1,5 @@
 import 'package:control_actividades/api/endpointApi.dart';
+import 'package:control_actividades/providers/ProfesoresProvider.dart';
 import 'package:control_actividades/providers/provider.dart';
 import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/services/local_storage.dart';
@@ -34,6 +35,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MediosProvider()),
         ChangeNotifierProvider(create: (_) => TypeUserModalProvider()),
         ChangeNotifierProvider(create: (_) => TypeUsersProvider()),
+        ChangeNotifierProvider(create: (_) => ProfesoresProvider()),
         ChangeNotifierProvider(create: (_) => SedeProvider()),
         ChangeNotifierProvider(create: (_) => SedeFormProvider()),
         ChangeNotifierProvider(create: (_) => GruposProvider()),
