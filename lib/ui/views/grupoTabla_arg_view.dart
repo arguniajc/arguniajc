@@ -8,8 +8,9 @@ import 'package:provider/provider.dart';
 
 class GruposTablaArgView extends StatelessWidget {
   const GruposTablaArgView({super.key});
+  
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     final gruposProvider = Provider.of<GruposProvider>(context);
 
