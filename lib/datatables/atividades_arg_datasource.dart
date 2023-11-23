@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 
 class ActividadesArgDTS extends DataTableSource {
   final List<ActividadesArg> actividadargs;
+  final String selectedOptionArg;
   final BuildContext context;
 
-  ActividadesArgDTS(this.actividadargs, this.context);
+  ActividadesArgDTS(this.actividadargs, this.selectedOptionArg, this.context);
 
   @override
   DataRow getRow(int index) {
@@ -16,14 +17,14 @@ class ActividadesArgDTS extends DataTableSource {
 
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text(activitiesArg.nombre)),
-      DataCell(Text(activitiesArg.descripcion)),
+      DataCell(Text(activitiesArg.descripcion.substring(0,activitiesArg.descripcion.length > 130 ? 130 : activitiesArg.descripcion.length))),
       DataCell(Row(
         children: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return ActivitiesArgView(actividades: activitiesArg);
+                    return ActivitiesArgView(actividades: activitiesArg, selectedOptionArg: selectedOptionArg);
                   }
                 ));
               },

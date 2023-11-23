@@ -10,8 +10,8 @@ import 'dart:math' as math;
 
 class ActivitiesArgView extends StatefulWidget {
   final ActividadesArg? actividades;
-
-  const ActivitiesArgView({super.key, this.actividades});
+  final String? selectedOptionArg;
+  const ActivitiesArgView({super.key, this.actividades, this.selectedOptionArg});
 
   @override
   State<ActivitiesArgView> createState() => CreateActivitiesArgViewState();
@@ -51,7 +51,7 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
     idMedios = widget.actividades?.idMedios ?? 0;
     timeinicial = widget.actividades?.timeinicial ?? '';
     timeFinalizacion = widget.actividades?.timeFinalizacion ?? '';
-    idArg = widget.actividades?.idArg ?? 0;
+    idArg = int.parse(widget.selectedOptionArg!);
     if (idMedios != 0) {
       selectedOption = idMedios.toString();
     }
@@ -143,63 +143,6 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                       const SizedBox(width: 12),
                       Expanded(
                         child: FooterWiget(
-                            label: "Descripción",
-                            child: TextFormField(
-                              initialValue: widget.actividades?.descripcion ?? '',
-                              style: const TextStyle(color: Colors.black),
-                              decoration: CustomInputs.loginInputDecoration(
-                                  hint: 'Ingrese la Descripción',
-                                  label: 'Descripción',
-                                  icon: Icons.description),
-                              onChanged: ((value) => descripcion = value),
-                            )),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: FooterWiget(
-                        label: 'Seleccionar un Arg',
-                        child: DropdownButtonFormField<String>(
-                                value: selectedOptionArg,
-                                hint: const Text('Selecciona una opcion'),
-                                onChanged: (String? newValue) {
-                                              setState(() {
-                                                selectedOptionArg = newValue;
-                                                if (selectedOptionArg != null) {
-                                                  idArg = int.parse(selectedOptionArg!);
-                                                }
-                                              });
-                                            },
-                                items: dataArg.map((item) {
-                                  return DropdownMenuItem<String>(
-                                        value: item.idarg.toString(),
-                                        child: Text(item.titulo),
-                                      );
-                                    }).toList(),
-                                decoration: const InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
-                                    ),
-                                      focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.transparent,
-                                ), 
-                                style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-            
-                          ),
-                        ) 
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FooterWiget(
                           label: 'Seleccionar un medio',
                           child: DropdownButtonFormField<String>(
                                 value: selectedOption,
@@ -236,6 +179,64 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                           ),
                         ),
                       )
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      // Expanded(
+                      //   child: FooterWiget(
+                      //   label: 'Seleccionar un Arg',
+                      //   child: DropdownButtonFormField<String>(
+                      //           value: selectedOptionArg,
+                      //           hint: const Text('Selecciona una opcion'),
+                      //           onChanged: (String? newValue) {
+                      //                         setState(() {
+                      //                           selectedOptionArg = newValue;
+                      //                           if (selectedOptionArg != null) {
+                      //                             idArg = int.parse(selectedOptionArg!);
+                      //                           }
+                      //                         });
+                      //                       },
+                      //           items: dataArg.map((item) {
+                      //             return DropdownMenuItem<String>(
+                      //                   value: item.idarg.toString(),
+                      //                   child: Text(item.titulo),
+                      //                 );
+                      //               }).toList(),
+                      //           decoration: const InputDecoration(
+                      //                 enabledBorder: OutlineInputBorder(
+                      //                 borderSide: BorderSide(color: Colors.grey),
+                      //               ),
+                      //                 focusedBorder: OutlineInputBorder(
+                      //                 borderSide: BorderSide(color: Colors.grey),
+                      //               ),
+                      //               filled: true,
+                      //               fillColor: Colors.transparent,
+                      //           ), 
+                      //           style: const TextStyle(
+                      //           fontSize: 15,
+                      //           fontWeight: FontWeight.w500,
+                      //         ),
+            
+                      //     ),
+                      //   ) 
+                      // ),
+                      // const SizedBox(width: 12),
+                      Expanded(
+                        child: FooterWiget(
+                            label: "Descripción",
+                            child: TextFormField(
+                              maxLines: null,
+                              initialValue: widget.actividades?.descripcion ?? '',
+                              style: const TextStyle(color: Colors.black),
+                              decoration: CustomInputs.loginInputDecoration(
+                                  hint: 'Ingrese la Descripción',
+                                  label: 'Descripción',
+                                  icon: Icons.description),
+                              onChanged: ((value) => descripcion = value),
+                            )),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -281,172 +282,173 @@ class CreateActivitiesArgViewState extends State<ActivitiesArgView>  {
                       ],
                     ),
                   const SizedBox(height: 20),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: selectedActividadesGrupo.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Row(
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: Center(
-                          child: SizedBox(
-                            height: 100,
-                            width: 500,
-                            child: Align(
-                            alignment: Alignment.center,
-                            child: Row(
-                              children: [
-                                IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  setState(() {
-                                    if(selectedActividadesGrupo[index].idGrupos != 0 && selectedActividadesGrupo[index].fechadefinalizacion != '') {
-                                      selectedActividadesGrupo.add(ActividadesGrupo(
-                                        idactividadesGrupos: 0,
-                                        idactividades: 0,
-                                        idGrupos: 0,
-                                        fecharealizacion: '',
-                                        fechadefinalizacion: '',
-                                        response: ''
-                                      ));
-                                      selectedOptionActividades?.add('');
-                                      fecharealizacion?.add('');
-                                      fechadefinalizacion?.add('');
-                                      dateinput?.add(TextEditingController());
-                                    }
-                                    
-                                  });
-                                }
-                                ),
-                                IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  setState(() {
-                                    if(selectedActividadesGrupo[index].idactividadesGrupos != 0) {
-                                      form.deleteActividadesArg2(selectedActividadesGrupo[index].idactividades, selectedActividadesGrupo[index].idactividadesGrupos);
-                                    }
-                                    if (selectedActividadesGrupo.length > 1) {
-                                      selectedActividadesGrupo.removeAt(index);
-                                      selectedOptionActividades?.removeAt(index);
-                                      fecharealizacion?.removeAt(index);
-                                      fechadefinalizacion?.removeAt(index);
-                                      dateinput!.removeAt(index);
-                                    }
-                                  });
-                                }
-                                )
-                              ],
-                            )
-                            ),
-                          )
-                        ),
-                      ),
-                      Flexible(
-                        flex: 3,
-                        child: FooterWiget(
-                          label: 'Seleccionar un grupo',
-                          child: DropdownButtonFormField<String>(
-                                value: selectedOptionActividades?[index] == '' ? null : selectedOptionActividades?[index],
-                                hint: const Text('Selecciona una opcion'),
-                                onChanged: (String? newValue) {
-                                              setState(() {
-                                                if (selectedOptionActividades == null) {
-                                                  selectedOptionActividades = [];
-                                                  selectedOptionActividades!.add(newValue!);
-                                                }
-                                                if (selectedOptionActividades != null) {
-                                                  selectedOptionActividades![index] = newValue!;
-                                                  final entero = int.parse(selectedOptionActividades![index]);
-                                                  selectedActividadesGrupo[index].idGrupos = entero;
-                                                }
-                                              });
-                                            },
-                                items: datagrupos.map((item) {
-                                  return DropdownMenuItem<String>(
-                                        value: item.idGrupos.toString(),
-                                        child: Text(item.nombreGrupo),
-                                      );
-                                    }).toList(),
-                                decoration: const InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
-                                    ),
-                                      focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.transparent,
-                                ), 
-                                style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-           
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Flexible(
-                        flex: 3,
-                        child: FooterWiget(
-                              label: "Fecha de realizacion",
-                              child: TextFormField(
-                                controller: dateinput?[index],
-                                style: const TextStyle(color: Colors.black),
-                                decoration: CustomInputs.loginInputDecoration(
-                                    hint: 'Ingrese la fecha de realizacion',
-                                    label: 'Fecha de realizacion',
-                                    icon: Icons.calendar_today),
-                                readOnly: true,
-                                onTap: () async {
-                                  final DateTimeRange? picked =  await showDateRangePicker(
-                                    context: context,
-                                    firstDate: DateTime(2023),
-                                    lastDate: DateTime(2024),
-                                    initialDateRange: DateTimeRange(
-                                      start: DateTime.now(),
-                                      end: DateTime.now().add(const Duration(days: 7)),
-                                    ),
-                                    helpText: 'Select a date range',
-                                    cancelText: 'Cancel',
-                                    confirmText: 'Select',
-                                  );
-
-                                  if (picked != null) {
-                                    DateTime startDate = picked.start;
-                                    DateTime endDate = picked.end;
-
-                                    String formattedDate = DateFormat('yyyy-MM-dd').format(startDate);
-                                    String formattedDate2 = DateFormat('yyyy-MM-dd').format(endDate);
-
+                  if (idactividades != 0 && selectedActividadesGrupo.length > 0)
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: selectedActividadesGrupo.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Center(
+                            child: SizedBox(
+                              height: 100,
+                              width: 500,
+                              child: Align(
+                              alignment: Alignment.center,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () {
                                     setState(() {
-                                    if (fechadefinalizacion == null && fecharealizacion == null && dateinput == null) {
-                                      fecharealizacion = [];
-                                      fechadefinalizacion = [];
-                                      dateinput = [];
-                                      fecharealizacion!.add(formattedDate);
-                                      fechadefinalizacion!.add(formattedDate2);
-                                      TextEditingController data = TextEditingController();
-                                      data.text = '$formattedDate - $formattedDate2';
-                                      dateinput!.add(data); 
-                                    } else {
-                                      fecharealizacion?[index] = formattedDate;
-                                      fechadefinalizacion?[index] = formattedDate2;
-                                      dateinput?[index].text = '$formattedDate - $formattedDate2';
-                                    }
-                                    selectedActividadesGrupo[index].fecharealizacion = formattedDate;
-                                    selectedActividadesGrupo[index].fechadefinalizacion = formattedDate2;
+                                      if(selectedActividadesGrupo[index].idGrupos != 0 && selectedActividadesGrupo[index].fechadefinalizacion != '') {
+                                        selectedActividadesGrupo.add(ActividadesGrupo(
+                                          idactividadesGrupos: 0,
+                                          idactividades: 0,
+                                          idGrupos: 0,
+                                          fecharealizacion: '',
+                                          fechadefinalizacion: '',
+                                          response: ''
+                                        ));
+                                        selectedOptionActividades?.add('');
+                                        fecharealizacion?.add('');
+                                        fechadefinalizacion?.add('');
+                                        dateinput?.add(TextEditingController());
+                                      }
                                       
                                     });
                                   }
-                                }
-                              )),
+                                  ),
+                                  IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    setState(() {
+                                      if(selectedActividadesGrupo[index].idactividadesGrupos != 0) {
+                                        form.deleteActividadesArg2(selectedActividadesGrupo[index].idactividades, selectedActividadesGrupo[index].idactividadesGrupos);
+                                      }
+                                      if (selectedActividadesGrupo.length > 1) {
+                                        selectedActividadesGrupo.removeAt(index);
+                                        selectedOptionActividades?.removeAt(index);
+                                        fecharealizacion?.removeAt(index);
+                                        fechadefinalizacion?.removeAt(index);
+                                        dateinput!.removeAt(index);
+                                      }
+                                    });
+                                  }
+                                  )
+                                ],
+                              )
+                              ),
+                            )
+                          ),
                         ),
-                      ],
-                    );
-                    },
-                  ),
+                        Flexible(
+                          flex: 3,
+                          child: FooterWiget(
+                            label: 'Seleccionar un grupo',
+                            child: DropdownButtonFormField<String>(
+                                  value: selectedOptionActividades?[index] == '' ? null : selectedOptionActividades?[index],
+                                  hint: const Text('Selecciona una opcion'),
+                                  onChanged: (String? newValue) {
+                                                setState(() {
+                                                  if (selectedOptionActividades == null) {
+                                                    selectedOptionActividades = [];
+                                                    selectedOptionActividades!.add(newValue!);
+                                                  }
+                                                  if (selectedOptionActividades != null) {
+                                                    selectedOptionActividades![index] = newValue!;
+                                                    final entero = int.parse(selectedOptionActividades![index]);
+                                                    selectedActividadesGrupo[index].idGrupos = entero;
+                                                  }
+                                                });
+                                              },
+                                  items: datagrupos.map((item) {
+                                    return DropdownMenuItem<String>(
+                                          value: item.idGrupos.toString(),
+                                          child: Text(item.nombreGrupo),
+                                        );
+                                      }).toList(),
+                                  decoration: const InputDecoration(
+                                        enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.grey),
+                                      ),
+                                        focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.grey),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.transparent,
+                                  ), 
+                                  style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+            
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Flexible(
+                          flex: 3,
+                          child: FooterWiget(
+                                label: "Fecha de realizacion",
+                                child: TextFormField(
+                                  controller: dateinput?[index],
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: CustomInputs.loginInputDecoration(
+                                      hint: 'Ingrese la fecha de realizacion',
+                                      label: 'Fecha de realizacion',
+                                      icon: Icons.calendar_today),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    final DateTimeRange? picked =  await showDateRangePicker(
+                                      context: context,
+                                      firstDate: DateTime(2023),
+                                      lastDate: DateTime(2024),
+                                      initialDateRange: DateTimeRange(
+                                        start: DateTime.now(),
+                                        end: DateTime.now().add(const Duration(days: 7)),
+                                      ),
+                                      helpText: 'Select a date range',
+                                      cancelText: 'Cancel',
+                                      confirmText: 'Select',
+                                    );
+
+                                    if (picked != null) {
+                                      DateTime startDate = picked.start;
+                                      DateTime endDate = picked.end;
+
+                                      String formattedDate = DateFormat('yyyy-MM-dd').format(startDate);
+                                      String formattedDate2 = DateFormat('yyyy-MM-dd').format(endDate);
+
+                                      setState(() {
+                                      if (fechadefinalizacion == null && fecharealizacion == null && dateinput == null) {
+                                        fecharealizacion = [];
+                                        fechadefinalizacion = [];
+                                        dateinput = [];
+                                        fecharealizacion!.add(formattedDate);
+                                        fechadefinalizacion!.add(formattedDate2);
+                                        TextEditingController data = TextEditingController();
+                                        data.text = '$formattedDate - $formattedDate2';
+                                        dateinput!.add(data); 
+                                      } else {
+                                        fecharealizacion?[index] = formattedDate;
+                                        fechadefinalizacion?[index] = formattedDate2;
+                                        dateinput?[index].text = '$formattedDate - $formattedDate2';
+                                      }
+                                      selectedActividadesGrupo[index].fecharealizacion = formattedDate;
+                                      selectedActividadesGrupo[index].fechadefinalizacion = formattedDate2;
+                                        
+                                      });
+                                    }
+                                  }
+                                )),
+                          ),
+                        ],
+                      );
+                      },
+                    ),
                   const SizedBox(height: 20),
                   Center(
                     child: ConstrainedBox(
