@@ -7,18 +7,38 @@ class NavbarAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AuthProvider>(context).usuario!;
-
-    return ClipOval(
-      child: SizedBox(
-        width: 30,
-        height: 30,
-        child: Image.network(
-          user.img ??
-              'https://upload.wikimedia.org/wikipedia/commons/c/c1/Sin_fotograf%C3%ADa.jpg',
-          fit: BoxFit
-              .cover, // Ajusta la imagen para cubrir completamente el espacio
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ClipOval(
+          child: SizedBox(
+            width: 30,
+            height: 30,
+            child: Image.network(
+              user.img ??
+                  'https://upload.wikimedia.org/wikipedia/commons/c/c1/Sin_fotograf%C3%ADa.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
-      ),
+        SizedBox(width: 8), // Espacio entre la imagen user y el texto
+        if (!isMobile)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '${user.nombre} ${user.apellido}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+      ],
     );
   }
 }

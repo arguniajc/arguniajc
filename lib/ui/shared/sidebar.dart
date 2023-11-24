@@ -21,7 +21,7 @@ class Sidebar extends StatelessWidget {
     final sideMenuProvider = Provider.of<SideMenuProvider>(context);
 
     return Container(
-      width: 220,
+      width: 200,
       height: double.infinity,
       decoration: buildBoxDecoration(),
       child: ListView(
@@ -93,7 +93,7 @@ class Sidebar extends StatelessWidget {
           Visibility(
               visible: user.idTipoUsuario == 5,
               child: MenuItem(
-                text: 'Tipo de usuarios',
+                text: 'Type of users',
                 icon: Icons.supervised_user_circle,
                 onPressed: () => navigateTo(Flurorouter.typeuserRoute),
               )),
