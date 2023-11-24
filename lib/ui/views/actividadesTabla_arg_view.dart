@@ -31,10 +31,20 @@ class _ActividadesArgViewState extends State<ActividadesArgView> {
     final dataArg = arg.args;
     final user = Provider.of<AuthProvider>(context).usuario!;
     final actividadArgProvider = Provider.of<ActividadesArgProvider>(context);
-    final actividadAgrsDataSource = ActividadesArgDTS(selectedOptionArg != null && user.idTipoUsuario == 5 ? 
-                                                        actividadArgProvider.activitiesArgs.where((element) => element.idArg == int.parse(selectedOptionArg!)).toList() 
-                                                      : selectedOptionArg != null ?
-                                                        actividadArgProvider.activitiesArgs.where((element) => element.tokenUser == user.token).toList() ?? [] : [], selectedOptionArg ?? '', context);
+    final actividadAgrsDataSource = ActividadesArgDTS(
+        selectedOptionArg != null && user.idTipoUsuario == 5
+            ? actividadArgProvider.activitiesArgs
+                .where(
+                    (element) => element.idArg == int.parse(selectedOptionArg!))
+                .toList()
+            : selectedOptionArg != null
+                ? actividadArgProvider.activitiesArgs
+                        .where((element) => element.tokenUser == user.token)
+                        .toList() ??
+                    []
+                : [],
+        selectedOptionArg ?? '',
+        context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListView(
@@ -47,81 +57,82 @@ class _ActividadesArgViewState extends State<ActividadesArgView> {
               sortColumnIndex: actividadArgProvider.sortColumnIndex,
               columns: [
                 DataColumn(
-                    label: const Text('Nombre'),
+                    label: const Text('Nombre actividad'),
                     onSort: (colIndex, _) {
                       actividadArgProvider.sortColumnIndex = colIndex;
-                      actividadArgProvider.sort((actividad) => actividad.nombre);
+                      actividadArgProvider
+                          .sort((actividad) => actividad.nombre);
                     }),
                 DataColumn(
-                    label: const Text('Descripción'),
+                    label: const Text('Descripción actividad'),
                     onSort: (colIndex, _) {
                       actividadArgProvider.sortColumnIndex = colIndex;
-                      actividadArgProvider.sort((actividad) => actividad.descripcion);
+                      actividadArgProvider
+                          .sort((actividad) => actividad.descripcion);
                     }),
                 const DataColumn(label: Text('Acción'))
               ],
               header: Row(
                 children: [
                   const Flexible(
-                    child: Text(
-                    'Lista de actividades',
+                      child: Text(
+                    'Lista de actividades del ARG:',
                     maxLines: 2,
-                    ) 
-                  ),
+                  )),
                   const SizedBox(width: 20),
                   Flexible(
                     child: DropdownButtonFormField<String>(
-                            value: selectedOptionArg,
-                            hint: const Text('Selecciona una opcion'),
-                            onChanged: (String? newValue) {
-                                          setState(() {
-                                            selectedOptionArg = newValue;
-                                            if (selectedOptionArg != null) {
-                                              idArg = int.parse(selectedOptionArg!);
-                                            }
-                                          });
-                                        },
-                            items: dataArg.map((item) {
-                              return DropdownMenuItem<String>(
-                                    value: item.idarg.toString(),
-                                    child: Text(item.titulo),
-                                  );
-                                }).toList(),
-                            decoration: const InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                  focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                filled: true,
-                                fillColor: Colors.transparent,
-                            ), 
-                            style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-        
+                      value: selectedOptionArg,
+                      hint: const Text('Selecciona un ARG'),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedOptionArg = newValue;
+                          if (selectedOptionArg != null) {
+                            idArg = int.parse(selectedOptionArg!);
+                          }
+                        });
+                      },
+                      items: dataArg.map((item) {
+                        return DropdownMenuItem<String>(
+                          value: item.idarg.toString(),
+                          child: Text(item.titulo),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        filled: true,
+                        fillColor: Colors.transparent,
                       ),
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ],
               ),
               source: actividadAgrsDataSource,
               actions: [
                 CustomInconButton(
-                  onPressed: () {
-                    if (selectedOptionArg != null) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return ActivitiesArgView(selectedOptionArg: selectedOptionArg);
-                        }
-                      ));
-                    } else {
-                      NotificationsService.showSnackbarError('Seleccione un arg para poder crear una actividad');
-                    }                    
-                  },
-                  text: 'Crear',
-                  icon: Icons.add_outlined)
+                    onPressed: () {
+                      if (selectedOptionArg != null) {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return ActivitiesArgView(
+                              selectedOptionArg: selectedOptionArg);
+                        }));
+                      } else {
+                        NotificationsService.showSnackbarError(
+                            'Seleccione un arg para poder crear una actividad');
+                      }
+                    },
+                    text: 'Crear',
+                    icon: Icons.add_outlined)
               ])
         ],
       ),
