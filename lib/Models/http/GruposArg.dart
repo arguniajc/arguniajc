@@ -10,6 +10,7 @@ class GruposArg {
   String profesorNombre;
   String titulo;
   String respuesta;
+  String tokenGrupo;
  
  
   GruposArg({
@@ -21,6 +22,7 @@ class GruposArg {
     required this.idSede,
     required this.nombreSede,
     required this.titulo,
+    required this.tokenGrupo,
     required this.respuesta
   });
 
@@ -37,6 +39,7 @@ class GruposArg {
         idSede: json["idSede"],
         nombreSede: json["nombreSede"],
         titulo: json["titulo"],
+        tokenGrupo: json["tokenGrupo"],
         respuesta: json["respuesta"],
       );
 
@@ -51,6 +54,7 @@ class GruposArg {
         "idSede": idSede,
         "nombreSede": nombreSede,
         "titulo": titulo,
+        "tokenGrupo": tokenGrupo,
         "respuesta": respuesta,
         
       };

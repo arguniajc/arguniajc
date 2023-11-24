@@ -53,6 +53,7 @@ class GruposProvider extends ChangeNotifier {
       "nombreSede": '',
       "titulo": '',
       "profesorNombre": profesorNombre,
+      "tokenGrupo": '',
       "respuesta": respuesta,
     };
 
@@ -89,6 +90,7 @@ class GruposProvider extends ChangeNotifier {
       "nombreSede": '',
       "titulo": '',
       "profesorNombre": '',
+      "tokenGrupo": '',
       "respuesta": respuesta,
     };
 

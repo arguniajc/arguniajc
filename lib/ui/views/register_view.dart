@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RegisterView extends StatefulWidget {
-  final String? idarg;
+  final String? idgrupo;
   final String? tipoUsuario;
 
-  const RegisterView({Key? key, this.idarg, this.tipoUsuario}) : super(key: key);
+  const RegisterView({Key? key, this.idgrupo, this.tipoUsuario}) : super(key: key);
 
   @override
   CreateRegisterView createState() => CreateRegisterView();
@@ -28,7 +28,7 @@ class CreateRegisterView extends State<RegisterView> {
   @override
   void initState() {
     super.initState();
-    idarg = widget.idarg ?? '';
+    idarg = widget.idgrupo ?? '';
     tipoUsuario = widget.tipoUsuario ?? '';
     if (idarg != '' && tipoUsuario == '1') {
         visibleContrasena = false;

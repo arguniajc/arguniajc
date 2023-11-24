@@ -25,7 +25,7 @@ class TypeUsersProvider extends ChangeNotifier {
     final data = {
       "idTypeUser": 0,
       "descripcion": descripcion,
-
+      "tokenTUser": ''
     };
 
     EndPointApi.httpPost('/typeuser', data).then((json) {
@@ -52,6 +52,7 @@ class TypeUsersProvider extends ChangeNotifier {
     final data = {
       "idTypeUser": id,
       "descripcion": descripcion,
+      "tokenTUser": '',
       "response": response
     };
 

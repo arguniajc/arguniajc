@@ -40,7 +40,7 @@ class AdminHandlers {
         .setCurrentPageUrl(Flurorouter.registerRoute2);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
-      return RegisterView(idarg: params['idarg']?.first,tipoUsuario: params['tipoUser']?.first);
+      return RegisterView(idgrupo: params['idarg']?.first,tipoUsuario: params['tipoUser']?.first);
     } else {
       return const DashboardView();
     }

@@ -21,6 +21,7 @@ class GruposFormProvider extends ChangeNotifier {
     int? idSede,
     String? nombreSede,
     String? titulo,
+    String? tokenGrupo,
     String? respuesta}) {
     grupos = GruposArg(
       idGrupos: idGrupos ?? grupos!.idGrupos,
@@ -31,6 +32,7 @@ class GruposFormProvider extends ChangeNotifier {
       idSede: idSede ?? grupos!.idSede,
       nombreSede: nombreSede ?? grupos!.nombreSede,
       titulo: titulo ?? grupos!.titulo,
+      tokenGrupo: tokenGrupo ?? grupos!.tokenGrupo,
       respuesta: respuesta ?? grupos!.respuesta
     );
     notifyListeners();
@@ -55,6 +57,7 @@ class GruposFormProvider extends ChangeNotifier {
       "idSede": grupos!.idSede,
       "nombreSede": grupos!.nombreSede,
       "titulo": grupos!.titulo,
+      "tokenGrupo": grupos!.tokenGrupo,
       "respuesta": grupos!.respuesta,
     };
 
