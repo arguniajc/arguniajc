@@ -247,9 +247,11 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                             ),
                                             const SizedBox(height: 7),
                                             Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 const Text('Descripcion: ', style: TextStyle(fontWeight: FontWeight.bold),),
-                                                Text(lineaDeTimepo[index].descripcionActividad),
+                                                Expanded(child: Text(lineaDeTimepo[index].descripcionActividad))
                                               ],
                                             ),
                                           ],
