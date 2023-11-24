@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
-//import '../../providers/auth_provider.dart';
 
 class DashboardView extends StatelessWidget {
-  const DashboardView({super.key});
+  const DashboardView({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    // final user = Provider.of<AuthProvider>(context).usuario!;
-
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: const Center(
-            child: Image(
-          image: AssetImage('logo.png'),
-        )));
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: const Stack(
+        alignment: Alignment.center,
+        children: [
+          Image(
+            image: AssetImage('logo.png'),
+            height: 600,
+            width: 600,
+          ),
+          Positioned(
+            bottom: 300,
+            child: Text(
+              'Transformando el aprendizaje con experiencias educativas inmersivas.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black, // Puedes ajustar el color del texto
+              ),
+            ), // Ajusta la posición del texto desde la parte superior
+          ),
+        ],
+      ),
+    );
   }
 }

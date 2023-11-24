@@ -31,117 +31,119 @@ class Sidebar extends StatelessWidget {
           const SizedBox(height: 50),
           const TextSeparator(text: 'Main'),
           MenuItem(
-              text: 'Dashboard',
-              icon: Icons.compass_calibration_outlined,
-              onPressed: () => navigateTo(Flurorouter.dashboardRoute),
-              isActive:
-                  sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
+            text: 'Dashboard',
+            icon: Icons.compass_calibration_outlined,
+            onPressed: () => navigateTo(Flurorouter.dashboardRoute),
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
           ),
           const SizedBox(height: 10),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
+            visible: user.idTipoUsuario == 5 ||
+                user.idTipoUsuario == 3 ||
+                user.idTipoUsuario == 4,
             child: const TextSeparator(text: 'ARG'),
           ),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3,
-            child: MenuItem(
-              text: 'ARG',
-              icon: Icons.book,
-              onPressed: () => navigateTo(Flurorouter.argRoute),
-              )
-          ),
+              visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3,
+              child: MenuItem(
+                text: 'ARGs',
+                icon: Icons.book,
+                onPressed: () => navigateTo(Flurorouter.argRoute),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
-            child: MenuItem(
-              text: 'Activities',
-              icon: Icons.menu_book,
-              onPressed: () => navigateTo(Flurorouter.activitiesTableArgRoute),
-            )
-          ),
+              visible: user.idTipoUsuario == 5 ||
+                  user.idTipoUsuario == 3 ||
+                  user.idTipoUsuario == 4,
+              child: MenuItem(
+                text: 'Actividades',
+                icon: Icons.menu_book,
+                onPressed: () =>
+                    navigateTo(Flurorouter.activitiesTableArgRoute),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
-            child: MenuItem(
-              text: 'Medio',
-              icon: Icons.apps,
-              onPressed: () => navigateTo(Flurorouter.medio),
-              )
-          ),
+              visible: user.idTipoUsuario == 5 ||
+                  user.idTipoUsuario == 3 ||
+                  user.idTipoUsuario == 4,
+              child: MenuItem(
+                text: 'Medios',
+                icon: Icons.apps,
+                onPressed: () => navigateTo(Flurorouter.medio),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
-            child: MenuItem(
-              text: 'Timeline',
-              icon: Icons.timeline_sharp,
-              onPressed: () => navigateTo(Flurorouter.timeLineRoute),
-              )
-          ),
+              visible: user.idTipoUsuario == 5 ||
+                  user.idTipoUsuario == 3 ||
+                  user.idTipoUsuario == 4,
+              child: MenuItem(
+                text: 'Timeline',
+                icon: Icons.timeline_sharp,
+                onPressed: () => navigateTo(Flurorouter.timeLineRoute),
+              )),
           Visibility(
             visible: user.idTipoUsuario == 5,
             child: const TextSeparator(text: 'Account'),
           ),
           Visibility(
-            visible: user.idTipoUsuario == 5,
-            child: MenuItem(
-            text: 'User',
-            icon: Icons.people_alt_outlined,
-            onPressed: () => navigateTo(Flurorouter.userRoute),
-            
-            )
-          ),
+              visible: user.idTipoUsuario == 5,
+              child: MenuItem(
+                text: 'Usuarios',
+                icon: Icons.people_alt_outlined,
+                onPressed: () => navigateTo(Flurorouter.userRoute),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5,
-            child: MenuItem(
-            text: 'Type user',
-            icon: Icons.supervised_user_circle,
-            onPressed: () => navigateTo(Flurorouter.typeuserRoute),
-            
-          )),
+              visible: user.idTipoUsuario == 5,
+              child: MenuItem(
+                text: 'Type of users',
+                icon: Icons.supervised_user_circle,
+                onPressed: () => navigateTo(Flurorouter.typeuserRoute),
+              )),
           // Visibility(
           //   child: MenuItem(
           //   text: 'Activities',
           //   icon: Icons.note_alt,
           //   onPressed: () => navigateTo(Flurorouter.activitiesRoute),
-            
+
           // )),
           const TextSeparator(text: 'Notas'),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
-            child: MenuItem(
-            text: 'Estudiantes',
-            icon: Icons.school,
-            onPressed: () => navigateTo(Flurorouter.estudiantesRoute),
-            
-          )),
+              visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
+              child: MenuItem(
+                text: 'Estudiantes',
+                icon: Icons.school,
+                onPressed: () => navigateTo(Flurorouter.estudiantesRoute),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
-            child: MenuItem(
-            text: 'Grupos',
-            icon: Icons.group_add_rounded,
-            onPressed: () => navigateTo(Flurorouter.gruposTablaRoute),
-            
-          )),
+              visible: user.idTipoUsuario == 5 ||
+                  user.idTipoUsuario == 3 ||
+                  user.idTipoUsuario == 4,
+              child: MenuItem(
+                text: 'Grupos',
+                icon: Icons.group_add_rounded,
+                onPressed: () => navigateTo(Flurorouter.gruposTablaRoute),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 3 || user.idTipoUsuario == 4,
-            child: MenuItem(
-            text: 'IE',
-            icon: Icons.business,
-            onPressed: () => navigateTo(Flurorouter.sedeRoute),
-            
-          )),
+              visible: user.idTipoUsuario == 5 ||
+                  user.idTipoUsuario == 3 ||
+                  user.idTipoUsuario == 4,
+              child: MenuItem(
+                text: 'IE',
+                icon: Icons.business,
+                onPressed: () => navigateTo(Flurorouter.sedeRoute),
+              )),
           Visibility(
-            visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
-            child: MenuItem(
-            text: 'Notas',
-            icon: Icons.note_alt,
-            onPressed: () => navigateTo(Flurorouter.notasRoute),
-            
-          )),
+              visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
+              child: MenuItem(
+                text: 'Notas',
+                icon: Icons.note_alt,
+                onPressed: () => navigateTo(Flurorouter.notasRoute),
+              )),
           // const SizedBox(height: 30),
           // const TextSeparator(text: 'UI Elements'),
           // MenuItem(
           //   text: 'Icons',
           //   icon: Icons.list_alt_outlined,
           //   onPressed: () => navigateTo(Flurorouter.iconsRoute),
-            
+
           // ),
           // MenuItem(
           //     text: 'Marketing',
