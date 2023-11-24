@@ -17,7 +17,7 @@ class ActividadesArgDTS extends DataTableSource {
 
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text(activitiesArg.nombre)),
-      DataCell(Text(activitiesArg.descripcion.substring(0,activitiesArg.descripcion.length > 130 ? 130 : activitiesArg.descripcion.length))),
+      DataCell(Text(activitiesArg.descripcion.substring(0,activitiesArg.descripcion.length > 90 ? 90 : activitiesArg.descripcion.length))),
       DataCell(Row(
         children: [
           IconButton(
