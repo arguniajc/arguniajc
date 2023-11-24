@@ -111,7 +111,7 @@ class EditRoleCardView extends State<RegisterTokenView> {
                               onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                      return RegisterView(idgrupo: arg!.idarg.toString(),tipoUsuario: selectedRole);
+                                      return RegisterView(idgrupo: arg!.idarg.toString(),tokenTUsuario: selectedRole);
                                     }
                                   ));
                                 },

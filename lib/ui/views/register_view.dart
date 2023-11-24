@@ -1,4 +1,5 @@
 import 'package:control_actividades/providers/register_form_provider.dart';
+import 'package:control_actividades/providers/typeUserModal_provider.dart';
 import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/buttons/link_text.dart';
@@ -12,32 +13,40 @@ import 'package:provider/provider.dart';
 
 class RegisterView extends StatefulWidget {
   final String? idgrupo;
-  final String? tipoUsuario;
+  final String? tokenTUsuario;
 
-  const RegisterView({Key? key, this.idgrupo, this.tipoUsuario}) : super(key: key);
+  const RegisterView({Key? key, this.idgrupo, this.tokenTUsuario}) : super(key: key);
 
   @override
   CreateRegisterView createState() => CreateRegisterView();
 }
 
 class CreateRegisterView extends State<RegisterView> {
-  String idarg = '';
+  String idGrupo = '';
   String tipoUsuario = '';
   bool visibleContrasena = true;
   
   @override
   void initState() {
     super.initState();
-    idarg = widget.idgrupo ?? '';
-    tipoUsuario = widget.tipoUsuario ?? '';
-    if (idarg != '' && tipoUsuario == '1') {
-        visibleContrasena = false;
-    }
+    
   }
 
   @override
   Widget build(BuildContext context) {
     final sideMenuProvider = Provider.of<SideMenuProvider>(context);
+    final tipoUserProvider = Provider.of<TypeUserModalProvider>(context);
+    if (widget.tokenTUsuario != null) {
+      idGrupo = widget.idgrupo ?? '';
+      final tipoUser = tipoUserProvider.typeUsers;
+      final user = tipoUser.where((element) => element.tokenTUser == widget.tokenTUsuario);
+      if (user.isNotEmpty) {
+        tipoUsuario = user.first.idTypeUser.toString();
+      }
+    }
+    if (idGrupo != '' && tipoUsuario == '1') {
+        visibleContrasena = false;
+    }
     return ChangeNotifierProvider(
       create: (_) => RegisterFormProvider(),
       child: Builder(builder: (context) {
@@ -161,7 +170,7 @@ class CreateRegisterView extends State<RegisterView> {
                           final validForm = registerFormProvider.validateForm();
                           if (!validForm) return;
 
-                          if (sideMenuProvider.currentPage == Flurorouter.registerRoute || sideMenuProvider.currentPage == '/auth/login') {
+                          if (sideMenuProvider.currentPage == Flurorouter.registerRoute) {
                             final authProvider =
                               Provider.of<AuthProvider>(context, listen: false);
                                 authProvider.register(
@@ -178,8 +187,8 @@ class CreateRegisterView extends State<RegisterView> {
                                     registerFormProvider.apellido!,
                                     registerFormProvider.documento!,
                                     registerFormProvider.email!,
-                                    registerFormProvider.password!,
-                                    idarg,
+                                    '',
+                                    idGrupo,
                                     tipoUsuario);
                           }
                         },

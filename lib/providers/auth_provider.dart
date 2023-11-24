@@ -65,7 +65,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   registerToken(String name, String apellido, int documento, String email,
-      String? password, String idArg, String idTipoUsuario) {
+      String? password, String idGrupo, String idTipoUsuario) {
     if (idTipoUsuario == '1') password = 'admin123*';
     // Petición post HTTP
     final data = {
@@ -77,7 +77,7 @@ class AuthProvider extends ChangeNotifier {
       "id_tipo_usuario": int.parse(idTipoUsuario)
     };
 
-    EndPointApi.httpPost('user/register/$idArg', data).then((json) {
+    EndPointApi.httpPost('user/register/$idGrupo', data).then((json) {
       usuario = Usuario.fromMap(json);
       if (usuario!.response.isEmpty) {
         if (idTipoUsuario != '1') {
