@@ -25,7 +25,7 @@ class CreateRegisterView extends State<RegisterView> {
   String idGrupo = '';
   String tipoUsuario = '';
   bool visibleContrasena = true;
-  
+  bool? isChecked = false;
   @override
   void initState() {
     super.initState();
@@ -46,6 +46,9 @@ class CreateRegisterView extends State<RegisterView> {
     }
     if (idGrupo != '' && tipoUsuario == '1') {
         visibleContrasena = false;
+    } 
+    if (tipoUsuario != '1') {
+      isChecked = true;
     }
     return ChangeNotifierProvider(
       create: (_) => RegisterFormProvider(),
@@ -137,8 +140,24 @@ class CreateRegisterView extends State<RegisterView> {
                             label: 'Email',
                             icon: Icons.email_outlined),
                       ),
-
                       const SizedBox(height: 20),
+                      Visibility(
+                        visible: !visibleContrasena,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                              Checkbox(
+                              value: isChecked,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isChecked = value;
+                                });
+                              },
+                            ),
+                            const SizedBox(width: 10),
+                            const Text('Acepto participar en el juego Arg', style: TextStyle( fontWeight: FontWeight.w500),)
+                          ])
+                      ),
                       Visibility(
                         visible: visibleContrasena,
                         child: TextFormField(
@@ -165,36 +184,38 @@ class CreateRegisterView extends State<RegisterView> {
                       // Password
 
                       const SizedBox(height: 20),
-                      CustomOutlinedButton(
+                      Visibility(
+                        visible: isChecked!,
+                        child: CustomOutlinedButton(
                         onPressed: () {
-                          final validForm = registerFormProvider.validateForm();
-                          if (!validForm) return;
+                            final validForm = registerFormProvider.validateForm();
+                            if (!validForm) return;
 
-                          if (sideMenuProvider.currentPage == Flurorouter.registerRoute) {
-                            final authProvider =
-                              Provider.of<AuthProvider>(context, listen: false);
-                                authProvider.register(
-                                    registerFormProvider.name!,
-                                    registerFormProvider.apellido!,
-                                    registerFormProvider.documento!,
-                                    registerFormProvider.email!,
-                                    registerFormProvider.password!);
-                          } else {
-                            final authProvider =
-                              Provider.of<AuthProvider>(context, listen: false);
-                                authProvider.registerToken(
-                                    registerFormProvider.name!,
-                                    registerFormProvider.apellido!,
-                                    registerFormProvider.documento!,
-                                    registerFormProvider.email!,
-                                    '',
-                                    idGrupo,
-                                    tipoUsuario);
-                          }
-                        },
-                        text: 'Crear Cuenta',
+                            if (sideMenuProvider.currentPage == Flurorouter.registerRoute) {
+                              final authProvider =
+                                Provider.of<AuthProvider>(context, listen: false);
+                                  authProvider.register(
+                                      registerFormProvider.name!,
+                                      registerFormProvider.apellido!,
+                                      registerFormProvider.documento!,
+                                      registerFormProvider.email!,
+                                      registerFormProvider.password!);
+                            } else {
+                              final authProvider =
+                                Provider.of<AuthProvider>(context, listen: false);
+                                  authProvider.registerToken(
+                                      registerFormProvider.name!,
+                                      registerFormProvider.apellido!,
+                                      registerFormProvider.documento!,
+                                      registerFormProvider.email!,
+                                      '',
+                                      idGrupo,
+                                      tipoUsuario);
+                            }
+                          },
+                          text: 'Crear Cuenta',
+                        ),
                       ),
-
                       const SizedBox(height: 20),
                       LinkText(
                         text: 'Ir al login',
