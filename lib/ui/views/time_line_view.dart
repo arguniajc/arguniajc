@@ -55,6 +55,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                     if (selectedOptionArg != null && selectedOptionGrupo != null) {
                                                       if (dataLineaTiempo.isNotEmpty) {
                                                         lineaDeTimepo = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!)).toList();
+                                                        lineaDeTimepo.sort(((a, b) => a.fecharealizacion.compareTo(b.fecharealizacion)));
                                                       }
                                                     }
                                                   });
@@ -101,6 +102,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                 if (selectedOptionArg != null && selectedOptionGrupo != null) {
                                                   if (dataLineaTiempo.isNotEmpty) {
                                                     lineaDeTimepo = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!)).toList();
+                                                    lineaDeTimepo.sort(((a, b) => a.fecharealizacion.compareTo(b.fecharealizacion)));
                                                   }
                                                 }
                                               });
@@ -160,6 +162,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                         ));
                                       setState(() {
                                         lineaDeTimepo = dataLineaTiempo.where((e) => e.idarg == int.parse(selectedOptionArg!) && e.idgrupos == int.parse(selectedOptionGrupo!)).toList();
+                                        lineaDeTimepo.sort(((a, b) => a.fecharealizacion.compareTo(b.fecharealizacion)));
                                       });
                                     },
                                     borderRadius: BorderRadius.circular(10),
