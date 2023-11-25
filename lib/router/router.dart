@@ -15,7 +15,7 @@ class Flurorouter {
   // Auth Router
   static String loginRoute = '/auth/login';
   static String registerRoute = '/auth/register';
-  static String registerRoute2 = '/auth/register/:idGrupo/:tokenTUsuario';
+  static String registerRoute2 = '/auth/register/:idGrupo/:tokenTUsuario/:tokenUser';
   static String roleCardRoute = '/auth/role';
   static String registerTokenRoute = '/auth/registerToken/:token';
   static String registerTokenRoute2 = '/auth/registerToken';

@@ -14,8 +14,9 @@ import 'package:provider/provider.dart';
 class RegisterView extends StatefulWidget {
   final String? idgrupo;
   final String? tokenTUsuario;
+  final String? tokenUser;
 
-  const RegisterView({Key? key, this.idgrupo, this.tokenTUsuario}) : super(key: key);
+  const RegisterView({Key? key, this.idgrupo, this.tokenTUsuario, this.tokenUser}) : super(key: key);
 
   @override
   CreateRegisterView createState() => CreateRegisterView();
@@ -24,6 +25,7 @@ class RegisterView extends StatefulWidget {
 class CreateRegisterView extends State<RegisterView> {
   String idGrupo = '';
   String tipoUsuario = '';
+  String tokenUser = '';
   bool visibleContrasena = true;
   bool? isChecked = false;
   @override
@@ -38,6 +40,7 @@ class CreateRegisterView extends State<RegisterView> {
     final tipoUserProvider = Provider.of<TypeUserModalProvider>(context);
     if (widget.tokenTUsuario != null) {
       idGrupo = widget.idgrupo ?? '';
+      tokenUser = widget.tokenTUsuario ?? '';
       final tipoUser = tipoUserProvider.typeUsers;
       final user = tipoUser.where((element) => element.tokenTUser == widget.tokenTUsuario);
       if (user.isNotEmpty) {
@@ -210,7 +213,8 @@ class CreateRegisterView extends State<RegisterView> {
                                       registerFormProvider.email!,
                                       '',
                                       idGrupo,
-                                      tipoUsuario);
+                                      tipoUsuario,
+                                      tokenUser);
                             }
                           },
                           text: 'Crear Cuenta',
