@@ -1,6 +1,7 @@
 import 'package:control_actividades/api/endpointApi.dart';
 import 'package:control_actividades/providers/ProfesoresProvider.dart';
 import 'package:control_actividades/providers/provider.dart';
+import 'package:control_actividades/providers/usuariosEstudiantes_provider.dart';
 import 'package:control_actividades/router/router.dart';
 import 'package:control_actividades/services/local_storage.dart';
 import 'package:control_actividades/services/navigation_service.dart';
@@ -41,7 +42,8 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GruposProvider()),
         ChangeNotifierProvider(create: (_) => GruposFormProvider()),
         ChangeNotifierProvider(create: (_) => TypeRegisterTokenModalProvider()),
-        ChangeNotifierProvider(create: (_) => LineaDeTiempoProvider())
+        ChangeNotifierProvider(create: (_) => LineaDeTiempoProvider()),
+        ChangeNotifierProvider(create: (_) => UsuariosEstudiantesProvider())
       ],
       child: MyApp(),
     );
