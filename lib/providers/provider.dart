@@ -18,3 +18,4 @@ export 'package:control_actividades/providers/GruposArg_provider.dart';
 export 'package:control_actividades/providers/typeRegisterTokenModal_provider.dart';
 export 'package:control_actividades/providers/lineaDeTiempo_provider.dart';
 export 'package:control_actividades/providers/usuariosEstudiantes_provider.dart';
+export 'package:control_actividades/providers/estudiantesNotas_provider.dart';

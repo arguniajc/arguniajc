@@ -130,13 +130,13 @@ class Sidebar extends StatelessWidget {
                 icon: Icons.business,
                 onPressed: () => navigateTo(Flurorouter.sedeRoute),
               )),
-          Visibility(
-              visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
-              child: MenuItem(
-                text: 'Notas',
-                icon: Icons.note_alt,
-                onPressed: () => navigateTo(Flurorouter.notasRoute),
-              )),
+          // Visibility(
+          //     visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
+          //     child: MenuItem(
+          //       text: 'Notas',
+          //       icon: Icons.note_alt,
+          //       onPressed: () => navigateTo(Flurorouter.notasRoute),
+          //     )),
           // const SizedBox(height: 30),
           // const TextSeparator(text: 'UI Elements'),
           // MenuItem(

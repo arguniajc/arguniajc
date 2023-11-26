@@ -3,22 +3,21 @@ import 'package:control_actividades/Models/http/estudiantesnotas.dart';
 import 'package:flutter/material.dart';
 import 'package:control_actividades/api/endpointApi.dart';
 
-class UsuariosEstudiantesProvider extends ChangeNotifier {
-  List<UsuariosEstudiantes> usuariosEtudiantes = [];
+class EstudiantesNotasProvider extends ChangeNotifier {
+  List<EstudianteNotas> estudiantesNotas = [];
   bool isLoading = true;
   bool ascending = true;
   int? sortColumnIndex;
 
-  UsuariosEstudiantesProvider() {
-    getUsuarioEstudiantes();
-  }
+  EstudiantesNotasProvider();
 
-  getUsuarioEstudiantes() async {
-    usuariosEtudiantes = [];
-    List<dynamic> resp = await EndPointApi.httpGet('UsuariosEstudiantes');
-    resp.forEach((element) => usuariosEtudiantes.add(UsuariosEstudiantes.fromMap(element)));
+  Future<List<EstudianteNotas>> getEstudiantesNotas(String id) async {
+    estudiantesNotas = [];
+    List<dynamic> resp = await EndPointApi.httpGet('infoestudiantes/$id');
+    resp.forEach((element) => estudiantesNotas.add(EstudianteNotas.fromJson(element)));
     isLoading = false;
     notifyListeners();
+    return estudiantesNotas;
   }
 
   // Future<ActividadesArg?> getActivitiesArgById(String id) async {
@@ -76,52 +75,25 @@ class UsuariosEstudiantesProvider extends ChangeNotifier {
   //   });
   // }
 
-  // Future updateArg(
-  //     int idactividades,
-  //     String nombre,
-  //     String descripcion,
-  //     int idMedios,
-  //     String timeinicial,
-  //     String timeFinalizacion,
-  //     int idArg,
-  //     String tokenUser,
-  //     List<ActividadesGrupo> grupos) async {
-  //   // Petición put HTTP
-  //   final data = {
-  //     "idactividades": idactividades,
-  //     "nombre": nombre,
-  //     "descripcion": descripcion,
-  //     "idMedios": idMedios,
-  //     "timeinicial": timeinicial,
-  //     "timeFinalizacion": timeFinalizacion,
-  //     "idArg": idArg,
-  //     "tokenUser": tokenUser,
-  //     "response": '',
-  //     "actividadesGrupos": grupos,
-  //     "nombre_grupo": '',
-  //     "correo_profesor": '',
-  //     "nombre_arg": '',
-  //     "descripcion_actividad": '',
-  //     "tipo_medio": '',
-  //     "fecha_realizacion": ''
-  //   };
-  //   EndPointApi.httpPut('activities/$idactividades', data).then((json) {
-  //     activitiesArgs = activitiesArgs.map((arg) {
-  //       if (arg.idactividades != idactividades) return arg;
-  //       arg.idactividades = idactividades;
-  //       arg.nombre = nombre;
-  //       arg.descripcion = descripcion;
-  //       arg.timeinicial = timeinicial;
-  //       arg.timeFinalizacion = timeFinalizacion;
-  //       arg.idMedios = idMedios;
-  //       return arg;
-  //     }).toList();
+  Future updateNota(
+      double nota,
+      int idActividad,
+      int idEstudiante) async {
+    // Petición put HTTP
+    EndPointApi.httpPutSinBody('infoestudiantes/$idEstudiante/$idActividad/$nota').then((json) {
+      notifyListeners();
+    }).catchError((e) {
+      throw 'Error en la peticion Put';
+    });
 
-  //     notifyListeners();
-  //   }).catchError((e) {
-  //     throw 'Error en la peticion Put';
-  //   });
-  // }
+    estudiantesNotas = estudiantesNotas.map((arg) {
+        if (arg.idUsuario != idEstudiante) return arg;
+        arg.fechaCalificacion = DateTime.now();
+        arg.nota = nota;
+        return arg;
+      }).toList();
+      notifyListeners();
+  }
   
   // Future deleteActividadesArg(int id) async {
   //   EndPointApi.httpDelete('activities/$id').then((json) {
@@ -133,8 +105,8 @@ class UsuariosEstudiantesProvider extends ChangeNotifier {
   //   });
   // }
 
-  void sort<T>(Comparable<T> Function(UsuariosEstudiantes arg) getField) {
-    usuariosEtudiantes.sort((a, b) {
+  void sort<T>(Comparable<T> Function(EstudianteNotas arg) getField) {
+    estudiantesNotas.sort((a, b) {
       final aValue = getField(a);
       final bValue = getField(b);
 
@@ -148,8 +120,8 @@ class UsuariosEstudiantesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void refreshArg(UsuariosEstudiantes newUser) {
-    usuariosEtudiantes = usuariosEtudiantes.map((user) {
+  void refreshArg(EstudianteNotas newUser) {
+    estudiantesNotas = estudiantesNotas.map((user) {
       if (user.idUsuario == newUser.idUsuario) return user = newUser;
       return user;
     }).toList();

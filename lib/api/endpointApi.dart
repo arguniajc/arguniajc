@@ -45,6 +45,17 @@ class EndPointApi {
     }
   }
 
+  static Future httpPutSinBody(String path) async {
+    //final formData = FormData.fromMap(data);
+
+    try {
+      final resp = await dio.put(path);
+      return resp.data;
+    } on DioException catch (e) {
+      throw ('Error en el put $e');
+    }
+  }
+
   static Future httpDelete(String path) async {
     try {
       final resp = await dio.delete(path);

@@ -1,6 +1,6 @@
 import 'package:control_actividades/ui/buttons/custom_icon_button.dart';
 import 'package:control_actividades/ui/labels/custom_labels.dart';
-import 'package:control_actividades/ui/modals/Typeuser_modal.dart';
+import 'package:control_actividades/ui/modals/Typeuser_modal%20copy.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../datatables/typeUser_datasource.dart';

@@ -1,8 +1,8 @@
 import 'package:control_actividades/Models/http/TypeUser.dart';
 import 'package:control_actividades/providers/typeUsers_provider.dart';
+import 'package:control_actividades/ui/modals/Typeuser_modal%20copy.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../ui/modals/Typeuser_modal.dart';
 
 class TipoUsuarioDTS extends DataTableSource {
   final List<TypeUser> tipoUsuarios;

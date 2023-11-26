@@ -1,4 +1,5 @@
 import 'package:control_actividades/Models/http/UsuariosEstudiantes.dart';
+import 'package:control_actividades/ui/views/estudiantesNotasTabla_view.dart';
 import 'package:flutter/material.dart';
 
 class UsuariosEstudiantesDTS extends DataTableSource {
@@ -19,10 +20,11 @@ class UsuariosEstudiantesDTS extends DataTableSource {
         children: [
           IconButton(
               onPressed: () {
-                // showModalBottomSheet(
-                //     backgroundColor: Colors.transparent,
-                //     context: context,
-                //     builder: (_) => ());
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return EstudianteNotasView(id: estudiante.idUsuario.toString());
+                  }
+                ));
               },
               icon: const Icon(Icons.edit_outlined)),
           // IconButton(
