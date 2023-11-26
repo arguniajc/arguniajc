@@ -18,8 +18,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final timeline = Provider.of<LineaDeTiempoProvider>(context, listen: false);
-    dataLineaTiempo = timeline.lineaDeTiempo;
+    
   }
 
   @override
@@ -35,6 +34,8 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
     final dataArg = arg.args;
     final grupos = Provider.of<GruposProvider>(context);
     final datagrupos = grupos.gruposArgs;
+    final timeline = Provider.of<LineaDeTiempoProvider>(context);
+    dataLineaTiempo = timeline.lineaDeTiempo;
     return Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
