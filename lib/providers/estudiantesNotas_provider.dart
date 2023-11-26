@@ -5,19 +5,14 @@ import 'package:control_actividades/api/endpointApi.dart';
 
 class EstudiantesNotasProvider extends ChangeNotifier {
   List<EstudianteNotas> estudiantesNotas = [];
-  bool isLoading = true;
   bool ascending = true;
   int? sortColumnIndex;
 
-  EstudiantesNotasProvider();
-
-  Future<List<EstudianteNotas>> getEstudiantesNotas(String id) async {
+  getEstudiantesNotas(String id) async {
     estudiantesNotas = [];
     List<dynamic> resp = await EndPointApi.httpGet('infoestudiantes/$id');
     resp.forEach((element) => estudiantesNotas.add(EstudianteNotas.fromJson(element)));
-    isLoading = false;
     notifyListeners();
-    return estudiantesNotas;
   }
 
   // Future<ActividadesArg?> getActivitiesArgById(String id) async {
@@ -81,18 +76,16 @@ class EstudiantesNotasProvider extends ChangeNotifier {
       int idEstudiante) async {
     // Petición put HTTP
     EndPointApi.httpPutSinBody('infoestudiantes/$idEstudiante/$idActividad/$nota').then((json) {
-      notifyListeners();
-    }).catchError((e) {
-      throw 'Error en la peticion Put';
-    });
-
-    estudiantesNotas = estudiantesNotas.map((arg) {
-        if (arg.idUsuario != idEstudiante) return arg;
+      estudiantesNotas = estudiantesNotas.map((arg) {
+        if (arg.idActividad != idActividad) return arg;
         arg.fechaCalificacion = DateTime.now();
         arg.nota = nota;
         return arg;
       }).toList();
       notifyListeners();
+    }).catchError((e) {
+      throw 'Error en la peticion Put';
+    });
   }
   
   // Future deleteActividadesArg(int id) async {

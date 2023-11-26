@@ -1,6 +1,5 @@
 import 'package:control_actividades/Models/http/estudiantesnotas.dart';
 import 'package:control_actividades/providers/estudiantesNotas_provider.dart';
-import 'package:control_actividades/providers/typeUsers_provider.dart';
 import 'package:control_actividades/services/notifications_service.dart';
 import 'package:control_actividades/ui/buttons/custom_outlined_button.dart';
 import 'package:control_actividades/ui/inputs/custom_inputs.dart';

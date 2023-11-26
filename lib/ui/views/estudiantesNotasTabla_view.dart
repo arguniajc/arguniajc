@@ -16,32 +16,32 @@ class EstudianteNotasView extends StatefulWidget {
 
 class EstudianteNotasViewState extends State<EstudianteNotasView> {
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
-  List<EstudianteNotas> notas = [];
   @override
   void initState() {
     super.initState();
     
-    final estudiantesProviders = Provider.of<EstudiantesNotasProvider>(context, listen: false);
-
-    estudiantesProviders.getEstudiantesNotas(widget.id).then((userDB) {
-      if (userDB.isNotEmpty) {
-        setState(() {
-          notas = userDB;
-        });
-      } else {
-        NavigationService.replaceTo('/dashboard/estudiantes');
-      }
-    });
+    
+    Provider.of<EstudiantesNotasProvider>(context, listen: false).getEstudiantesNotas(widget.id);
+    // estudiantesProviders.getEstudiantesNotas(widget.id).then((userDB) {
+    //   if (userDB.isNotEmpty) {
+    //     setState(() {
+    //       notas = userDB;
+    //     });
+    //   } else {
+    //     NavigationService.replaceTo('/dashboard/estudiantes');
+    //   }
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    final notas = Provider.of<EstudiantesNotasProvider>(context).estudiantesNotas;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListView(
         physics: const ClampingScrollPhysics(),
         children: [
-          Text('Actividades', style: CustomLabels.h1),
+          Text('Notas', style: CustomLabels.h1),
           const SizedBox(height: 10),
           PaginatedDataTable(
               columns: const [
@@ -55,23 +55,14 @@ class EstudianteNotasViewState extends State<EstudianteNotasView> {
                     label: Text('Nota')),
                 DataColumn(label: Text('Acción'))
               ],
-              // header: Row(
-              //   children: [
-              //     const Flexible(
-              //         child: Text(
-              //       'Lista de actividades del ARG:',
-              //       maxLines: 2,
-              //     )),
-              //     const SizedBox(width: 20),
-              //   ],
-              // ),
+              source: EstudiantesNotasDTS(notas,context),
               onRowsPerPageChanged: (value) {
               setState(() {
                 _rowPerPage = value ?? 10;
               });
               },
-              rowsPerPage: _rowPerPage,
-              source: EstudiantesNotasDTS(notas,context))
+              rowsPerPage: _rowPerPage
+              )
         ],
       ),
     );
