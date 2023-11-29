@@ -130,6 +130,16 @@ class Sidebar extends StatelessWidget {
                 icon: Icons.business,
                 onPressed: () => navigateTo(Flurorouter.sedeRoute),
               )),
+
+          const TextSeparator(text: 'Invitación'),
+          Visibility(
+              //visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
+              child: MenuItem(
+            text: 'Invitación',
+            icon: Icons.link,
+            onPressed: () => navigateTo(Flurorouter.estudiantesRoute),
+          )),
+
           // Visibility(
           //     visible: user.idTipoUsuario == 5 || user.idTipoUsuario == 2,
           //     child: MenuItem(

@@ -7,7 +7,7 @@ class EndPointApi {
 
   static void configureDio() {
     // Base del Url
-    dio.options.baseUrl = 'https://localhost:7275/api/';
+    dio.options.baseUrl = 'http://argprueba-001-site1.gtempurl.com/api/';
     // Configurar Headers
     //_dio.options.headers = {
     //  '': ''
