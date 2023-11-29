@@ -35,6 +35,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
     final grupos = Provider.of<GruposProvider>(context);
     final datagrupos = grupos.gruposArgs;
     final timeline = Provider.of<LineaDeTiempoProvider>(context);
+    final user = Provider.of<AuthProvider>(context).usuario!;
     dataLineaTiempo = timeline.lineaDeTiempo;
     return Padding(
         padding: const EdgeInsets.all(20),
@@ -61,7 +62,7 @@ class TimeLineState extends State<TimeLineView> with TickerProviderStateMixin {
                                                     }
                                                   });
                                                 },
-                                    items: dataArg.map((item) {
+                                    items: dataArg.where((element) => element.tokenUser == user.token).map((item) {
                                       return DropdownMenuItem<String>(
                                             value: item.idarg.toString(),
                                             child: Text(item.titulo),

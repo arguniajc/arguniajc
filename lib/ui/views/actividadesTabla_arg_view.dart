@@ -92,7 +92,7 @@ class _ActividadesArgViewState extends State<ActividadesArgView> {
                           }
                         });
                       },
-                      items: dataArg.map((item) {
+                      items: dataArg.where((element) => element.tokenUser == user.token).map((item) {
                         return DropdownMenuItem<String>(
                           value: item.idarg.toString(),
                           child: Text(item.titulo),
