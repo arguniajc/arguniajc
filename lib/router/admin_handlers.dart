@@ -46,6 +46,18 @@ class AdminHandlers {
     }
   });
 
+  static Handler register3 = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.registerRoute3);
+
+    if (authProvider.authStatus == AuthStatus.notAuthenticated) {
+      return RegisterView(tokenUser: params['tokenUser']?.first);
+    } else {
+      return const DashboardView();
+    }
+  });
+
   static Handler role = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)

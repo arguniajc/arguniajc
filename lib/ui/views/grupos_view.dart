@@ -69,7 +69,8 @@ class CreateGruposView extends State<GruposView> {
     final dataSede = sede.sedeArgs;
     final profesor = Provider.of<ProfesoresProvider>(context);
     final dataprofesor = profesor.profesores;
-
+    final user = Provider.of<AuthProvider>(context).usuario!;
+    
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -138,7 +139,7 @@ class CreateGruposView extends State<GruposView> {
                                 }
                               });
                             },
-                            items: dataArg.map((item) {
+                            items: dataArg.where((element) => element.tokenUser == user.token).map((item) {
                               return DropdownMenuItem<String>(
                                 value: item.idarg.toString(),
                                 child: Text(item.titulo),

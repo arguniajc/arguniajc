@@ -40,12 +40,15 @@ class CreateRegisterView extends State<RegisterView> {
     final tipoUserProvider = Provider.of<TypeUserModalProvider>(context);
     if (widget.tokenTUsuario != null) {
       idGrupo = widget.idgrupo ?? '';
-      tokenUser = widget.tokenTUsuario ?? '';
+      tokenUser = widget.tokenUser ?? '';
       final tipoUser = tipoUserProvider.typeUsers;
       final user = tipoUser.where((element) => element.tokenTUser == widget.tokenTUsuario);
       if (user.isNotEmpty) {
         tipoUsuario = user.first.idTypeUser.toString();
       }
+    }
+    if (widget.tokenUser != null && widget.tokenTUsuario == null) {
+      tokenUser = widget.tokenUser ?? '';
     }
     if (idGrupo != '' && tipoUsuario == '1') {
         visibleContrasena = false;
@@ -194,7 +197,7 @@ class CreateRegisterView extends State<RegisterView> {
                             final validForm = registerFormProvider.validateForm();
                             if (!validForm) return;
 
-                            if (sideMenuProvider.currentPage == Flurorouter.registerRoute) {
+                            if (tokenUser.isEmpty) {
                               final authProvider =
                                 Provider.of<AuthProvider>(context, listen: false);
                                   authProvider.register(
@@ -204,17 +207,29 @@ class CreateRegisterView extends State<RegisterView> {
                                       registerFormProvider.email!,
                                       registerFormProvider.password!);
                             } else {
-                              final authProvider =
+                              if (idGrupo.isNotEmpty) {
+                                final authProvider =
                                 Provider.of<AuthProvider>(context, listen: false);
                                   authProvider.registerToken(
                                       registerFormProvider.name!,
                                       registerFormProvider.apellido!,
                                       registerFormProvider.documento!,
                                       registerFormProvider.email!,
-                                      '',
+                                      tipoUsuario != '1' ? registerFormProvider.password! : '',
                                       idGrupo,
                                       tipoUsuario,
                                       tokenUser);
+                              } else {
+                                final authProvider =
+                                Provider.of<AuthProvider>(context, listen: false);
+                                  authProvider.registerTokenGestor(
+                                      registerFormProvider.name!,
+                                      registerFormProvider.apellido!,
+                                      registerFormProvider.documento!,
+                                      registerFormProvider.email!,
+                                      registerFormProvider.password!,
+                                      tokenUser);
+                              }
                             }
                           },
                           text: 'Crear Cuenta',

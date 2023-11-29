@@ -64,6 +64,35 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
+  registerTokenGestor(String name, String apellido, int documento, String email,
+      String? password, String token) {
+    // Petición post HTTP
+    final data = {
+      "documento": documento,
+      "nombre": name,
+      "apellido": apellido,
+      "email": email,
+      "password": password,
+      "id_tipo_usuario": 4,
+      "token": token
+    };
+
+    EndPointApi.httpPost('user/register/gestor/master', data).then((json) {
+      usuario = Usuario.fromMap(json);
+      if (usuario!.response.isEmpty) {
+        authStatus = AuthStatus.authenticated;
+        LocalStorage.prefs.setString('token', usuario!.token);
+        NavigationService.replaceTo(Flurorouter.dashboardRoute);
+        EndPointApi.configureDio();
+        notifyListeners();
+      } else {
+        NotificationsService.showSnackbarError(usuario!.response);
+      }
+    }).catchError((e) {
+      throw 'Error en la peticion auht';
+    });
+  }
+
   registerToken(String name, String apellido, int documento, String email,
       String? password, String idGrupo, String idTipoUsuario, String token) {
     if (idTipoUsuario == '1') password = 'admin123*';
